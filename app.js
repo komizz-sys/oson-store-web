@@ -1,3 +1,6 @@
+/* === DIQQAT: Shu yerga Codespace (yoki Railway) ssilkasini yoz! Oxirida "/" bo'lmasin === */
+const API_BASE_URL = "https://effective-space-waffle-6vrj9r7wv9r5crrgw.github.dev";
+
 const tg = window.Telegram && window.Telegram.WebApp;
 if (tg) { tg.expand(); tg.ready(); }
 
@@ -36,7 +39,7 @@ const I18N = {
     copied: "Скопировано!", empty: "Пока пусто.", rent_days_suffix: "дн.", rent_from: "от", rent_btn: "Арендовать",
   },
 };
-I18N.kk = I18N.ru; I18N.tj = I18N.ru; I18N.en = I18N.ru; // TODO: отдельные переводы
+I18N.kk = I18N.ru; I18N.tj = I18N.ru; I18N.en = I18N.ru; 
 
 let lang = "uz";
 function t(key) { return I18N[lang][key] !== undefined ? I18N[lang][key] : key; }
@@ -81,7 +84,8 @@ let currentTab = "asosiy";
 
 async function loadCatalog(cat) {
   if (catalog[cat].length) return catalog[cat];
-  const res = await fetch("/api/" + cat);
+  // API_BASE_URL ulangan qism
+  const res = await fetch(API_BASE_URL + "/api/" + cat);
   if (!res.ok) throw new Error("bad response " + cat);
   const data = await res.json();
   catalog[cat] = data.map(normalizeItem(cat));
@@ -97,7 +101,6 @@ function normalizeItem(cat) {
   };
 }
 
-// Фото у API нет, подбираем эмодзи по названию для узнаваемости карточки
 function pickGiftEmoji(name) {
   const n = (name || "").toLowerCase();
   if (n.includes("pepe")) return "🐸";
@@ -115,6 +118,7 @@ function pickGiftEmoji(name) {
 
 async function renderItems() {
   const grid = document.getElementById("products-grid");
+  if(!grid) return;
   grid.innerHTML = skeletonHTML(6, "h-24");
   let items;
   try { items = await loadCatalog(currentCategory); }
@@ -135,48 +139,41 @@ async function renderItems() {
   });
 }
 
-// Карточка аренды в стиле MarketApp: картинка-плейсхолдер с бейджем срока,
-// название, цена + "so'm" + "· N kun", кнопка "Ijaraga olish"
+// OsonStore yangi NFT kartochkalar dizayni bilan ulash
 async function renderIjara() {
-  const grid = document.getElementById("ijara-grid");
+  const grid = document.getElementById("nft-catalog");
+  if(!grid) return;
   grid.innerHTML = skeletonHTML(4, "h-64");
+  
   let items;
   try { items = await loadCatalog("nft_rent"); }
-  catch (e) { grid.innerHTML = '<p class="col-span-2 text-center text-xs text-gray-500 py-8">' + t("empty") + '</p>'; return; }
+  catch (e) { grid.innerHTML = '<p class="col-span-2 text-center text-xs text-gray-500 py-8">Xatolik: Serverga ulanib bo\'lmadi. API_BASE_URL ni tekshiring.</p>'; return; }
 
   if (!items.length) { grid.innerHTML = '<p class="col-span-2 text-center text-xs text-gray-500 py-8">' + t("empty") + '</p>'; return; }
 
   grid.innerHTML = items.map(function(it, i) {
-    const imgBlock = it.image
-      ? '<img src="' + it.image + '" loading="lazy" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';" />' +
-        '<div class="absolute inset-0 hidden items-center justify-center"><span class="text-5xl animated-gift">' + it.emoji + '</span></div>'
-      : '<div class="absolute inset-0 flex items-center justify-center"><span class="text-5xl animated-gift">' + it.emoji + '</span></div>';
+    const imgUrl = it.image ? it.image : 'https://via.placeholder.com/150/252542/FFFFFF?text=No+Image';
+    const num = it.raw.number ? "#" + it.raw.number : "🎁";
+    const rawPrice = fmtUZS(it.price).replace(" so'm", ""); // Faqat raqam qolishi uchun
 
-    const discountBadge = it.raw.discount_per_day > 0
-      ? '<span class="absolute top-2 right-2 bg-red-500/80 backdrop-blur text-[9px] font-bold px-1.5 py-0.5 rounded-md text-white">-' + it.raw.discount_per_day + '%</span>'
-      : '';
-
-    const numberBadge = it.raw.number
-      ? '<span class="text-[10px] text-gray-500 font-mono">#' + it.raw.number + '</span>'
-      : '';
-
-    return '<div class="bg-[#0d1424] border border-white/10 rounded-2xl overflow-hidden flex flex-col">' +
-      '<div class="rent-img relative h-32">' +
-        imgBlock +
-        discountBadge +
-        '<span class="absolute bottom-2 right-2 bg-black/60 backdrop-blur text-[9px] font-semibold px-2 py-1 rounded-lg text-gray-200">' +
-          t("rent_from") + ' ' + it.raw.min_duration_days + '-' + it.raw.max_duration_days + ' ' + t("rent_days_suffix") +
-        '</span>' +
-      '</div>' +
-      '<div class="p-3 flex flex-col gap-1">' +
-        '<div class="flex items-center justify-between">' +
-          '<div class="text-xs font-bold text-white truncate">' + it.title + '</div>' +
-          numberBadge +
-        '</div>' +
-        '<div class="text-xs font-bold text-neon-yellow">' + fmtUZS(it.price) + ' <span class="text-[10px] text-gray-400 font-normal">· 1 ' + t("rent_days_suffix") + '</span></div>' +
-        '<button data-i="' + i + '" class="rent-btn mt-1.5 w-full py-2 rounded-xl bg-neon-blue font-bold text-white text-xs active:scale-95 transition-all">' + t("rent_btn") + '</button>' +
-      '</div>' +
-    '</div>';
+    return `
+      <div class="nft-card">
+          <div class="nft-header">
+              <span>${num}</span>
+              <span>✨</span>
+          </div>
+          <div class="nft-image-wrapper">
+              <img src="${imgUrl}" alt="${it.title}">
+              <div class="nft-duration">${it.raw.min_duration_days}-${it.raw.max_duration_days} ${t("rent_days_suffix")}</div>
+          </div>
+          <h3 class="nft-title">${it.title}</h3>
+          <div class="nft-price-row">
+              <span class="nft-price">${rawPrice}</span>
+              <span class="nft-price-unit">SO'M · 1 KUN</span>
+          </div>
+          <button data-i="${i}" class="rent-btn active:scale-95 transition-all">${t("rent_btn")}</button>
+      </div>
+    `;
   }).join("");
 
   Array.prototype.forEach.call(grid.querySelectorAll(".rent-btn"), function(btn) {
@@ -294,7 +291,7 @@ function closeModal() {
 let _paymentInfoCache = null;
 async function getPaymentInfo() {
   if (_paymentInfoCache) return _paymentInfoCache;
-  const res = await fetch("/api/payment_info");
+  const res = await fetch(API_BASE_URL + "/api/payment_info");
   _paymentInfoCache = await res.json();
   return _paymentInfoCache;
 }
@@ -381,7 +378,7 @@ function initProfile() {
 async function initReferral() {
   try {
     const u = tg && tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
-    const res = await fetch("/api/bot_info");
+    const res = await fetch(API_BASE_URL + "/api/bot_info");
     const data = await res.json();
     const ref = u ? "https://t.me/" + data.username + "?start=ref" + u.id : "https://t.me/" + data.username;
     document.getElementById("referral-link").textContent = ref;
@@ -391,7 +388,7 @@ async function initReferral() {
 
 async function renderRentTerms() {
   try {
-    const res = await fetch("/api/rent_terms");
+    const res = await fetch(API_BASE_URL + "/api/rent_terms");
     const d = await res.json();
     document.getElementById("rent-terms-text").textContent = t("rent_terms")(fmtUZS(d.fee_uzs), fmtUZS(d.refund_uzs));
   } catch (e) { /* тихо игнорируем */ }
