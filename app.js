@@ -1,5 +1,5 @@
 /* === DIQQAT: Shu yerga Codespace (yoki Railway) ssilkasini yoz! Oxirida "/" bo'lmasin === */
-const API_BASE_URL = "https://effective-space-waffle-6vrj9r7wv9r5crrgw.github.dev";
+const API_BASE_URL = "https://wv9r5crrgw-8000.app.github.dev";
 
 const tg = window.Telegram && window.Telegram.WebApp;
 if (tg) { tg.expand(); tg.ready(); }
