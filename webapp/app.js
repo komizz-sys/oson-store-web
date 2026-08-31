@@ -8,7 +8,7 @@ const I18N = {
     history_empty: "Hozircha xaridlar tarixi bo'sh.", history_hint: "To'liq tarix - botdagi \"Mening buyurtmalarim\" bo'limida.",
     top_title: "Reyting", top_subtitle: "Eng faol mijozlar", top_forming: "Reyting shakllanmoqda", top_hint: "Birinchi xaridni amalga oshiring!",
     referral_title: "Referal tizimi", referral_subtitle: "Do'stlaringizni taklif qiling!", referral_link_label: "Sizning referal havolangiz:", referral_copy: "Havolani nusxalash",
-    profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot kanali", profile_orders_channel: "\ud83d\uded2 Savdo/Orderlar",
+    profile_operator: "Operator", profile_channel: "📢 Bot kanali", profile_orders_channel: "🛒 Savdo/Orderlar",
     nav_main: "Asosiy", nav_rent: "Ijara", nav_history: "Tarix", nav_referral: "Referal", nav_profile: "Profil",
     modal_to_whom: "Kimga?", modal_to_self: "O'zimga", modal_to_friend: "Do'stimga",
     modal_recipient_label: "Qabul qiluvchi (@username):", modal_message_label: "Xabar (ixtiyoriy):",
@@ -28,7 +28,7 @@ const I18N = {
     history_empty: "Пока пусто.", history_hint: "Полная история - в разделе «Мои заказы» в боте.",
     top_title: "Рейтинг", top_subtitle: "Самые активные клиенты", top_forming: "Рейтинг формируется", top_hint: "Сделайте первую покупку!",
     referral_title: "Реферальная система", referral_subtitle: "Приглашай друзей и получай бонусы!", referral_link_label: "Твоя реферальная ссылка:", referral_copy: "Скопировать ссылку",
-    profile_operator: "Оператор", profile_channel: "\ud83d\udce2 Канал бота", profile_orders_channel: "\ud83d\uded2 Заказы/Отзывы",
+    profile_operator: "Оператор", profile_channel: "📢 Канал бота", profile_orders_channel: "🛒 Заказы/Отзывы",
     nav_main: "Главная", nav_rent: "Аренда", nav_history: "История", nav_referral: "Рефералы", nav_profile: "Профиль",
     modal_to_whom: "Кому?", modal_to_self: "Себе", modal_to_friend: "Другу",
     modal_recipient_label: "Получатель (@username):", modal_message_label: "Сообщение (необязательно):",
@@ -48,7 +48,7 @@ const I18N = {
     history_empty: "Nothing here yet.", history_hint: "Full history is in \"My orders\" in the bot chat.",
     top_title: "Rating", top_subtitle: "Most active customers", top_forming: "Rating is forming", top_hint: "Make your first purchase!",
     referral_title: "Referral program", referral_subtitle: "Invite friends and get bonuses!", referral_link_label: "Your referral link:", referral_copy: "Copy link",
-    profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot channel", profile_orders_channel: "\ud83d\uded2 Orders channel",
+    profile_operator: "Operator", profile_channel: "📢 Bot channel", profile_orders_channel: "🛒 Orders channel",
     nav_main: "Home", nav_rent: "Rent", nav_history: "History", nav_referral: "Referral", nav_profile: "Profile",
     modal_to_whom: "For whom?", modal_to_self: "Myself", modal_to_friend: "A friend",
     modal_recipient_label: "Recipient (@username):", modal_message_label: "Message (optional):",
@@ -138,7 +138,6 @@ function normalizeItem(cat) {
   };
 }
 
-// Фото у API нет, подбираем эмодзи по названию для узнаваемости карточки
 function pickGiftEmoji(name) {
   const n = (name || "").toLowerCase();
   if (n.includes("pepe")) return "🐸";
@@ -181,13 +180,10 @@ async function renderItems() {
   });
 }
 
-/* ---------------- Ijara (аренда) — с догрузкой страниц ---------------- */
+/* ---------------- Ijara (аренда) ---------------- */
 let rentNextCursor = null;
 let rentLoadingMore = false;
 
-// Карточка аренды в стиле MarketApp: картинка с бейджем срока, название,
-// цена + "so'm" + "· N kun", кнопка "Ijaraga olish". Кликается ВСЯ карточка,
-// не только кнопка.
 function rentCardHTML(it, i) {
   const imgBlock = it.image
     ? '<img src="' + it.image + '" loading="lazy" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';" />' +
@@ -229,7 +225,7 @@ function renderRentGrid() {
 
   Array.prototype.forEach.call(grid.querySelectorAll(".rent-card"), function(card) {
     card.addEventListener("click", function(e) {
-      if (e.target.closest(".rent-btn")) return; // кнопка сама откроет — избегаем двойного триггера
+      if (e.target.closest(".rent-btn")) return;
       openModal(items[Number(card.dataset.i)]);
     });
   });
@@ -265,7 +261,7 @@ async function loadMoreRent() {
     catalog.nft_rent = catalog.nft_rent.concat(page.items);
     rentNextCursor = page.nextCursor;
     renderRentGrid();
-  } catch (e) { /* тихо игнорируем — кнопка просто останется */ }
+  } catch (e) { }
 
   rentLoadingMore = false;
 }
@@ -465,18 +461,16 @@ async function openModal(item) {
 }
 
 function closeModal() {
-  if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); // убрать клавиатуру
+  if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
   modalContent.classList.add("translate-y-full");
   modal.classList.add("opacity-0");
   setTimeout(function() { modal.classList.add("hidden"); }, 300);
 }
 
-// Клик по затемнённому фону вокруг шторки — тоже закрывает
 modal.addEventListener("click", function(e) {
   if (e.target === modal) closeModal();
 });
 
-/* ---------------- Свайп вниз для закрытия шторки ---------------- */
 (function enableSwipeToDismiss() {
   const handle = document.getElementById("sheet-handle");
   let startY = 0, currentY = 0, dragging = false;
@@ -508,7 +502,6 @@ modal.addEventListener("click", function(e) {
   handle.addEventListener("touchmove", function(e) { onMove(e.touches[0].clientY); }, { passive: true });
   handle.addEventListener("touchend", onEnd);
 
-  // На всякий случай (десктоп/тестирование) — те же события мышью
   handle.addEventListener("mousedown", function(e) { onStart(e.clientY); });
   document.addEventListener("mousemove", function(e) { if (dragging) onMove(e.clientY); });
   document.addEventListener("mouseup", onEnd);
@@ -562,10 +555,9 @@ async function initSupportInfo() {
       document.getElementById("orders-handle").textContent = "@" + info.orders_channel_username;
       row.onclick = function() { openTgUsername(info.orders_channel_username); };
     }
-  } catch (e) { /* тихо игнорируем — строки просто останутся скрытыми/пустыми */ }
+  } catch (e) { }
 }
 
-/* ---------------- Отправка заказа боту ---------------- */
 function sendPaymentInfo() {
   const errorEl = document.getElementById("modal-error");
   let friendUsername = document.getElementById("gift-username").value.trim();
@@ -575,9 +567,6 @@ function sendPaymentInfo() {
     if (friendUsername.charAt(0) !== "@") friendUsername = "@" + friendUsername;
   }
 
-  // Юзернейм для "себе" достаём на СЕРВЕРЕ (бот всегда точно знает,
-  // кто написал) — клиентский tg.initDataUnsafe не всегда надёжен
-  // (кэш вебвью и т.п.), поэтому здесь ничего не проверяем и не блокируем.
   const item = activeItem;
   const message = document.getElementById("gift-message").value.trim();
   const recipient = recipientType === "self" ? "" : friendUsername;
@@ -606,11 +595,10 @@ function sendPaymentInfo() {
     tg.sendData(JSON.stringify(payload));
     tg.close();
   } else {
-    alert("DEMO (Telegram ichida ochish kerak): " + JSON.stringify(payload, null, 2));
+    alert("DEMO: " + JSON.stringify(payload, null, 2));
   }
 }
 
-/* ---------------- Профиль / рефералка / условия аренды ---------------- */
 function initProfile() {
   const u = tg && tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
   if (!u) return;
@@ -627,7 +615,7 @@ async function initReferral() {
     const data = await res.json();
     const ref = u ? "https://t.me/" + data.username + "?start=ref" + u.id : "https://t.me/" + data.username;
     document.getElementById("referral-link").textContent = ref;
-  } catch (e) { /* тихо игнорируем */ }
+  } catch (e) { }
 }
 
 async function renderRentTerms() {
@@ -635,7 +623,7 @@ async function renderRentTerms() {
     const res = await fetch("/api/rent_terms");
     const d = await res.json();
     document.getElementById("rent-terms-text").textContent = t("rent_terms")(fmtUZS(d.fee_uzs), fmtUZS(d.refund_uzs));
-  } catch (e) { /* тихо игнорируем */ }
+  } catch (e) { }
 }
 
 /* ---------------- Init ---------------- */
