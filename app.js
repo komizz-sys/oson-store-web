@@ -8,7 +8,7 @@ const I18N = {
     history_empty: "Hozircha xaridlar tarixi bo'sh.", history_hint: "To'liq tarix - botdagi \"Mening buyurtmalarim\" bo'limida.",
     top_title: "Reyting", top_subtitle: "Eng faol mijozlar", top_forming: "Reyting shakllanmoqda", top_hint: "Birinchi xaridni amalga oshiring!",
     referral_title: "Referal tizimi", referral_subtitle: "Do'stlaringizni taklif qiling!", referral_link_label: "Sizning referal havolangiz:", referral_copy: "Havolani nusxalash",
-    profile_operator: "Operator",
+    profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot kanali", profile_orders_channel: "\ud83d\uded2 Savdo/Orderlar",
     nav_main: "Asosiy", nav_rent: "Ijara", nav_history: "Tarix", nav_referral: "Referal", nav_profile: "Profil",
     modal_to_whom: "Kimga?", modal_to_self: "O'zimga", modal_to_friend: "Do'stimga",
     modal_recipient_label: "Qabul qiluvchi (@username):", modal_message_label: "Xabar (ixtiyoriy):",
@@ -18,13 +18,17 @@ const I18N = {
     err_username: "Username kiriting", err_no_username: "Sizda public username yo'q. Telegram sozlamalaridan o'rnating yoki \"Do'stimga\" tanlang.",
     rent_terms: (fee, refund) => "Xizmat haqi: ~" + fee + ". Ijara tugagach ~" + refund + " qaytariladi.",
     copied: "Nusxalandi!", empty: "Hozircha bo'sh.", rent_days_suffix: "kun", rent_from: "dan", rent_btn: "Ijaraga olish",
+    modal_preview: "Telegram-da ko'rish",
+    sort_recent: "Yangilari", sort_price_asc: "Narx: arzon", sort_price_desc: "Narx: qimmat", sort_price_min: "Narx: min",
+    sort_duration_asc: "Muddat: qisqa", sort_duration_desc: "Muddat: uzun",
+    load_more: "Ko'proq ko'rsatish", premium_title: "Telegram Premium olish", premium_subtitle: "O'zingiz yoki yaqiningiz uchun", premium_get_suffix: "olish",
   },
   ru: {
     ijara_title: "Аренда гифтов", history_title: "История покупок",
     history_empty: "Пока пусто.", history_hint: "Полная история - в разделе «Мои заказы» в боте.",
     top_title: "Рейтинг", top_subtitle: "Самые активные клиенты", top_forming: "Рейтинг формируется", top_hint: "Сделайте первую покупку!",
     referral_title: "Реферальная система", referral_subtitle: "Приглашай друзей и получай бонусы!", referral_link_label: "Твоя реферальная ссылка:", referral_copy: "Скопировать ссылку",
-    profile_operator: "Оператор",
+    profile_operator: "Оператор", profile_channel: "\ud83d\udce2 Канал бота", profile_orders_channel: "\ud83d\uded2 Заказы/Отзывы",
     nav_main: "Главная", nav_rent: "Аренда", nav_history: "История", nav_referral: "Рефералы", nav_profile: "Профиль",
     modal_to_whom: "Кому?", modal_to_self: "Себе", modal_to_friend: "Другу",
     modal_recipient_label: "Получатель (@username):", modal_message_label: "Сообщение (необязательно):",
@@ -34,9 +38,32 @@ const I18N = {
     err_username: "Введите username", err_no_username: "У вас нет публичного username. Установите в настройках Telegram или выберите \"Другу\".",
     rent_terms: (fee, refund) => "Сервисный сбор: ~" + fee + ". После окончания аренды вернётся ~" + refund + ".",
     copied: "Скопировано!", empty: "Пока пусто.", rent_days_suffix: "дн.", rent_from: "от", rent_btn: "Арендовать",
+    modal_preview: "Смотреть в Telegram",
+    sort_recent: "Новинки", sort_price_asc: "Цена: дешевле", sort_price_desc: "Цена: дороже", sort_price_min: "Цена: мин",
+    sort_duration_asc: "Срок: короче", sort_duration_desc: "Срок: длиннее",
+    load_more: "Показать ещё", premium_title: "Оформить Telegram Premium", premium_subtitle: "Себе или близкому человеку", premium_get_suffix: "оформить",
+  },
+  en: {
+    ijara_title: "Gift rental", history_title: "Purchase history",
+    history_empty: "Nothing here yet.", history_hint: "Full history is in \"My orders\" in the bot chat.",
+    top_title: "Rating", top_subtitle: "Most active customers", top_forming: "Rating is forming", top_hint: "Make your first purchase!",
+    referral_title: "Referral program", referral_subtitle: "Invite friends and get bonuses!", referral_link_label: "Your referral link:", referral_copy: "Copy link",
+    profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot channel", profile_orders_channel: "\ud83d\uded2 Orders channel",
+    nav_main: "Home", nav_rent: "Rent", nav_history: "History", nav_referral: "Referral", nav_profile: "Profile",
+    modal_to_whom: "For whom?", modal_to_self: "Myself", modal_to_friend: "A friend",
+    modal_recipient_label: "Recipient (@username):", modal_message_label: "Message (optional):",
+    modal_message_placeholder: "Congratulation text...", modal_rent_days: "For how many days?",
+    modal_card_label: "Payment card (Uzcard/Humo)", modal_card_holder_label: "Recipient",
+    modal_copy: "Copy", modal_paid: "I've paid", modal_cancel: "Cancel",
+    err_username: "Enter a username", err_no_username: "You don't have a public username. Set one in Telegram settings or choose \"A friend\".",
+    rent_terms: (fee, refund) => "Service fee: ~" + fee + ". ~" + refund + " is refunded after the rental ends.",
+    copied: "Copied!", empty: "Nothing here yet.", rent_days_suffix: "days", rent_from: "from", rent_btn: "Rent",
+    modal_preview: "View in Telegram",
+    sort_recent: "Newest", sort_price_asc: "Price: cheapest", sort_price_desc: "Price: priciest", sort_price_min: "Price: min",
+    sort_duration_asc: "Duration: shortest", sort_duration_desc: "Duration: longest",
+    load_more: "Show more", premium_title: "Get Telegram Premium", premium_subtitle: "For yourself or someone else", premium_get_suffix: "get",
   },
 };
-I18N.kk = I18N.ru; I18N.tj = I18N.ru; I18N.en = I18N.ru; // TODO: отдельные переводы
 
 let lang = "uz";
 function t(key) { return I18N[lang][key] !== undefined ? I18N[lang][key] : key; }
@@ -78,9 +105,10 @@ function fmtUZS(n) { return Math.round(n).toLocaleString("ru-RU").replace(/,/g, 
 const catalog = { stars: [], premium: [], simple_gift: [], nft_rent: [] };
 let currentCategory = "stars";
 let currentTab = "asosiy";
+let currentRentSort = "recently_touch";
 
-async function loadCatalog(cat) {
-  if (catalog[cat].length) return catalog[cat];
+async function loadCatalog(cat, forceReload) {
+  if (catalog[cat].length && !forceReload) return catalog[cat];
   const res = await fetch("/api/" + cat);
   if (!res.ok) throw new Error("bad response " + cat);
   const data = await res.json();
@@ -88,12 +116,25 @@ async function loadCatalog(cat) {
   return catalog[cat];
 }
 
+async function fetchRentPage(cursor) {
+  const isClientDesc = currentRentSort === "price_desc_client";
+  const backendSort = isClientDesc ? "price_per_day" : currentRentSort;
+  let url = "/api/nft_rent?sort_by=" + backendSort;
+  if (cursor) url += "&cursor=" + encodeURIComponent(cursor);
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("bad response nft_rent");
+  const data = await res.json();
+  let mapped = data.items.map(normalizeItem("nft_rent"));
+  if (isClientDesc) mapped = mapped.slice().reverse();
+  return { items: mapped, nextCursor: data.next_cursor };
+}
+
 function normalizeItem(cat) {
   return function(raw) {
     if (cat === "stars") return { kind: "stars", title: raw.amount.toLocaleString("ru-RU") + " Stars", price: raw.price_uzs, emoji: "⭐️", raw: raw };
     if (cat === "premium") return { kind: "premium", title: raw.label, price: raw.price_uzs, emoji: "👑", raw: raw };
     if (cat === "simple_gift") return { kind: "simple_gift", title: raw.star_count + "⭐", price: raw.price_uzs, emoji: raw.sticker_emoji || "🎁", raw: raw };
-    if (cat === "nft_rent") return { kind: "nft_rent", title: raw.name, price: raw.price_per_day_uzs_with_markup, emoji: pickGiftEmoji(raw.name), image: raw.image_url, raw: raw };
+    if (cat === "nft_rent") return { kind: "nft_rent", title: raw.name, price: raw.price_per_day_uzs_with_markup, emoji: pickGiftEmoji(raw.name), image: raw.image_url, previewUrl: raw.preview_url, raw: raw };
   };
 }
 
@@ -115,6 +156,11 @@ function pickGiftEmoji(name) {
 
 async function renderItems() {
   const grid = document.getElementById("products-grid");
+
+  if (currentCategory === "premium") { await renderPremiumList(); return; }
+  document.getElementById("premium-list").classList.add("hidden");
+  grid.classList.remove("hidden");
+
   grid.innerHTML = skeletonHTML(6, "h-24");
   let items;
   try { items = await loadCatalog(currentCategory); }
@@ -123,7 +169,7 @@ async function renderItems() {
   if (!items.length) { grid.innerHTML = '<p class="col-span-3 text-center text-xs text-gray-500 py-8">' + t("empty") + '</p>'; return; }
 
   grid.innerHTML = items.map(function(it, i) {
-    return '<div data-i="' + i + '" class="product-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-3 flex flex-col items-center text-center cursor-pointer active:scale-95 transition-all hover:bg-white/10">' +
+    return '<div data-i="' + i + '" class="product-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-3 flex flex-col items-center text-center cursor-pointer active:scale-95 transition-all hover:bg-white/10 hover:border-white/20 shadow-lg shadow-black/20">' +
       '<div class="text-3xl my-2 animated-gift">' + it.emoji + '</div>' +
       '<div class="text-[10px] text-gray-300 mt-1 mb-1 leading-tight h-6 overflow-hidden">' + it.title + '</div>' +
       '<div class="text-[10px] font-bold text-neon-yellow">' + fmtUZS(it.price) + '</div>' +
@@ -135,53 +181,174 @@ async function renderItems() {
   });
 }
 
-// Карточка аренды в стиле MarketApp: картинка-плейсхолдер с бейджем срока,
-// название, цена + "so'm" + "· N kun", кнопка "Ijaraga olish"
-async function renderIjara() {
+/* ---------------- Ijara (аренда) — с догрузкой страниц ---------------- */
+let rentNextCursor = null;
+let rentLoadingMore = false;
+
+// Карточка аренды в стиле MarketApp: картинка с бейджем срока, название,
+// цена + "so'm" + "· N kun", кнопка "Ijaraga olish". Кликается ВСЯ карточка,
+// не только кнопка.
+function rentCardHTML(it, i) {
+  const imgBlock = it.image
+    ? '<img src="' + it.image + '" loading="lazy" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';" />' +
+      '<div class="absolute inset-0 hidden items-center justify-center"><span class="text-6xl animated-gift">' + it.emoji + '</span></div>'
+    : '<div class="absolute inset-0 flex items-center justify-center"><span class="text-6xl animated-gift">' + it.emoji + '</span></div>';
+
+  const discountBadge = it.raw.discount_per_day > 0
+    ? '<span class="absolute top-2 right-2 bg-red-500/80 backdrop-blur text-[10px] font-bold px-2 py-1 rounded-lg text-white">-' + it.raw.discount_per_day + '%</span>'
+    : '';
+
+  const numberBadge = it.raw.number
+    ? '<span class="text-[11px] text-gray-500 font-mono">#' + it.raw.number + '</span>'
+    : '';
+
+  return '<div data-i="' + i + '" class="rent-card bg-[#0d1424] border border-white/10 rounded-2xl overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition-all hover:border-white/20 shadow-lg shadow-black/20">' +
+    '<div class="rent-img relative h-44">' +
+      imgBlock +
+      discountBadge +
+      '<span class="absolute bottom-2 right-2 bg-black/60 backdrop-blur text-[10px] font-semibold px-2 py-1 rounded-lg text-gray-200">' +
+        t("rent_from") + ' ' + it.raw.min_duration_days + '-' + it.raw.max_duration_days + ' ' + t("rent_days_suffix") +
+      '</span>' +
+    '</div>' +
+    '<div class="p-3.5 flex flex-col gap-1.5">' +
+      '<div class="flex items-center justify-between">' +
+        '<div class="text-sm font-bold text-white truncate">' + it.title + '</div>' +
+        numberBadge +
+      '</div>' +
+      '<div class="text-sm font-bold text-neon-yellow">' + fmtUZS(it.price) + ' <span class="text-[11px] text-gray-400 font-normal">· 1 ' + t("rent_days_suffix") + '</span></div>' +
+      '<button data-i="' + i + '" class="rent-btn mt-2 w-full py-2.5 rounded-xl bg-gradient-to-r from-neon-blue to-blue-600 font-bold text-white text-sm active:scale-95 transition-all shadow-[0_4px_14px_rgba(59,130,246,0.35)]">' + t("rent_btn") + '</button>' +
+    '</div>' +
+  '</div>';
+}
+
+function renderRentGrid() {
   const grid = document.getElementById("ijara-grid");
-  grid.innerHTML = skeletonHTML(4, "h-64");
-  let items;
-  try { items = await loadCatalog("nft_rent"); }
-  catch (e) { grid.innerHTML = '<p class="col-span-2 text-center text-xs text-gray-500 py-8">' + t("empty") + '</p>'; return; }
+  const items = catalog.nft_rent;
 
-  if (!items.length) { grid.innerHTML = '<p class="col-span-2 text-center text-xs text-gray-500 py-8">' + t("empty") + '</p>'; return; }
+  grid.innerHTML = items.map(function(it, i) { return rentCardHTML(it, i); }).join("");
 
-  grid.innerHTML = items.map(function(it, i) {
-    const imgBlock = it.image
-      ? '<img src="' + it.image + '" loading="lazy" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';" />' +
-        '<div class="absolute inset-0 hidden items-center justify-center"><span class="text-5xl animated-gift">' + it.emoji + '</span></div>'
-      : '<div class="absolute inset-0 flex items-center justify-center"><span class="text-5xl animated-gift">' + it.emoji + '</span></div>';
-
-    const discountBadge = it.raw.discount_per_day > 0
-      ? '<span class="absolute top-2 right-2 bg-red-500/80 backdrop-blur text-[9px] font-bold px-1.5 py-0.5 rounded-md text-white">-' + it.raw.discount_per_day + '%</span>'
-      : '';
-
-    const numberBadge = it.raw.number
-      ? '<span class="text-[10px] text-gray-500 font-mono">#' + it.raw.number + '</span>'
-      : '';
-
-    return '<div class="bg-[#0d1424] border border-white/10 rounded-2xl overflow-hidden flex flex-col">' +
-      '<div class="rent-img relative h-32">' +
-        imgBlock +
-        discountBadge +
-        '<span class="absolute bottom-2 right-2 bg-black/60 backdrop-blur text-[9px] font-semibold px-2 py-1 rounded-lg text-gray-200">' +
-          t("rent_from") + ' ' + it.raw.min_duration_days + '-' + it.raw.max_duration_days + ' ' + t("rent_days_suffix") +
-        '</span>' +
-      '</div>' +
-      '<div class="p-3 flex flex-col gap-1">' +
-        '<div class="flex items-center justify-between">' +
-          '<div class="text-xs font-bold text-white truncate">' + it.title + '</div>' +
-          numberBadge +
-        '</div>' +
-        '<div class="text-xs font-bold text-neon-yellow">' + fmtUZS(it.price) + ' <span class="text-[10px] text-gray-400 font-normal">· 1 ' + t("rent_days_suffix") + '</span></div>' +
-        '<button data-i="' + i + '" class="rent-btn mt-1.5 w-full py-2 rounded-xl bg-neon-blue font-bold text-white text-xs active:scale-95 transition-all">' + t("rent_btn") + '</button>' +
-      '</div>' +
-    '</div>';
-  }).join("");
-
+  Array.prototype.forEach.call(grid.querySelectorAll(".rent-card"), function(card) {
+    card.addEventListener("click", function(e) {
+      if (e.target.closest(".rent-btn")) return; // кнопка сама откроет — избегаем двойного триггера
+      openModal(items[Number(card.dataset.i)]);
+    });
+  });
   Array.prototype.forEach.call(grid.querySelectorAll(".rent-btn"), function(btn) {
     btn.addEventListener("click", function() { openModal(items[Number(btn.dataset.i)]); });
   });
+
+  renderLoadMoreButton();
+}
+
+function renderLoadMoreButton() {
+  const existing = document.getElementById("rent-load-more");
+  if (existing) existing.remove();
+
+  if (!rentNextCursor) return;
+
+  const btn = document.createElement("button");
+  btn.id = "rent-load-more";
+  btn.className = "col-span-2 mt-1 py-3 rounded-xl bg-white/5 border border-white/10 text-sm font-semibold text-gray-300 active:scale-95 transition-all";
+  btn.textContent = t("load_more");
+  btn.addEventListener("click", loadMoreRent);
+  document.getElementById("ijara-grid").appendChild(btn);
+}
+
+async function loadMoreRent() {
+  if (rentLoadingMore) return;
+  rentLoadingMore = true;
+  const btn = document.getElementById("rent-load-more");
+  if (btn) { btn.textContent = "..."; btn.disabled = true; }
+
+  try {
+    const page = await fetchRentPage(rentNextCursor);
+    catalog.nft_rent = catalog.nft_rent.concat(page.items);
+    rentNextCursor = page.nextCursor;
+    renderRentGrid();
+  } catch (e) { /* тихо игнорируем — кнопка просто останется */ }
+
+  rentLoadingMore = false;
+}
+
+async function renderIjara(reset) {
+  const grid = document.getElementById("ijara-grid");
+
+  if (reset || !catalog.nft_rent.length) {
+    grid.innerHTML = skeletonHTML(4, "h-80");
+    catalog.nft_rent = [];
+    rentNextCursor = null;
+
+    try {
+      const page = await fetchRentPage(null);
+      catalog.nft_rent = page.items;
+      rentNextCursor = page.nextCursor;
+    } catch (e) {
+      grid.innerHTML = '<p class="col-span-2 text-center text-xs text-gray-500 py-8">' + t("empty") + '</p>';
+      return;
+    }
+  }
+
+  if (!catalog.nft_rent.length) { grid.innerHTML = '<p class="col-span-2 text-center text-xs text-gray-500 py-8">' + t("empty") + '</p>'; return; }
+  renderRentGrid();
+}
+
+document.getElementById("rent-sort-select").addEventListener("change", function(e) {
+  currentRentSort = e.target.value;
+  renderIjara(true);
+});
+
+/* ---------------- Premium: список с радио-выбором ---------------- */
+let selectedPremiumIndex = 0;
+
+async function renderPremiumList() {
+  document.getElementById("products-grid").classList.add("hidden");
+  const container = document.getElementById("premium-list");
+  container.classList.remove("hidden");
+
+  const optionsEl = document.getElementById("premium-options");
+  optionsEl.innerHTML = skeletonHTML(3, "h-16");
+
+  let items;
+  try { items = await loadCatalog("premium"); }
+  catch (e) { optionsEl.innerHTML = '<p class="text-center text-xs text-gray-500 py-8">' + t("empty") + '</p>'; return; }
+
+  if (!items.length) { optionsEl.innerHTML = '<p class="text-center text-xs text-gray-500 py-8">' + t("empty") + '</p>'; return; }
+  if (selectedPremiumIndex >= items.length) selectedPremiumIndex = 0;
+
+  function paint() {
+    optionsEl.innerHTML = items.map(function(it, i) {
+      const selected = i === selectedPremiumIndex;
+      return '<div data-i="' + i + '" class="premium-option flex items-center justify-between gap-3 rounded-2xl p-3.5 cursor-pointer transition-all border ' +
+        (selected ? "bg-neon-blue/10 border-neon-blue" : "bg-white/5 border-white/10") + '">' +
+        '<div class="flex items-center gap-3">' +
+          '<span class="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ' + (selected ? "border-neon-blue" : "border-gray-500") + '">' +
+            (selected ? '<span class="w-2.5 h-2.5 rounded-full bg-neon-blue"></span>' : "") +
+          '</span>' +
+          '<span class="text-xl">👑</span>' +
+          '<span class="text-sm font-semibold text-white">' + it.title + '</span>' +
+        '</div>' +
+        '<span class="text-sm font-bold text-neon-yellow">' + fmtUZS(it.price) + '</span>' +
+      '</div>';
+    }).join("");
+
+    Array.prototype.forEach.call(optionsEl.querySelectorAll(".premium-option"), function(row) {
+      row.addEventListener("click", function() {
+        selectedPremiumIndex = Number(row.dataset.i);
+        paint();
+        updatePremiumCta();
+      });
+    });
+  }
+
+  function updatePremiumCta() {
+    const btn = document.getElementById("premium-cta-btn");
+    const it = items[selectedPremiumIndex];
+    btn.textContent = it.title + " " + t("premium_get_suffix");
+    btn.onclick = function() { openModal(it); };
+  }
+
+  paint();
+  updatePremiumCta();
 }
 
 function skeletonHTML(n, heightClass) {
@@ -269,6 +436,18 @@ async function openModal(item) {
   document.getElementById("rent-days-field").classList.toggle("hidden", item.kind !== "nft_rent");
   if (item.kind === "nft_rent") document.getElementById("days-value").textContent = rentDays;
 
+  const previewBtn = document.getElementById("preview-gift-btn");
+  if (item.kind === "nft_rent" && item.previewUrl) {
+    previewBtn.classList.remove("hidden");
+    previewBtn.onclick = function() {
+      if (tg && tg.openTelegramLink) tg.openTelegramLink(item.previewUrl);
+      else window.open(item.previewUrl, "_blank");
+    };
+  } else {
+    previewBtn.classList.add("hidden");
+    previewBtn.onclick = null;
+  }
+
   try {
     const pay = await getPaymentInfo();
     document.getElementById("pay-card-number").textContent = pay.card_number || "—";
@@ -286,10 +465,54 @@ async function openModal(item) {
 }
 
 function closeModal() {
+  if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); // убрать клавиатуру
   modalContent.classList.add("translate-y-full");
   modal.classList.add("opacity-0");
   setTimeout(function() { modal.classList.add("hidden"); }, 300);
 }
+
+// Клик по затемнённому фону вокруг шторки — тоже закрывает
+modal.addEventListener("click", function(e) {
+  if (e.target === modal) closeModal();
+});
+
+/* ---------------- Свайп вниз для закрытия шторки ---------------- */
+(function enableSwipeToDismiss() {
+  const handle = document.getElementById("sheet-handle");
+  let startY = 0, currentY = 0, dragging = false;
+
+  function onStart(y) {
+    dragging = true;
+    startY = y;
+    currentY = y;
+    modalContent.style.transition = "none";
+  }
+  function onMove(y) {
+    if (!dragging) return;
+    currentY = y;
+    const delta = Math.max(0, currentY - startY);
+    modalContent.style.transform = "translateY(" + delta + "px)";
+  }
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    modalContent.style.transition = "";
+    const delta = currentY - startY;
+    modalContent.style.transform = "";
+    if (delta > 90) {
+      closeModal();
+    }
+  }
+
+  handle.addEventListener("touchstart", function(e) { onStart(e.touches[0].clientY); }, { passive: true });
+  handle.addEventListener("touchmove", function(e) { onMove(e.touches[0].clientY); }, { passive: true });
+  handle.addEventListener("touchend", onEnd);
+
+  // На всякий случай (десктоп/тестирование) — те же события мышью
+  handle.addEventListener("mousedown", function(e) { onStart(e.clientY); });
+  document.addEventListener("mousemove", function(e) { if (dragging) onMove(e.clientY); });
+  document.addEventListener("mouseup", onEnd);
+})();
 
 let _paymentInfoCache = null;
 async function getPaymentInfo() {
@@ -312,9 +535,34 @@ function copyReferral() {
   if (tg && tg.showAlert) tg.showAlert(t("copied")); else alert(t("copied"));
 }
 
-function openOperatorChat() {
-  const handle = document.getElementById("operator-handle").textContent;
-  if (handle && handle !== "—" && tg && tg.openTelegramLink) tg.openTelegramLink("https://t.me/" + handle.replace("@", ""));
+function openTgUsername(username) {
+  if (!username) return;
+  if (tg && tg.openTelegramLink) tg.openTelegramLink("https://t.me/" + username);
+  else window.open("https://t.me/" + username, "_blank");
+}
+
+async function initSupportInfo() {
+  try {
+    const res = await fetch("/api/support_info");
+    const info = await res.json();
+
+    if (info.operator_username) {
+      document.getElementById("operator-handle").textContent = "@" + info.operator_username;
+      document.getElementById("row-operator").onclick = function() { openTgUsername(info.operator_username); };
+    }
+    if (info.channel_username) {
+      const row = document.getElementById("row-channel");
+      row.classList.remove("hidden"); row.classList.add("flex");
+      document.getElementById("channel-handle").textContent = "@" + info.channel_username;
+      row.onclick = function() { openTgUsername(info.channel_username); };
+    }
+    if (info.orders_channel_username) {
+      const row = document.getElementById("row-orders");
+      row.classList.remove("hidden"); row.classList.add("flex");
+      document.getElementById("orders-handle").textContent = "@" + info.orders_channel_username;
+      row.onclick = function() { openTgUsername(info.orders_channel_username); };
+    }
+  } catch (e) { /* тихо игнорируем — строки просто останутся скрытыми/пустыми */ }
 }
 
 /* ---------------- Отправка заказа боту ---------------- */
@@ -327,18 +575,12 @@ function sendPaymentInfo() {
     if (friendUsername.charAt(0) !== "@") friendUsername = "@" + friendUsername;
   }
 
-  const tgUser = tg && tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
-  const selfUsername = tgUser && tgUser.username ? "@" + tgUser.username : null;
-
-  if (recipientType === "self" && !selfUsername && activeItem.kind !== "simple_gift") {
-    errorEl.textContent = t("err_no_username");
-    errorEl.classList.remove("hidden");
-    return;
-  }
-
+  // Юзернейм для "себе" достаём на СЕРВЕРЕ (бот всегда точно знает,
+  // кто написал) — клиентский tg.initDataUnsafe не всегда надёжен
+  // (кэш вебвью и т.п.), поэтому здесь ничего не проверяем и не блокируем.
   const item = activeItem;
   const message = document.getElementById("gift-message").value.trim();
-  const recipient = recipientType === "self" ? (selfUsername || "") : friendUsername;
+  const recipient = recipientType === "self" ? "" : friendUsername;
 
   const payload = {
     category: item.kind,
@@ -385,7 +627,6 @@ async function initReferral() {
     const data = await res.json();
     const ref = u ? "https://t.me/" + data.username + "?start=ref" + u.id : "https://t.me/" + data.username;
     document.getElementById("referral-link").textContent = ref;
-    document.getElementById("operator-handle").textContent = "@admin";
   } catch (e) { /* тихо игнорируем */ }
 }
 
@@ -401,3 +642,4 @@ async function renderRentTerms() {
 applyI18n();
 initProfile();
 initReferral();
+initSupportInfo();
