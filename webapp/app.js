@@ -8,7 +8,7 @@ const I18N = {
     history_empty: "Hozircha xaridlar tarixi bo'sh.", history_hint: "To'liq tarix - botdagi \"Mening buyurtmalarim\" bo'limida.",
     top_title: "Reyting", top_subtitle: "Eng faol mijozlar", top_forming: "Reyting shakllanmoqda", top_hint: "Birinchi xaridni amalga oshiring!",
     referral_title: "Referal tizimi", referral_subtitle: "Do'stlaringizni taklif qiling!", referral_link_label: "Sizning referal havolangiz:", referral_copy: "Havolani nusxalash",
-    profile_operator: "Operator", profile_channel: "📢 Bot kanali", profile_orders_channel: "🛒 Savdo/Orderlar",
+    profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot kanali", profile_orders_channel: "\ud83d\uded2 Savdo/Orderlar",
     nav_main: "Asosiy", nav_rent: "Ijara", nav_history: "Tarix", nav_referral: "Referal", nav_profile: "Profil",
     modal_to_whom: "Kimga?", modal_to_self: "O'zimga", modal_to_friend: "Do'stimga",
     modal_recipient_label: "Qabul qiluvchi (@username):", modal_message_label: "Xabar (ixtiyoriy):",
@@ -22,13 +22,15 @@ const I18N = {
     sort_recent: "Yangilari", sort_price_asc: "Narx: arzon", sort_price_desc: "Narx: qimmat", sort_price_min: "Narx: min",
     sort_duration_asc: "Muddat: qisqa", sort_duration_desc: "Muddat: uzun",
     load_more: "Ko'proq ko'rsatish", premium_title: "Telegram Premium olish", premium_subtitle: "O'zingiz yoki yaqiningiz uchun", premium_get_suffix: "olish",
+    custom_amount: "Boshqa miqdor", custom_amount_hint: "O'zingiz kiriting", custom_amount_label: "Nechta Stars?",
+    recent_recipient_label: "Yaqinda:",
   },
   ru: {
     ijara_title: "Аренда гифтов", history_title: "История покупок",
     history_empty: "Пока пусто.", history_hint: "Полная история - в разделе «Мои заказы» в боте.",
     top_title: "Рейтинг", top_subtitle: "Самые активные клиенты", top_forming: "Рейтинг формируется", top_hint: "Сделайте первую покупку!",
     referral_title: "Реферальная система", referral_subtitle: "Приглашай друзей и получай бонусы!", referral_link_label: "Твоя реферальная ссылка:", referral_copy: "Скопировать ссылку",
-    profile_operator: "Оператор", profile_channel: "📢 Канал бота", profile_orders_channel: "🛒 Заказы/Отзывы",
+    profile_operator: "Оператор", profile_channel: "\ud83d\udce2 Канал бота", profile_orders_channel: "\ud83d\uded2 Заказы/Отзывы",
     nav_main: "Главная", nav_rent: "Аренда", nav_history: "История", nav_referral: "Рефералы", nav_profile: "Профиль",
     modal_to_whom: "Кому?", modal_to_self: "Себе", modal_to_friend: "Другу",
     modal_recipient_label: "Получатель (@username):", modal_message_label: "Сообщение (необязательно):",
@@ -42,13 +44,15 @@ const I18N = {
     sort_recent: "Новинки", sort_price_asc: "Цена: дешевле", sort_price_desc: "Цена: дороже", sort_price_min: "Цена: мин",
     sort_duration_asc: "Срок: короче", sort_duration_desc: "Срок: длиннее",
     load_more: "Показать ещё", premium_title: "Оформить Telegram Premium", premium_subtitle: "Себе или близкому человеку", premium_get_suffix: "оформить",
+    custom_amount: "Другое количество", custom_amount_hint: "Введите сами", custom_amount_label: "Сколько звёзд?",
+    recent_recipient_label: "Недавнее:",
   },
   en: {
     ijara_title: "Gift rental", history_title: "Purchase history",
     history_empty: "Nothing here yet.", history_hint: "Full history is in \"My orders\" in the bot chat.",
     top_title: "Rating", top_subtitle: "Most active customers", top_forming: "Rating is forming", top_hint: "Make your first purchase!",
     referral_title: "Referral program", referral_subtitle: "Invite friends and get bonuses!", referral_link_label: "Your referral link:", referral_copy: "Copy link",
-    profile_operator: "Operator", profile_channel: "📢 Bot channel", profile_orders_channel: "🛒 Orders channel",
+    profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot channel", profile_orders_channel: "\ud83d\uded2 Orders channel",
     nav_main: "Home", nav_rent: "Rent", nav_history: "History", nav_referral: "Referral", nav_profile: "Profile",
     modal_to_whom: "For whom?", modal_to_self: "Myself", modal_to_friend: "A friend",
     modal_recipient_label: "Recipient (@username):", modal_message_label: "Message (optional):",
@@ -62,6 +66,8 @@ const I18N = {
     sort_recent: "Newest", sort_price_asc: "Price: cheapest", sort_price_desc: "Price: priciest", sort_price_min: "Price: min",
     sort_duration_asc: "Duration: shortest", sort_duration_desc: "Duration: longest",
     load_more: "Show more", premium_title: "Get Telegram Premium", premium_subtitle: "For yourself or someone else", premium_get_suffix: "get",
+    custom_amount: "Custom amount", custom_amount_hint: "Enter your own", custom_amount_label: "How many Stars?",
+    recent_recipient_label: "Recent:",
   },
 };
 
@@ -138,6 +144,7 @@ function normalizeItem(cat) {
   };
 }
 
+// Фото у API нет, подбираем эмодзи по названию для узнаваемости карточки
 function pickGiftEmoji(name) {
   const n = (name || "").toLowerCase();
   if (n.includes("pepe")) return "🐸";
@@ -167,23 +174,37 @@ async function renderItems() {
 
   if (!items.length) { grid.innerHTML = '<p class="col-span-3 text-center text-xs text-gray-500 py-8">' + t("empty") + '</p>'; return; }
 
+  const customCardHTML = currentCategory === "stars"
+    ? '<div id="stars-custom-card" class="bg-white/5 backdrop-blur-md border border-dashed border-white/20 rounded-2xl p-3 flex flex-col items-center text-center cursor-pointer active:scale-95 transition-all hover:bg-white/10">' +
+        '<div class="text-3xl my-2">✏️</div>' +
+        '<div class="text-[10px] text-gray-300 mt-1 mb-1 leading-tight h-6 overflow-hidden">' + t("custom_amount") + '</div>' +
+        '<div class="text-[10px] font-bold text-gray-400">' + t("custom_amount_hint") + '</div>' +
+      '</div>'
+    : "";
+
   grid.innerHTML = items.map(function(it, i) {
     return '<div data-i="' + i + '" class="product-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-3 flex flex-col items-center text-center cursor-pointer active:scale-95 transition-all hover:bg-white/10 hover:border-white/20 shadow-lg shadow-black/20">' +
       '<div class="text-3xl my-2 animated-gift">' + it.emoji + '</div>' +
       '<div class="text-[10px] text-gray-300 mt-1 mb-1 leading-tight h-6 overflow-hidden">' + it.title + '</div>' +
       '<div class="text-[10px] font-bold text-neon-yellow">' + fmtUZS(it.price) + '</div>' +
     '</div>';
-  }).join("");
+  }).join("") + customCardHTML;
+
+  const customCard = document.getElementById("stars-custom-card");
+  if (customCard) customCard.addEventListener("click", openCustomStarsModal);
 
   Array.prototype.forEach.call(grid.querySelectorAll(".product-card"), function(card) {
     card.addEventListener("click", function() { openModal(items[Number(card.dataset.i)]); });
   });
 }
 
-/* ---------------- Ijara (аренда) ---------------- */
+/* ---------------- Ijara (аренда) — с догрузкой страниц ---------------- */
 let rentNextCursor = null;
 let rentLoadingMore = false;
 
+// Карточка аренды в стиле MarketApp: картинка с бейджем срока, название,
+// цена + "so'm" + "· N kun", кнопка "Ijaraga olish". Кликается ВСЯ карточка,
+// не только кнопка.
 function rentCardHTML(it, i) {
   const imgBlock = it.image
     ? '<img src="' + it.image + '" loading="lazy" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';" />' +
@@ -225,7 +246,7 @@ function renderRentGrid() {
 
   Array.prototype.forEach.call(grid.querySelectorAll(".rent-card"), function(card) {
     card.addEventListener("click", function(e) {
-      if (e.target.closest(".rent-btn")) return;
+      if (e.target.closest(".rent-btn")) return; // кнопка сама откроет — избегаем двойного триггера
       openModal(items[Number(card.dataset.i)]);
     });
   });
@@ -261,7 +282,7 @@ async function loadMoreRent() {
     catalog.nft_rent = catalog.nft_rent.concat(page.items);
     rentNextCursor = page.nextCursor;
     renderRentGrid();
-  } catch (e) { }
+  } catch (e) { /* тихо игнорируем — кнопка просто останется */ }
 
   rentLoadingMore = false;
 }
@@ -389,7 +410,7 @@ function setRecipient(type) {
   const btnSelf = document.getElementById("rec-self");
   const btnFriend = document.getElementById("rec-friend");
   const userField = document.getElementById("username-field");
-  const activeCls = "flex-1 py-1.5 rounded-lg bg-white/10 font-semibold text-xs text-white";
+  const activeCls = "flex-1 py-1.5 rounded-lg bg-white/10 font-semibold text-xs text-white shadow-inner";
   const inactiveCls = "flex-1 py-1.5 rounded-lg text-gray-400 font-semibold text-xs";
 
   if (type === "self") {
@@ -398,8 +419,26 @@ function setRecipient(type) {
   } else {
     btnFriend.className = activeCls; btnSelf.className = inactiveCls;
     userField.classList.remove("hidden");
+    showRecentRecipientChip();
   }
   document.getElementById("modal-error").classList.add("hidden");
+}
+
+function showRecentRecipientChip() {
+  let recent = null;
+  try { recent = localStorage.getItem("oson_last_recipient"); } catch (e) { /* недоступно — просто не покажем чип */ }
+
+  const chip = document.getElementById("recent-recipient-chip");
+  const btn = document.getElementById("recent-recipient-btn");
+  if (!recent) { chip.classList.add("hidden"); return; }
+
+  btn.textContent = recent;
+  btn.onclick = function() { document.getElementById("gift-username").value = recent; };
+  chip.classList.remove("hidden");
+}
+
+function saveRecentRecipient(username) {
+  try { localStorage.setItem("oson_last_recipient", username); } catch (e) { /* тихо игнорируем */ }
 }
 
 function stepDays(delta) {
@@ -410,6 +449,23 @@ function stepDays(delta) {
   rentDays = next;
   document.getElementById("days-value").textContent = rentDays;
   document.getElementById("modal-price").textContent = fmtUZS(activeItem.price * rentDays);
+}
+
+let _starsRateCache = null;
+async function openCustomStarsModal() {
+  if (!_starsRateCache) {
+    const res = await fetch("/api/stars_rate");
+    _starsRateCache = await res.json();
+  }
+  const rate = _starsRateCache.rate_uzs_per_star;
+  const qty = 50;
+  openModal({
+    kind: "stars_custom",
+    title: t("custom_amount"),
+    price: rate * qty,
+    emoji: "✏️",
+    raw: { rate: rate, qty: qty, min: _starsRateCache.min_stars || 50 },
+  });
 }
 
 async function openModal(item) {
@@ -431,6 +487,20 @@ async function openModal(item) {
 
   document.getElementById("rent-days-field").classList.toggle("hidden", item.kind !== "nft_rent");
   if (item.kind === "nft_rent") document.getElementById("days-value").textContent = rentDays;
+
+  const starsCustomField = document.getElementById("stars-custom-field");
+  const starsCustomInput = document.getElementById("stars-custom-input");
+  starsCustomField.classList.toggle("hidden", item.kind !== "stars_custom");
+  if (item.kind === "stars_custom") {
+    starsCustomInput.value = item.raw.qty || 50;
+    starsCustomInput.oninput = function() {
+      let qty = parseInt(starsCustomInput.value, 10);
+      if (isNaN(qty) || qty < 50) qty = 50;
+      item.raw.qty = qty;
+      item.price = qty * item.raw.rate;
+      document.getElementById("modal-price").textContent = fmtUZS(item.price);
+    };
+  }
 
   const previewBtn = document.getElementById("preview-gift-btn");
   if (item.kind === "nft_rent" && item.previewUrl) {
@@ -461,16 +531,18 @@ async function openModal(item) {
 }
 
 function closeModal() {
-  if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); // убрать клавиатуру
   modalContent.classList.add("translate-y-full");
   modal.classList.add("opacity-0");
   setTimeout(function() { modal.classList.add("hidden"); }, 300);
 }
 
+// Клик по затемнённому фону вокруг шторки — тоже закрывает
 modal.addEventListener("click", function(e) {
   if (e.target === modal) closeModal();
 });
 
+/* ---------------- Свайп вниз для закрытия шторки ---------------- */
 (function enableSwipeToDismiss() {
   const handle = document.getElementById("sheet-handle");
   let startY = 0, currentY = 0, dragging = false;
@@ -502,6 +574,7 @@ modal.addEventListener("click", function(e) {
   handle.addEventListener("touchmove", function(e) { onMove(e.touches[0].clientY); }, { passive: true });
   handle.addEventListener("touchend", onEnd);
 
+  // На всякий случай (десктоп/тестирование) — те же события мышью
   handle.addEventListener("mousedown", function(e) { onStart(e.clientY); });
   document.addEventListener("mousemove", function(e) { if (dragging) onMove(e.clientY); });
   document.addEventListener("mouseup", onEnd);
@@ -555,9 +628,10 @@ async function initSupportInfo() {
       document.getElementById("orders-handle").textContent = "@" + info.orders_channel_username;
       row.onclick = function() { openTgUsername(info.orders_channel_username); };
     }
-  } catch (e) { }
+  } catch (e) { /* тихо игнорируем — строки просто останутся скрытыми/пустыми */ }
 }
 
+/* ---------------- Отправка заказа боту ---------------- */
 function sendPaymentInfo() {
   const errorEl = document.getElementById("modal-error");
   let friendUsername = document.getElementById("gift-username").value.trim();
@@ -567,6 +641,9 @@ function sendPaymentInfo() {
     if (friendUsername.charAt(0) !== "@") friendUsername = "@" + friendUsername;
   }
 
+  // Юзернейм для "себе" достаём на СЕРВЕРЕ (бот всегда точно знает,
+  // кто написал) — клиентский tg.initDataUnsafe не всегда надёжен
+  // (кэш вебвью и т.п.), поэтому здесь ничего не проверяем и не блокируем.
   const item = activeItem;
   const message = document.getElementById("gift-message").value.trim();
   const recipient = recipientType === "self" ? "" : friendUsername;
@@ -580,6 +657,8 @@ function sendPaymentInfo() {
 
   if (item.kind === "stars") {
     payload.item_name = item.raw.amount + " звёзд"; payload.price = item.raw.price_uzs; payload.quantity = item.raw.amount;
+  } else if (item.kind === "stars_custom") {
+    payload.item_name = item.raw.qty + " звёзд"; payload.price = item.price; payload.quantity = item.raw.qty;
   } else if (item.kind === "premium") {
     payload.item_name = "Premium — " + item.raw.label; payload.price = item.raw.price_uzs; payload.quantity = 1;
   } else if (item.kind === "simple_gift") {
@@ -591,14 +670,17 @@ function sendPaymentInfo() {
     payload.days = rentDays;
   }
 
+  if (recipientType === "friend" && friendUsername) saveRecentRecipient(friendUsername);
+
   if (tg && tg.sendData) {
     tg.sendData(JSON.stringify(payload));
     tg.close();
   } else {
-    alert("DEMO: " + JSON.stringify(payload, null, 2));
+    alert("DEMO (Telegram ichida ochish kerak): " + JSON.stringify(payload, null, 2));
   }
 }
 
+/* ---------------- Профиль / рефералка / условия аренды ---------------- */
 function initProfile() {
   const u = tg && tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
   if (!u) return;
@@ -615,7 +697,7 @@ async function initReferral() {
     const data = await res.json();
     const ref = u ? "https://t.me/" + data.username + "?start=ref" + u.id : "https://t.me/" + data.username;
     document.getElementById("referral-link").textContent = ref;
-  } catch (e) { }
+  } catch (e) { /* тихо игнорируем */ }
 }
 
 async function renderRentTerms() {
@@ -623,7 +705,7 @@ async function renderRentTerms() {
     const res = await fetch("/api/rent_terms");
     const d = await res.json();
     document.getElementById("rent-terms-text").textContent = t("rent_terms")(fmtUZS(d.fee_uzs), fmtUZS(d.refund_uzs));
-  } catch (e) { }
+  } catch (e) { /* тихо игнорируем */ }
 }
 
 /* ---------------- Init ---------------- */
