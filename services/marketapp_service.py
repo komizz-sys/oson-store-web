@@ -26,7 +26,7 @@ from services.ton_deeplink import build_ton_deeplinks
 
 SECONDS_IN_DAY = 86400
 NANO_PER_GRAM = 1_000_000_000
-MAX_PAGES_TO_SCAN = 4  # сколько страниц API максимум пролистать, чтобы набрать limit валидных лотов
+MAX_PAGES_TO_SCAN = 10  # сколько страниц API максимум пролистать, чтобы набрать limit валидных лотов
 
 _NAME_NUM_RE = re.compile(r"^(.*?)\s*#(\d+)\s*$")
 
@@ -59,7 +59,8 @@ async def _fetch_gift_image(client: httpx.AsyncClient, nft_name: str) -> str | N
         return None
 
 
-async def get_available_gifts(limit: int = 15, sort_by: str = "recently_touch", cursor: str | None = None) -> dict:
+async def get_available_gifts(limit: int = 15, sort_by: str = "recently_touch", cursor: str | None = None,
+                               collection_address: str | None = None) -> dict:
     """
     Живой список гифтов, доступных в аренду, с ценой/день в сумах (уже с наценкой)
     и, если удалось получить, реальной картинкой + ссылкой-превью гифта.
@@ -78,7 +79,9 @@ async def get_available_gifts(limit: int = 15, sort_by: str = "recently_touch", 
 
     try:
         for _ in range(MAX_PAGES_TO_SCAN):
-            data = await marketapp_api.get_gifts_for_rent(sort_by=sort_by, cursor=next_cursor)
+            data = await marketapp_api.get_gifts_for_rent(
+                sort_by=sort_by, cursor=next_cursor, collection_address=collection_address
+            )
             items = data.get("items", [])
             collected_raw.extend(items)
 
@@ -98,34 +101,43 @@ async def get_available_gifts(limit: int = 15, sort_by: str = "recently_touch", 
             return_exceptions=False,
         )
 
-    result = []
-    for item, image_url in zip(collected_raw, images):
+    def build_item(item: dict, image_url: str | None) -> dict:
         base_price_per_day_gram = int(item["price_per_day"]) / NANO_PER_GRAM
         calc = calc_rent_price(base_price_per_day_gram, days=1)
-
-        if calc["with_markup"] < config.RENT_MIN_DISPLAY_UZS:
-            continue  # отсекаем почти бесплатные/мусорные лоты
 
         m = _NAME_NUM_RE.match(item["nft_name"] or "")
         title = m.group(1) if m else item["nft_name"]
         number = m.group(2) if m else None
         slug = _slugify(title) if title else None
 
-        result.append({
+        return {
             "nft_address": item["nft_address"],
             "name": title,
             "number": number,
             "image_url": image_url,
-            # Официальный формат Telegram для просмотра гифта (как в самом приложении)
             "preview_url": f"https://t.me/nft/{slug}-{number}" if slug and number else None,
             "discount_per_day": item.get("discount_per_day", 0),
             "base_price_per_day_gram": base_price_per_day_gram,
             "price_per_day_uzs_with_markup": calc["with_markup"],
             "min_duration_days": item["min_duration"] // SECONDS_IN_DAY,
             "max_duration_days": item["max_duration"] // SECONDS_IN_DAY,
-        })
+        }
+
+    result = []
+    for item, image_url in zip(collected_raw, images):
+        base_price_per_day_gram = int(item["price_per_day"]) / NANO_PER_GRAM
+        calc = calc_rent_price(base_price_per_day_gram, days=1)
+        if calc["with_markup"] < config.RENT_MIN_DISPLAY_UZS:
+            continue  # отсекаем почти бесплатные/мусорные лоты
+        result.append(build_item(item, image_url))
         if len(result) >= limit:
             break
+
+    # Аварийный откат: если после фильтра совсем ничего не осталось (например,
+    # конкретная сортировка выдаёт подряд одни копеечные лоты) — лучше
+    # показать хоть что-то без порога цены, чем пустой экран
+    if not result and collected_raw:
+        result = [build_item(item, image_url) for item, image_url in zip(collected_raw, images)][:limit]
 
     return {"items": result, "next_cursor": next_cursor}
 
@@ -136,6 +148,28 @@ def _price_uzs_preview(raw_item: dict) -> int:
         return calc_rent_price(gram, days=1)["with_markup"]
     except Exception:
         return 0
+
+
+_collections_cache: list[dict] | None = None
+
+
+async def get_rent_collections() -> list[dict]:
+    """
+    Список коллекций гифтов для фильтра (Plush Pepes, Scared Cats и т.д.).
+    Кэшируется в памяти процесса — список коллекций меняется редко.
+    -> [{"name": str, "address": str}]
+    """
+    global _collections_cache
+    if _collections_cache is not None:
+        return _collections_cache
+
+    try:
+        raw = await marketapp_api.get_gift_collections()
+    except Exception:
+        return []
+
+    _collections_cache = [{"name": c["name"], "address": c["address"]} for c in raw]
+    return _collections_cache
 
 
 def calc_rent_price(base_price_per_day_gram: float, days: int) -> dict:
