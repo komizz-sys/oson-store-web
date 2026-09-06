@@ -73,3 +73,9 @@ OPERATOR_USERNAME = os.getenv("OPERATOR_USERNAME", "")
 # ---- Внутренний секрет для связи бота с веб-сервисом (живая лента заказов) ----
 # Один и тот же секрет должен быть прописан в ОБОИХ сервисах на Railway.
 INTERNAL_PUSH_SECRET = os.getenv("INTERNAL_PUSH_SECRET", "")
+
+# ---- Публичный адрес бота (сервис tg_shop_bot/worker) — для вкладок
+# "Tarix" (история), "TOP" (рейтинг), "Profil" (личная статистика) ----
+# Тот же домен, что и SHOP_API_URL у бота-аналитика (см. analytics_bot).
+# Например: https://oson-store-bot-production.up.railway.app
+SHOP_API_URL = os.getenv("SHOP_API_URL", "").rstrip("/")
