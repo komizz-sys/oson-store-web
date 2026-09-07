@@ -1,6 +1,25 @@
 const tg = window.Telegram && window.Telegram.WebApp;
 if (tg) { tg.expand(); tg.ready(); }
 
+/**
+ * Telegram иногда отдаёт initData не мгновенно на первом кадре WebView —
+ * страница уже выполнилась, а initData ещё пустая строка (особенно на
+ * некоторых версиях клиента при "холодном" открытии мини-аппа). Раньше из-за
+ * этого Tarix/Profil мгновенно показывали "открой в Telegram", хотя человек
+ * и так был внутри Telegram. Ждём короткими попытками, прежде чем сдаться.
+ */
+function waitForInitData(maxWaitMs = 1500, stepMs = 100) {
+  return new Promise(function(resolve) {
+    if (tg && tg.initData) { resolve(tg.initData); return; }
+    let waited = 0;
+    const iv = setInterval(function() {
+      waited += stepMs;
+      if (tg && tg.initData) { clearInterval(iv); resolve(tg.initData); }
+      else if (waited >= maxWaitMs) { clearInterval(iv); resolve(tg && tg.initData ? tg.initData : ""); }
+    }, stepMs);
+  });
+}
+
 /* ---------------- i18n ---------------- */
 const I18N = {
   uz: {
@@ -165,7 +184,6 @@ function normalizeItem(cat) {
   };
 }
 
-// Фото у API нет, подбираем эмодзи по названию для узнаваемости карточки
 function pickGiftEmoji(name) {
   const n = (name || "").toLowerCase();
   if (n.includes("pepe")) return "🐸";
@@ -204,10 +222,6 @@ async function renderItems() {
     : "";
 
   grid.innerHTML = items.map(function(it, i) {
-    // БАГ БЫЛ ЗДЕСЬ: карточка в сетке всегда рисовала только эмодзи (it.emoji),
-    // even когда у товара есть реальное фото (it.image) — картинку показывала
-    // только модалка после тапа. Из-за этого добавленные через /addgift фото
-    // подарков не появлялись там, где их реально видит покупатель — в каталоге.
     const iconHTML = it.image
       ? '<img src="' + it.image + '" loading="lazy" class="w-14 h-14 my-1 rounded-xl object-cover animated-gift" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'block\';" />' +
         '<div class="text-3xl my-2 animated-gift" style="display:none">' + it.emoji + '</div>'
@@ -227,13 +241,9 @@ async function renderItems() {
   });
 }
 
-/* ---------------- Ijara (аренда) — с догрузкой страниц ---------------- */
 let rentNextCursor = null;
 let rentLoadingMore = false;
 
-// Карточка аренды в стиле MarketApp: картинка с бейджем срока, название,
-// цена + "so'm" + "· N kun", кнопка "Ijaraga olish". Кликается ВСЯ карточка,
-// не только кнопка.
 function rentCardHTML(it, i) {
   const imgBlock = it.image
     ? '<img src="' + it.image + '" loading="lazy" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';" />' +
@@ -275,7 +285,7 @@ function renderRentGrid() {
 
   Array.prototype.forEach.call(grid.querySelectorAll(".rent-card"), function(card) {
     card.addEventListener("click", function(e) {
-      if (e.target.closest(".rent-btn")) return; // кнопка сама откроет — избегаем двойного триггера
+      if (e.target.closest(".rent-btn")) return;
       openModal(items[Number(card.dataset.i)]);
     });
   });
@@ -311,7 +321,7 @@ async function loadMoreRent() {
     catalog.nft_rent = catalog.nft_rent.concat(page.items);
     rentNextCursor = page.nextCursor;
     renderRentGrid();
-  } catch (e) { /* тихо игнорируем — кнопка просто останется */ }
+  } catch (e) { /* тихо */ }
 
   rentLoadingMore = false;
 }
@@ -343,7 +353,6 @@ document.getElementById("rent-sort-select").addEventListener("change", function(
   renderIjara(true);
 });
 
-/* ---------------- Фильтр по коллекции ---------------- */
 let _collectionsCache = null;
 
 document.getElementById("rent-collection-btn").addEventListener("click", openCollectionModal);
@@ -410,7 +419,6 @@ function closeCollectionModal() {
   setTimeout(function() { modal.classList.add("hidden"); }, 300);
 }
 
-/* ---------------- Premium: список с радио-выбором ---------------- */
 let selectedPremiumIndex = 0;
 
 async function renderPremiumList() {
@@ -493,10 +501,9 @@ function switchTab(tab) {
   if (tab === "ijara") renderIjara();
   if (tab === "tarix") renderHistory();
   if (tab === "top") renderLeaderboard(currentTopPeriod);
-  if (tab === "profil") renderProfileStats();
+  if (tab === "profil") { initProfile(); renderProfileStats(); }
 }
 
-/* ---------------- Модалка оплаты ---------------- */
 let activeItem = null;
 let recipientType = "self";
 let rentDays = 1;
@@ -525,7 +532,7 @@ function setRecipient(type) {
 
 function showRecentRecipientChip() {
   let recent = null;
-  try { recent = localStorage.getItem("oson_last_recipient"); } catch (e) { /* недоступно — просто не покажем чип */ }
+  try { recent = localStorage.getItem("oson_last_recipient"); } catch (e) {}
 
   const chip = document.getElementById("recent-recipient-chip");
   const btn = document.getElementById("recent-recipient-btn");
@@ -537,7 +544,7 @@ function showRecentRecipientChip() {
 }
 
 function saveRecentRecipient(username) {
-  try { localStorage.setItem("oson_last_recipient", username); } catch (e) { /* тихо игнорируем */ }
+  try { localStorage.setItem("oson_last_recipient", username); } catch (e) {}
 }
 
 function stepDays(delta) {
@@ -651,18 +658,16 @@ async function openModal(item) {
 }
 
 function closeModal() {
-  if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); // убрать клавиатуру
+  if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
   modalContent.classList.add("translate-y-full");
   modal.classList.add("opacity-0");
   setTimeout(function() { modal.classList.add("hidden"); }, 300);
 }
 
-// Клик по затемнённому фону вокруг шторки — тоже закрывает
 modal.addEventListener("click", function(e) {
   if (e.target === modal) closeModal();
 });
 
-/* ---------------- Свайп вниз для закрытия шторки ---------------- */
 (function enableSwipeToDismiss() {
   const handle = document.getElementById("sheet-handle");
   let startY = 0, currentY = 0, dragging = false;
@@ -694,7 +699,6 @@ modal.addEventListener("click", function(e) {
   handle.addEventListener("touchmove", function(e) { onMove(e.touches[0].clientY); }, { passive: true });
   handle.addEventListener("touchend", onEnd);
 
-  // На всякий случай (десктоп/тестирование) — те же события мышью
   handle.addEventListener("mousedown", function(e) { onStart(e.clientY); });
   document.addEventListener("mousemove", function(e) { if (dragging) onMove(e.clientY); });
   document.addEventListener("mouseup", onEnd);
@@ -742,10 +746,9 @@ async function initSupportInfo() {
       document.getElementById("orders-handle").textContent = "@" + info.orders_channel_username;
       row.onclick = function() { openTgUsername(info.orders_channel_username); };
     }
-  } catch (e) { /* тихо игнорируем — строки просто останутся скрытыми/пустыми */ }
+  } catch (e) {}
 }
 
-/* ---------------- Отправка заказа боту ---------------- */
 function sendPaymentInfo() {
   const errorEl = document.getElementById("modal-error");
   let friendUsername = document.getElementById("gift-username").value.trim();
@@ -755,9 +758,6 @@ function sendPaymentInfo() {
     if (friendUsername.charAt(0) !== "@") friendUsername = "@" + friendUsername;
   }
 
-  // Юзернейм для "себе" достаём на СЕРВЕРЕ (бот всегда точно знает,
-  // кто написал) — клиентский tg.initDataUnsafe не всегда надёжен
-  // (кэш вебвью и т.п.), поэтому здесь ничего не проверяем и не блокируем.
   const item = activeItem;
   const message = document.getElementById("gift-message").value.trim();
   const recipient = recipientType === "self" ? "" : friendUsername;
@@ -797,9 +797,12 @@ function sendPaymentInfo() {
   }
 }
 
-/* ---------------- Профиль / рефералка / условия аренды ---------------- */
-function initProfile() {
-  const u = tg && tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
+async function initProfile() {
+  let u = tg && tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
+  if (!u) {
+    await waitForInitData();
+    u = tg && tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
+  }
   if (!u) return;
   document.getElementById("profile-name").textContent = u.first_name || "Mijoz";
   document.getElementById("profile-username").textContent = u.username ? "@" + u.username : "";
@@ -807,7 +810,6 @@ function initProfile() {
   document.getElementById("profile-avatar").textContent = (u.first_name ? u.first_name.charAt(0) : "?").toUpperCase();
 }
 
-/* ---------------- API бота-магазина (Tarix/TOP/Profil) ---------------- */
 let shopApiUrl = null;
 async function getShopApiUrl() {
   if (shopApiUrl !== null) return shopApiUrl;
@@ -829,14 +831,14 @@ const STATUS_KEY = {
 
 function formatOrderDate(sqlDate) {
   if (!sqlDate) return "";
-  // формат из sqlite: "YYYY-MM-DD HH:MM:SS" (UTC) — просто показываем как есть, без пересчёта пояса
   return sqlDate.replace("T", " ").slice(0, 16);
 }
 
 async function renderHistory() {
   const listEl = document.getElementById("tarix-list");
   const base = await getShopApiUrl();
-  if (!base || !tg || !tg.initData) {
+  const initData = await waitForInitData();
+  if (!base || !initData) {
     listEl.innerHTML =
       '<div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center text-gray-400">' +
       '<p class="text-3xl mb-2">\ud83d\uded2</p><p class="text-sm">' + t("history_open_bot") + '</p></div>';
@@ -847,7 +849,7 @@ async function renderHistory() {
   try {
     const res = await fetch(base + "/public/my_orders", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ initData: tg.initData }),
+      body: JSON.stringify({ initData: initData }),
     });
     const data = await res.json();
     const orders = data.orders || [];
@@ -921,15 +923,43 @@ async function renderLeaderboard(period) {
       return;
     }
 
-    const medal = ["\ud83e\udd47", "\ud83e\udd48", "\ud83e\udd49"];
-    listEl.innerHTML = rows.map(function(r, i) {
-      const name = r.full_name || (r.username ? "@" + r.username : "ID " + r.user_id);
+    const initials = function(name) { return (name || "?").trim().charAt(0).toUpperCase(); };
+
+    function personName(r) {
+      return r.full_name || (r.username ? "@" + r.username : "ID " + r.user_id);
+    }
+
+    let podiumHtml = "";
+    if (rows.length >= 1) {
+      const order = [1, 0, 2].filter(function(i) { return rows[i]; });
+      const RING = { 0: "ring-neon-yellow shadow-[0_0_16px_rgba(234,179,8,0.45)]", 1: "ring-gray-300/70", 2: "ring-amber-700/70" };
+      const LIFT = { 0: "-mt-3", 1: "mt-2", 2: "mt-4" };
+      const SIZE = { 0: "w-16 h-16 text-xl", 1: "w-12 h-12 text-base", 2: "w-12 h-12 text-base" };
+      const medal = ["\ud83e\udd47", "\ud83e\udd48", "\ud83e\udd49"];
+      podiumHtml =
+        '<div class="flex items-end justify-center gap-3 pt-2 pb-5">' +
+        order.map(function(i) {
+          const r = rows[i];
+          const name = personName(r);
+          const isMe = myId && r.user_id === myId;
+          return '<div class="flex flex-col items-center ' + LIFT[i] + ' ' + (i === 0 ? "" : "opacity-95") + '">' +
+            '<div class="' + SIZE[i] + ' rounded-full ring-2 ' + RING[i] + ' bg-gradient-to-br from-neon-blue to-neon-purple flex items-center justify-center font-bold' + (isMe ? " outline outline-2 outline-neon-blue outline-offset-2" : "") + '">' + initials(name) + '</div>' +
+            '<div class="text-base leading-none mt-1.5">' + medal[i] + '</div>' +
+            '<div class="text-[11px] font-semibold text-white mt-1 max-w-[80px] truncate text-center">' + name + '</div>' +
+            '<div class="text-[11px] font-bold text-neon-yellow">' + fmtUZS(r.total_uzs) + '</div>' +
+          '</div>';
+        }).join("") +
+        '</div>';
+    }
+
+    const restHtml = rows.slice(3).map(function(r, idx) {
+      const i = idx + 3;
+      const name = personName(r);
       const isMe = myId && r.user_id === myId;
-      const rankBadge = i < 3 ? '<span class="text-lg">' + medal[i] + '</span>' : '<span class="text-xs text-gray-500 w-5 text-center">' + (i + 1) + '</span>';
       return '<div class="flex items-center justify-between gap-2 rounded-xl p-3 ' +
         (isMe ? "bg-neon-blue/10 border border-neon-blue/40" : "bg-white/5 border border-white/10") + '">' +
         '<div class="flex items-center gap-3 min-w-0">' +
-          rankBadge +
+          '<span class="text-xs text-gray-500 w-5 text-center flex-shrink-0">' + (i + 1) + '</span>' +
           '<div class="min-w-0">' +
             '<div class="text-xs font-semibold text-white truncate">' + name + (isMe ? ' \u00b7 <span class="text-neon-blue">' + t("top_you") + '</span>' : '') + '</div>' +
             '<div class="text-[10px] text-gray-400">' + r.orders_count + ' ' + t("top_orders_suffix") + '</div>' +
@@ -938,6 +968,8 @@ async function renderLeaderboard(period) {
         '<div class="text-xs font-bold text-neon-yellow flex-shrink-0">' + fmtUZS(r.total_uzs) + '</div>' +
       '</div>';
     }).join("");
+
+    listEl.innerHTML = podiumHtml + '<div class="space-y-2">' + restHtml + '</div>';
   } catch (e) {
     listEl.innerHTML = '<div class="text-center text-xs text-gray-500 py-6">' + t("top_empty") + '</div>';
   }
@@ -946,12 +978,13 @@ async function renderLeaderboard(period) {
 async function renderProfileStats() {
   const box = document.getElementById("profile-stats-box");
   const base = await getShopApiUrl();
-  if (!base || !tg || !tg.initData) { box.classList.add("hidden"); return; }
+  const initData = await waitForInitData();
+  if (!base || !initData) { box.classList.add("hidden"); return; }
 
   try {
     const res = await fetch(base + "/public/my_stats", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ initData: tg.initData }),
+      body: JSON.stringify({ initData: initData }),
     });
     const stats = await res.json();
 
@@ -983,16 +1016,14 @@ async function renderRentTerms() {
     const res = await fetch("/api/rent_terms");
     const d = await res.json();
     document.getElementById("rent-terms-text").textContent = t("rent_terms")(fmtUZS(d.fee_uzs), fmtUZS(d.refund_uzs));
-  } catch (e) { /* тихо игнорируем */ }
+  } catch (e) {}
 }
 
-/* ---------------- Init ---------------- */
 applyI18n();
 initProfile();
 initSupportInfo();
 initLiveFeed();
 
-/* ---------------- Живая лента заказов ---------------- */
 function timeAgoLabel(ts) {
   const diffMin = Math.max(1, Math.round((Date.now() / 1000 - ts) / 60));
   if (diffMin < 60) return diffMin + " " + t("minutes_ago");
