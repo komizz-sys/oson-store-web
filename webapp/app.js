@@ -8,7 +8,16 @@ if (tg) { tg.expand(); tg.ready(); }
  * этого Tarix/Profil мгновенно показывали "открой в Telegram", хотя человек
  * и так был внутри Telegram. Ждём короткими попытками, прежде чем сдаться.
  */
-function waitForInitData(maxWaitMs = 1500, stepMs = 100) {
+/**
+ * Telegram иногда отдаёт initData не мгновенно на первом кадре WebView —
+ * страница уже выполнилась, а initData ещё пустая строка. На слабых
+ * Android-устройствах (видел в логах — Redmi Note 9S "AVERAGE" performance)
+ * это может занимать заметно больше 1.5 сек, особенно на медленном интернете.
+ * БАГ БЫЛ ЗДЕСЬ: ждали всего 1.5 сек и сдавались — Tarix/Profil показывали
+ * "открой в Telegram", хотя человек и так был внутри Telegram, просто
+ * initData ещё не успела дойти. Увеличил окно ожидания и сделал его терпеливее.
+ */
+function waitForInitData(maxWaitMs = 4000, stepMs = 150) {
   return new Promise(function(resolve) {
     if (tg && tg.initData) { resolve(tg.initData); return; }
     let waited = 0;
@@ -16,6 +25,25 @@ function waitForInitData(maxWaitMs = 1500, stepMs = 100) {
       waited += stepMs;
       if (tg && tg.initData) { clearInterval(iv); resolve(tg.initData); }
       else if (waited >= maxWaitMs) { clearInterval(iv); resolve(tg && tg.initData ? tg.initData : ""); }
+    }, stepMs);
+  });
+}
+
+/**
+ * Отдельное (и обычно куда более быстрое) ожидание именно initDataUnsafe.user —
+ * это НЕподписанные данные, для отображения имени/аватарки в Profil подпись
+ * не нужна, поэтому не блокируем это той же долгой проверкой, что my_orders/my_stats.
+ */
+function waitForUnsafeUser(maxWaitMs = 4000, stepMs = 150) {
+  return new Promise(function(resolve) {
+    const get = function() { return tg && tg.initDataUnsafe && tg.initDataUnsafe.user; };
+    if (get()) { resolve(get()); return; }
+    let waited = 0;
+    const iv = setInterval(function() {
+      waited += stepMs;
+      const u = get();
+      if (u) { clearInterval(iv); resolve(u); }
+      else if (waited >= maxWaitMs) { clearInterval(iv); resolve(null); }
     }, stepMs);
   });
 }
@@ -215,19 +243,19 @@ async function renderItems() {
   if (!items.length) { grid.innerHTML = '<p class="col-span-3 text-center text-xs text-gray-500 py-8">' + t("empty") + '</p>'; return; }
 
   const customCardHTML = currentCategory === "stars"
-    ? '<div id="stars-custom-card" class="bg-white/5 backdrop-blur-md border border-dashed border-white/20 rounded-2xl p-3 flex flex-col items-center text-center cursor-pointer active:scale-95 transition-all hover:bg-white/10">' +
+    ? '<div id="stars-custom-card" class="glass-card press rounded-[20px] p-3 flex flex-col items-center text-center cursor-pointer" style="border-style: dashed;">' +
         '<div class="text-3xl my-2">✏️</div>' +
         '<div class="text-[10px] text-gray-300 mt-1 mb-1 leading-tight h-6 overflow-hidden">' + t("custom_amount") + '</div>' +
-        '<div class="text-[10px] font-bold text-gray-400">' + t("custom_amount_hint") + '</div>' +
+        '<div class="text-[10px] font-bold text-gray-500">' + t("custom_amount_hint") + '</div>' +
       '</div>'
     : "";
 
   grid.innerHTML = items.map(function(it, i) {
     const iconHTML = it.image
-      ? '<img src="' + it.image + '" loading="lazy" class="w-14 h-14 my-1 rounded-xl object-cover animated-gift" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'block\';" />' +
+      ? '<img src="' + it.image + '" loading="lazy" class="w-14 h-14 my-1 rounded-2xl object-cover animated-gift" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'block\';" />' +
         '<div class="text-3xl my-2 animated-gift" style="display:none">' + it.emoji + '</div>'
       : '<div class="text-3xl my-2 animated-gift">' + it.emoji + '</div>';
-    return '<div data-i="' + i + '" class="product-card bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-3 flex flex-col items-center text-center cursor-pointer active:scale-95 transition-all hover:bg-white/10 hover:border-white/20 shadow-lg shadow-black/20">' +
+    return '<div data-i="' + i + '" class="product-card glass-card press rounded-[20px] p-3 flex flex-col items-center text-center cursor-pointer">' +
       iconHTML +
       '<div class="text-[10px] text-gray-300 mt-1 mb-1 leading-tight h-6 overflow-hidden">' + it.title + '</div>' +
       '<div class="text-[10px] font-bold text-neon-yellow">' + fmtUZS(it.price) + '</div>' +
@@ -260,11 +288,11 @@ function rentCardHTML(it, i) {
     ? '<span class="text-[11px] text-gray-500 font-mono">#' + it.raw.number + '</span>'
     : '';
 
-  return '<div data-i="' + i + '" class="rent-card bg-[#0d1424] border border-white/10 rounded-2xl overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition-all hover:border-white/20 shadow-lg shadow-black/20">' +
+  return '<div data-i="' + i + '" class="rent-card glass-card press rounded-[22px] overflow-hidden flex flex-col cursor-pointer">' +
     '<div class="rent-img relative h-44">' +
       imgBlock +
       discountBadge +
-      '<span class="absolute bottom-2 right-2 bg-black/60 backdrop-blur text-[10px] font-semibold px-2 py-1 rounded-lg text-gray-200">' +
+      '<span class="absolute bottom-2 right-2 bg-black/50 backdrop-blur-md text-[10px] font-semibold px-2 py-1 rounded-lg text-gray-200 border border-white/10">' +
         t("rent_from") + ' ' + it.raw.min_duration_days + '-' + it.raw.max_duration_days + ' ' + t("rent_days_suffix") +
       '</span>' +
     '</div>' +
@@ -274,7 +302,7 @@ function rentCardHTML(it, i) {
         numberBadge +
       '</div>' +
       '<div class="text-sm font-bold text-neon-yellow">' + fmtUZS(it.price) + ' <span class="text-[11px] text-gray-400 font-normal">· 1 ' + t("rent_days_suffix") + '</span></div>' +
-      '<button data-i="' + i + '" class="rent-btn mt-2 w-full py-2.5 rounded-xl bg-gradient-to-r from-neon-blue to-blue-600 font-bold text-white text-sm active:scale-95 transition-all shadow-[0_4px_14px_rgba(59,130,246,0.35)]">' + t("rent_btn") + '</button>' +
+      '<button data-i="' + i + '" class="rent-btn press mt-2 w-full py-3 rounded-2xl btn-primary font-semibold text-white text-sm">' + t("rent_btn") + '</button>' +
     '</div>' +
   '</div>';
 }
@@ -306,7 +334,7 @@ function renderLoadMoreButton() {
 
   const btn = document.createElement("button");
   btn.id = "rent-load-more";
-  btn.className = "col-span-2 mt-1 py-3 rounded-xl bg-white/5 border border-white/10 text-sm font-semibold text-gray-300 active:scale-95 transition-all";
+  btn.className = "col-span-2 mt-1 py-3.5 rounded-2xl pill press text-sm font-semibold";
   btn.textContent = t("load_more");
   btn.addEventListener("click", loadMoreRent);
   document.getElementById("ijara-grid").appendChild(btn);
@@ -395,8 +423,8 @@ function paintCollectionList() {
     const iconHTML = c.image
       ? '<img src="' + c.image + '" alt="" class="w-8 h-8 rounded-lg object-cover flex-shrink-0" onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'w-8 h-8 rounded-lg bg-white/10 flex-shrink-0\'}))">'
       : '<div class="w-8 h-8 rounded-lg bg-white/10 flex-shrink-0"></div>';
-    return '<div data-address="' + (c.address || "") + '" data-name="' + c.name + '" class="collection-row flex items-center gap-3 rounded-xl p-3 cursor-pointer border ' +
-      (selected ? "bg-neon-blue/10 border-neon-blue" : "bg-white/5 border-white/10") + '">' +
+    return '<div data-address="' + (c.address || "") + '" data-name="' + c.name + '" class="collection-row press flex items-center gap-3 rounded-2xl p-3 cursor-pointer border ' +
+      (selected ? "bg-neon-blue/10 border-neon-blue/50" : "bg-white/[0.04] border-white/[0.08]") + '">' +
       iconHTML +
       '<span class="text-sm font-medium text-white flex-1">' + c.name + '</span>' +
       (selected ? '<span class="text-neon-blue text-sm">✓</span>' : '') +
@@ -443,8 +471,8 @@ async function renderPremiumList() {
   function paint() {
     optionsEl.innerHTML = items.map(function(it, i) {
       const selected = i === selectedPremiumIndex;
-      return '<div data-i="' + i + '" class="premium-option flex items-center justify-between gap-3 rounded-2xl p-3.5 cursor-pointer transition-all border ' +
-        (selected ? "bg-neon-blue/10 border-neon-blue" : "bg-white/5 border-white/10") + '">' +
+      return '<div data-i="' + i + '" class="premium-option press flex items-center justify-between gap-3 rounded-2xl p-4 cursor-pointer border ' +
+        (selected ? "bg-neon-blue/10 border-neon-blue/50" : "bg-white/[0.04] border-white/[0.08]") + '">' +
         '<div class="flex items-center gap-3">' +
           '<span class="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ' + (selected ? "border-neon-blue" : "border-gray-500") + '">' +
             (selected ? '<span class="w-2.5 h-2.5 rounded-full bg-neon-blue"></span>' : "") +
@@ -485,9 +513,9 @@ function skeletonHTML(n, heightClass) {
 function setCategory(cat) {
   currentCategory = cat;
   Array.prototype.forEach.call(document.querySelectorAll(".cat-btn"), function(btn) {
-    btn.className = "cat-btn px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs whitespace-nowrap text-gray-300";
+    btn.className = "cat-btn press px-4 py-2 rounded-full pill text-xs whitespace-nowrap";
   });
-  document.getElementById("cat-" + cat).className = "cat-btn px-4 py-1.5 rounded-full bg-gradient-to-r from-neon-yellow to-amber-500 text-black text-xs font-bold whitespace-nowrap shadow-[0_0_10px_rgba(234,179,8,0.3)]";
+  document.getElementById("cat-" + cat).className = "cat-btn press px-4 py-2 rounded-full pill-gold text-xs font-semibold whitespace-nowrap";
   renderItems();
 }
 
@@ -806,11 +834,7 @@ function sendPaymentInfo() {
 
 /* ---------------- Профиль / рефералка / условия аренды ---------------- */
 async function initProfile() {
-  let u = tg && tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
-  if (!u) {
-    await waitForInitData();
-    u = tg && tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
-  }
+  const u = await waitForUnsafeUser();
   if (!u) return;
   document.getElementById("profile-name").textContent = u.first_name || "Mijoz";
   document.getElementById("profile-username").textContent = u.username ? "@" + u.username : "";
@@ -849,7 +873,7 @@ async function renderHistory() {
   const initData = await waitForInitData();
   if (!base || !initData) {
     listEl.innerHTML =
-      '<div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center text-gray-400">' +
+      '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
       '<p class="text-3xl mb-2">🛒</p><p class="text-sm">' + t("history_open_bot") + '</p></div>';
     return;
   }
@@ -865,7 +889,7 @@ async function renderHistory() {
 
     if (!orders.length) {
       listEl.innerHTML =
-        '<div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center text-gray-400">' +
+        '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
         '<p class="text-3xl mb-2">🛒</p><p class="text-sm">' + t("history_empty") + '</p></div>';
       return;
     }
@@ -874,7 +898,7 @@ async function renderHistory() {
       const emoji = CATEGORY_EMOJI[o.category] || "📦";
       const statusLabel = t(STATUS_KEY[o.status] || o.status);
       const statusColor = (o.status === "completed") ? "text-green-400" : (o.status === "rejected") ? "text-red-400" : "text-gray-400";
-      return '<div class="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center justify-between gap-2">' +
+      return '<div class="glass-card rounded-2xl p-3.5 flex items-center justify-between gap-2">' +
         '<div class="flex items-center gap-2.5 min-w-0">' +
           '<span class="text-xl flex-shrink-0">' + emoji + '</span>' +
           '<div class="min-w-0">' +
@@ -887,7 +911,7 @@ async function renderHistory() {
     }).join("");
   } catch (e) {
     listEl.innerHTML =
-      '<div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center text-gray-400">' +
+      '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
       '<p class="text-sm">' + t("history_empty") + '</p></div>';
   }
 }
@@ -899,8 +923,8 @@ function setTopPeriod(period) {
     const btn = document.getElementById("top-period-" + p);
     if (!btn) return;
     btn.className = p === period
-      ? "px-3 py-1.5 rounded-full bg-gradient-to-r from-neon-yellow to-amber-500 text-black text-[11px] font-bold whitespace-nowrap"
-      : "px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-gray-300 whitespace-nowrap";
+      ? "press px-3.5 py-2 rounded-full pill-gold text-[11px] font-semibold whitespace-nowrap"
+      : "press px-3.5 py-2 rounded-full pill text-[11px] whitespace-nowrap";
   });
   renderLeaderboard(period);
 }
@@ -910,14 +934,15 @@ async function renderLeaderboard(period) {
   const base = await getShopApiUrl();
   if (!base) {
     listEl.innerHTML =
-      '<div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center text-gray-400">' +
+      '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
       '<p class="text-3xl mb-2">🏆</p><p class="text-sm font-semibold text-white mb-1">' + t("top_forming") + '</p>' +
       '<p class="text-xs">' + t("top_hint") + '</p></div>';
     return;
   }
   listEl.innerHTML = '<div class="text-center text-xs text-gray-500 py-6">' + t("history_loading") + '</div>';
 
-  const myId = tg && tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : null;
+  const myUser = await waitForUnsafeUser();
+  const myId = myUser ? myUser.id : null;
 
   try {
     const res = await fetch(base + "/public/leaderboard?period=" + period);
@@ -926,7 +951,7 @@ async function renderLeaderboard(period) {
 
     if (!rows.length) {
       listEl.innerHTML =
-        '<div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center text-gray-400">' +
+        '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
         '<p class="text-3xl mb-2">🏆</p><p class="text-sm font-semibold text-white mb-1">' + t("top_forming") + '</p>' +
         '<p class="text-xs">' + t("top_hint") + '</p></div>';
       return;
@@ -941,7 +966,7 @@ async function renderLeaderboard(period) {
     let podiumHtml = "";
     if (rows.length >= 1) {
       const order = [1, 0, 2].filter(function(i) { return rows[i]; });
-      const RING = { 0: "ring-neon-yellow shadow-[0_0_16px_rgba(234,179,8,0.45)]", 1: "ring-gray-300/70", 2: "ring-amber-700/70" };
+      const RING = { 0: "ring-neon-yellow shadow-[0_0_18px_rgba(217,180,91,0.5)]", 1: "ring-gray-300/70", 2: "ring-amber-700/70" };
       const LIFT = { 0: "-mt-3", 1: "mt-2", 2: "mt-4" };
       const SIZE = { 0: "w-16 h-16 text-xl", 1: "w-12 h-12 text-base", 2: "w-12 h-12 text-base" };
       const medal = ["🥇", "🥈", "🥉"];
@@ -965,8 +990,8 @@ async function renderLeaderboard(period) {
       const i = idx + 3;
       const name = personName(r);
       const isMe = myId && r.user_id === myId;
-      return '<div class="flex items-center justify-between gap-2 rounded-xl p-3 ' +
-        (isMe ? "bg-neon-blue/10 border border-neon-blue/40" : "bg-white/5 border border-white/10") + '">' +
+      return '<div class="press flex items-center justify-between gap-2 rounded-2xl p-3.5 ' +
+        (isMe ? "bg-neon-blue/10 border border-neon-blue/40" : "glass-card") + '">' +
         '<div class="flex items-center gap-3 min-w-0">' +
           '<span class="text-xs text-gray-500 w-5 text-center flex-shrink-0">' + (i + 1) + '</span>' +
           '<div class="min-w-0">' +
@@ -1012,7 +1037,7 @@ async function renderProfileStats() {
         (stats.rank ? '<span class="text-[10px] text-neon-yellow font-semibold">' + t("profile_stats_rank") + ': #' + stats.rank + '</span>' : '') +
       '</div>' +
       catRows +
-      '<div class="flex justify-between items-center text-xs pt-2 mt-1 border-t border-white/10">' +
+      '<div class="flex justify-between items-center text-xs pt-2 mt-1 border-t border-white/[0.08]">' +
         '<span class="font-bold text-white">' + t("profile_stats_total") + '</span>' +
         '<span class="font-bold text-neon-blue">' + fmtUZS(stats.total_uzs || 0) + '</span></div>';
   } catch (e) {
