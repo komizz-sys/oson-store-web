@@ -54,7 +54,7 @@ const I18N = {
     ijara_title: "Gift Arendasi", history_title: "Xaridlar tarixi",
     history_empty: "Hozircha xaridlar tarixi bo'sh.", history_hint: "To'liq tarix - botdagi \"Mening buyurtmalarim\" bo'limida.",
     top_title: "Reyting", top_subtitle: "Eng faol mijozlar", top_forming: "Reyting shakllanmoqda", top_hint: "Birinchi xaridni amalga oshiring!",
-    profile_operator: "Operator", profile_channel: "📢 Bot kanali", profile_orders_channel: "🛒 Savdo/Orderlar",
+    profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot kanali", profile_orders_channel: "\ud83d\uded2 Savdo/Orderlar",
     nav_main: "Asosiy", nav_rent: "Ijara", nav_history: "Tarix", nav_profile: "Profil",
     modal_to_whom: "Kimga?", modal_to_self: "O'zimga", modal_to_friend: "Do'stimga",
     modal_recipient_label: "Qabul qiluvchi (@username):", modal_message_label: "Xabar (ixtiyoriy):",
@@ -73,9 +73,9 @@ const I18N = {
     live_label: "JONLI", minutes_ago: "daqiqa oldin", hours_ago: "soat oldin",
     status_awaiting_payment: "To'lov kutilmoqda", status_payment_review: "Tekshirilmoqda", status_paid: "To'landi",
     status_fulfilling: "Bajarilmoqda", status_completed: "Bajarildi", status_rejected: "Bekor qilindi",
-    cat_stars: "⭐ Stars", cat_premium: "💎 Premium", cat_simple_gift: "🎁 Sovg'a", cat_nft_rent: "🖼 Ijara",
+    cat_stars: "\u2b50 Stars", cat_premium: "\ud83d\udc8e Premium", cat_simple_gift: "\ud83c\udf81 Sovg'a", cat_nft_rent: "\ud83d\uddbc Ijara",
     top_period_today: "Bugun", top_period_week: "Hafta", top_period_month: "Oy", top_period_all: "Hammasi",
-    top_orders_suffix: "buyurtma", top_you: "Siz", top_empty: "Bu davrda hali xaridlar yo'q.",
+    top_orders_suffix: "buyurtma", top_you: "Siz", top_empty: "Bu davrda hali xaridlar yo'q.", badge_popular: "Mashhur",
     profile_stats_title: "Mening statistikam", profile_stats_rank: "Reyting o'rningiz", profile_stats_total: "Jami xarid",
     history_loading: "Yuklanmoqda...", history_open_bot: "Ochish uchun botni Telegram ichida oching.",
   },
@@ -83,7 +83,7 @@ const I18N = {
     ijara_title: "Аренда гифтов", history_title: "История покупок",
     history_empty: "Пока пусто.", history_hint: "Полная история - в разделе «Мои заказы» в боте.",
     top_title: "Рейтинг", top_subtitle: "Самые активные клиенты", top_forming: "Рейтинг формируется", top_hint: "Сделайте первую покупку!",
-    profile_operator: "Оператор", profile_channel: "📢 Канал бота", profile_orders_channel: "🛒 Заказы/Отзывы",
+    profile_operator: "Оператор", profile_channel: "\ud83d\udce2 Канал бота", profile_orders_channel: "\ud83d\uded2 Заказы/Отзывы",
     nav_main: "Главная", nav_rent: "Аренда", nav_history: "История", nav_profile: "Профиль",
     modal_to_whom: "Кому?", modal_to_self: "Себе", modal_to_friend: "Другу",
     modal_recipient_label: "Получатель (@username):", modal_message_label: "Сообщение (необязательно):",
@@ -102,9 +102,9 @@ const I18N = {
     live_label: "СЕЙЧАС", minutes_ago: "мин назад", hours_ago: "ч назад",
     status_awaiting_payment: "Ждём оплату", status_payment_review: "Проверяется", status_paid: "Оплачено",
     status_fulfilling: "Выполняется", status_completed: "Выполнено", status_rejected: "Отменено",
-    cat_stars: "⭐ Stars", cat_premium: "💎 Premium", cat_simple_gift: "🎁 Подарок", cat_nft_rent: "🖼 Аренда",
+    cat_stars: "\u2b50 Stars", cat_premium: "\ud83d\udc8e Premium", cat_simple_gift: "\ud83c\udf81 Подарок", cat_nft_rent: "\ud83d\uddbc Аренда",
     top_period_today: "Сегодня", top_period_week: "Неделя", top_period_month: "Месяц", top_period_all: "Всё время",
-    top_orders_suffix: "заказ(ов)", top_you: "Вы", top_empty: "За этот период покупок ещё не было.",
+    top_orders_suffix: "заказ(ов)", top_you: "Вы", top_empty: "За этот период покупок ещё не было.", badge_popular: "Популярный",
     profile_stats_title: "Моя статистика", profile_stats_rank: "Ваше место в рейтинге", profile_stats_total: "Всего куплено",
     history_loading: "Загрузка...", history_open_bot: "Откройте магазин внутри Telegram, чтобы увидеть историю.",
   },
@@ -112,7 +112,7 @@ const I18N = {
     ijara_title: "Gift rental", history_title: "Purchase history",
     history_empty: "Nothing here yet.", history_hint: "Full history is in \"My orders\" in the bot chat.",
     top_title: "Rating", top_subtitle: "Most active customers", top_forming: "Rating is forming", top_hint: "Make your first purchase!",
-    profile_operator: "Operator", profile_channel: "📢 Bot channel", profile_orders_channel: "🛒 Orders channel",
+    profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot channel", profile_orders_channel: "\ud83d\uded2 Orders channel",
     nav_main: "Home", nav_rent: "Rent", nav_history: "History", nav_profile: "Profile",
     modal_to_whom: "For whom?", modal_to_self: "Myself", modal_to_friend: "A friend",
     modal_recipient_label: "Recipient (@username):", modal_message_label: "Message (optional):",
@@ -131,9 +131,9 @@ const I18N = {
     live_label: "LIVE", minutes_ago: "min ago", hours_ago: "h ago",
     status_awaiting_payment: "Awaiting payment", status_payment_review: "Under review", status_paid: "Paid",
     status_fulfilling: "In progress", status_completed: "Completed", status_rejected: "Cancelled",
-    cat_stars: "⭐ Stars", cat_premium: "💎 Premium", cat_simple_gift: "🎁 Gift", cat_nft_rent: "🖼 Rent",
+    cat_stars: "\u2b50 Stars", cat_premium: "\ud83d\udc8e Premium", cat_simple_gift: "\ud83c\udf81 Gift", cat_nft_rent: "\ud83d\uddbc Rent",
     top_period_today: "Today", top_period_week: "Week", top_period_month: "Month", top_period_all: "All time",
-    top_orders_suffix: "order(s)", top_you: "You", top_empty: "No purchases in this period yet.",
+    top_orders_suffix: "order(s)", top_you: "You", top_empty: "No purchases in this period yet.", badge_popular: "Popular",
     profile_stats_title: "My stats", profile_stats_rank: "Your rank", profile_stats_total: "Total spent",
     history_loading: "Loading...", history_open_bot: "Open the shop inside Telegram to see your history.",
   },
@@ -251,11 +251,20 @@ async function renderItems() {
     : "";
 
   grid.innerHTML = items.map(function(it, i) {
+    // БАГ БЫЛ ЗДЕСЬ: карточка в сетке всегда рисовала только эмодзи (it.emoji),
+    // even когда у товара есть реальное фото (it.image) — картинку показывала
+    // только модалка после тапа. Из-за этого добавленные через /addgift фото
+    // подарков не появлялись там, где их реально видит покупатель — в каталоге.
     const iconHTML = it.image
       ? '<img src="' + it.image + '" loading="lazy" class="w-14 h-14 my-1 rounded-2xl object-cover animated-gift" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'block\';" />' +
         '<div class="text-3xl my-2 animated-gift" style="display:none">' + it.emoji + '</div>'
       : '<div class="text-3xl my-2 animated-gift">' + it.emoji + '</div>';
-    return '<div data-i="' + i + '" class="product-card glass-card press rounded-[20px] p-3 flex flex-col items-center text-center cursor-pointer">' +
+    const isPopularStars = currentCategory === "stars" && it.raw && it.raw.amount === 1000;
+    const popularBadge = isPopularStars
+      ? '<span class="absolute top-1.5 right-1.5 pill-gold text-[8px] font-bold px-1.5 py-0.5 rounded-md leading-none">' + t("badge_popular") + '</span>'
+      : "";
+    return '<div data-i="' + i + '" class="product-card glass-card press rounded-[20px] p-3 flex flex-col items-center text-center cursor-pointer relative">' +
+      popularBadge +
       iconHTML +
       '<div class="text-[10px] text-gray-300 mt-1 mb-1 leading-tight h-6 overflow-hidden">' + it.title + '</div>' +
       '<div class="text-[10px] font-bold text-neon-yellow">' + fmtUZS(it.price) + '</div>' +
@@ -274,6 +283,9 @@ async function renderItems() {
 let rentNextCursor = null;
 let rentLoadingMore = false;
 
+// Карточка аренды в стиле MarketApp: картинка с бейджем срока, название,
+// цена + "so'm" + "· N kun", кнопка "Ijaraga olish". Кликается ВСЯ карточка,
+// не только кнопка.
 function rentCardHTML(it, i) {
   const imgBlock = it.image
     ? '<img src="' + it.image + '" loading="lazy" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';" />' +
@@ -315,7 +327,7 @@ function renderRentGrid() {
 
   Array.prototype.forEach.call(grid.querySelectorAll(".rent-card"), function(card) {
     card.addEventListener("click", function(e) {
-      if (e.target.closest(".rent-btn")) return;
+      if (e.target.closest(".rent-btn")) return; // кнопка сама откроет — избегаем двойного триггера
       openModal(items[Number(card.dataset.i)]);
     });
   });
@@ -351,7 +363,7 @@ async function loadMoreRent() {
     catalog.nft_rent = catalog.nft_rent.concat(page.items);
     rentNextCursor = page.nextCursor;
     renderRentGrid();
-  } catch (e) { /* тихо игнорируем */ }
+  } catch (e) { /* тихо игнорируем — кнопка просто останется */ }
 
   rentLoadingMore = false;
 }
@@ -469,10 +481,26 @@ async function renderPremiumList() {
   if (selectedPremiumIndex >= items.length) selectedPremiumIndex = 0;
 
   function paint() {
+    // "Популярный" — на тариф с самым долгим сроком (обычно 12 месяцев).
+    // Если совпадений несколько (напр. "12 месяцев" и "12 месяцев как подарок"),
+    // помечаем только первый по списку, чтобы бейдж не задублировался.
+    const durationOf = function(title) {
+      const m = /^(\d+)/.exec(title || "");
+      return m ? parseInt(m[1], 10) : 0;
+    };
+    const maxDuration = Math.max.apply(null, items.map(function(it) { return durationOf(it.title); }));
+    let popularMarked = false;
+
     optionsEl.innerHTML = items.map(function(it, i) {
       const selected = i === selectedPremiumIndex;
-      return '<div data-i="' + i + '" class="premium-option press flex items-center justify-between gap-3 rounded-2xl p-4 cursor-pointer border ' +
+      const isPopular = !popularMarked && maxDuration > 0 && durationOf(it.title) === maxDuration;
+      if (isPopular) popularMarked = true;
+      const popularBadge = isPopular
+        ? '<span class="absolute -top-2 right-3 pill-gold text-[9px] font-bold px-2 py-0.5 rounded-full leading-none">' + t("badge_popular") + '</span>'
+        : "";
+      return '<div data-i="' + i + '" class="premium-option press flex items-center justify-between gap-3 rounded-2xl p-4 cursor-pointer border relative ' +
         (selected ? "bg-neon-blue/10 border-neon-blue/50" : "bg-white/[0.04] border-white/[0.08]") + '">' +
+        popularBadge +
         '<div class="flex items-center gap-3">' +
           '<span class="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ' + (selected ? "border-neon-blue" : "border-gray-500") + '">' +
             (selected ? '<span class="w-2.5 h-2.5 rounded-full bg-neon-blue"></span>' : "") +
@@ -565,7 +593,7 @@ function setRecipient(type) {
 
 function showRecentRecipientChip() {
   let recent = null;
-  try { recent = localStorage.getItem("oson_last_recipient"); } catch (e) { /* тихо */ }
+  try { recent = localStorage.getItem("oson_last_recipient"); } catch (e) { /* недоступно — просто не покажем чип */ }
 
   const chip = document.getElementById("recent-recipient-chip");
   const btn = document.getElementById("recent-recipient-btn");
@@ -577,7 +605,7 @@ function showRecentRecipientChip() {
 }
 
 function saveRecentRecipient(username) {
-  try { localStorage.setItem("oson_last_recipient", username); } catch (e) { /* тихо */ }
+  try { localStorage.setItem("oson_last_recipient", username); } catch (e) { /* тихо игнорируем */ }
 }
 
 function stepDays(delta) {
@@ -691,12 +719,13 @@ async function openModal(item) {
 }
 
 function closeModal() {
-  if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); // убрать клавиатуру
   modalContent.classList.add("translate-y-full");
   modal.classList.add("opacity-0");
   setTimeout(function() { modal.classList.add("hidden"); }, 300);
 }
 
+// Клик по затемнённому фону вокруг шторки — тоже закрывает
 modal.addEventListener("click", function(e) {
   if (e.target === modal) closeModal();
 });
@@ -733,6 +762,7 @@ modal.addEventListener("click", function(e) {
   handle.addEventListener("touchmove", function(e) { onMove(e.touches[0].clientY); }, { passive: true });
   handle.addEventListener("touchend", onEnd);
 
+  // На всякий случай (десктоп/тестирование) — те же события мышью
   handle.addEventListener("mousedown", function(e) { onStart(e.clientY); });
   document.addEventListener("mousemove", function(e) { if (dragging) onMove(e.clientY); });
   document.addEventListener("mouseup", onEnd);
@@ -780,7 +810,7 @@ async function initSupportInfo() {
       document.getElementById("orders-handle").textContent = "@" + info.orders_channel_username;
       row.onclick = function() { openTgUsername(info.orders_channel_username); };
     }
-  } catch (e) { /* тихо */ }
+  } catch (e) { /* тихо игнорируем — строки просто останутся скрытыми/пустыми */ }
 }
 
 /* ---------------- Отправка заказа боту ---------------- */
@@ -793,6 +823,9 @@ function sendPaymentInfo() {
     if (friendUsername.charAt(0) !== "@") friendUsername = "@" + friendUsername;
   }
 
+  // Юзернейм для "себе" достаём на СЕРВЕРЕ (бот всегда точно знает,
+  // кто написал) — клиентский tg.initDataUnsafe не всегда надёжен
+  // (кэш вебвью и т.п.), поэтому здесь ничего не проверяем и не блокируем.
   const item = activeItem;
   const message = document.getElementById("gift-message").value.trim();
   const recipient = recipientType === "self" ? "" : friendUsername;
@@ -824,18 +857,63 @@ function sendPaymentInfo() {
 
   if (recipientType === "friend" && friendUsername) saveRecentRecipient(friendUsername);
 
-  if (tg && tg.sendData) {
-    tg.sendData(JSON.stringify(payload));
+  // БЫЛО: tg.sendData(...) — работает ТОЛЬКО если мини-апп открыт через
+  // растянутую кнопку клавиатуры ("Do'konni ochish"). Через компактную Menu
+  // Button ("Открыть" у поля ввода) sendData() вообще не доходит до бота —
+  // это ограничение самого Telegram, не баг. Поэтому теперь заказ уходит
+  // обычным HTTP-запросом с подписью initData (её бот проверяет на сервере
+  // той же функцией, что и для Tarix/TOP/Profil) — работает одинаково
+  // из любой точки входа.
+  submitOrder(payload);
+}
+
+async function submitOrder(payload) {
+  const errorEl = document.getElementById("modal-error");
+  const base = await getShopApiUrl();
+
+  if (!base || !tg || !tg.initData) {
+    if (tg && tg.sendData) {
+      // Резервный путь на случай, если публичный API ещё не настроен
+      // (SHOP_API_URL пустой) — старый способ хотя бы не роняет заказ совсем.
+      tg.sendData(JSON.stringify(payload));
+      tg.close();
+    } else {
+      alert("DEMO (Telegram ichida ochish kerak): " + JSON.stringify(payload, null, 2));
+    }
+    return;
+  }
+
+  try {
+    const res = await fetch(base + "/public/create_order", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData: tg.initData, payload: payload }),
+    });
+    const data = await res.json();
+    if (!res.ok || data.error) {
+      errorEl.textContent = data.error || "Xatolik yuz berdi, qayta urinib ko'ring.";
+      errorEl.classList.remove("hidden");
+      return;
+    }
     tg.close();
-  } else {
-    alert("DEMO (Telegram ichida ochish kerak): " + JSON.stringify(payload, null, 2));
+  } catch (e) {
+    errorEl.textContent = "Server bilan bog'lanib bo'lmadi, qayta urinib ko'ring.";
+    errorEl.classList.remove("hidden");
   }
 }
 
 /* ---------------- Профиль / рефералка / условия аренды ---------------- */
 async function initProfile() {
+  // БАГ БЫЛ ЗДЕСЬ: ждали именно подписанную initData (нужна только для
+  // /public/my_orders и /public/my_stats), а initDataUnsafe.user — отдельные,
+  // неподписанные данные, которые обычно готовы раньше. Из-за завязки на
+  // не тот таймер имя/аватар иногда так и оставались плейсхолдером "—",
+  // даже когда сам Telegram уже готов был отдать данные пользователя.
   const u = await waitForUnsafeUser();
-  if (!u) return;
+  if (!u) {
+    // После ожидания юзера всё ещё нет — редкий случай (например, открыли
+    // не из настоящего Telegram-клиента). Тихо оставляем плейсхолдер.
+    return;
+  }
   document.getElementById("profile-name").textContent = u.first_name || "Mijoz";
   document.getElementById("profile-username").textContent = u.username ? "@" + u.username : "";
   document.getElementById("profile-id").textContent = "ID: " + u.id;
@@ -856,7 +934,7 @@ async function getShopApiUrl() {
   return shopApiUrl;
 }
 
-const CATEGORY_EMOJI = { stars: "⭐", premium: "💎", simple_gift: "🎁", nft_rent: "🖼" };
+const CATEGORY_EMOJI = { stars: "\u2b50", premium: "\ud83d\udc8e", simple_gift: "\ud83c\udf81", nft_rent: "\ud83d\uddbc" };
 const STATUS_KEY = {
   awaiting_payment: "status_awaiting_payment", payment_review: "status_payment_review",
   paid: "status_paid", fulfilling: "status_fulfilling", completed: "status_completed", rejected: "status_rejected",
@@ -864,6 +942,7 @@ const STATUS_KEY = {
 
 function formatOrderDate(sqlDate) {
   if (!sqlDate) return "";
+  // формат из sqlite: "YYYY-MM-DD HH:MM:SS" (UTC) — просто показываем как есть, без пересчёта пояса
   return sqlDate.replace("T", " ").slice(0, 16);
 }
 
@@ -874,7 +953,7 @@ async function renderHistory() {
   if (!base || !initData) {
     listEl.innerHTML =
       '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
-      '<p class="text-3xl mb-2">🛒</p><p class="text-sm">' + t("history_open_bot") + '</p></div>';
+      '<p class="text-3xl mb-2">\ud83d\uded2</p><p class="text-sm">' + t("history_open_bot") + '</p></div>';
     return;
   }
   listEl.innerHTML = '<div class="text-center text-xs text-gray-500 py-6">' + t("history_loading") + '</div>';
@@ -890,12 +969,12 @@ async function renderHistory() {
     if (!orders.length) {
       listEl.innerHTML =
         '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
-        '<p class="text-3xl mb-2">🛒</p><p class="text-sm">' + t("history_empty") + '</p></div>';
+        '<p class="text-3xl mb-2">\ud83d\uded2</p><p class="text-sm">' + t("history_empty") + '</p></div>';
       return;
     }
 
     listEl.innerHTML = orders.map(function(o) {
-      const emoji = CATEGORY_EMOJI[o.category] || "📦";
+      const emoji = CATEGORY_EMOJI[o.category] || "\ud83d\udce6";
       const statusLabel = t(STATUS_KEY[o.status] || o.status);
       const statusColor = (o.status === "completed") ? "text-green-400" : (o.status === "rejected") ? "text-red-400" : "text-gray-400";
       return '<div class="glass-card rounded-2xl p-3.5 flex items-center justify-between gap-2">' +
@@ -903,7 +982,7 @@ async function renderHistory() {
           '<span class="text-xl flex-shrink-0">' + emoji + '</span>' +
           '<div class="min-w-0">' +
             '<div class="text-xs font-semibold text-white truncate">' + o.item_name + '</div>' +
-            '<div class="text-[10px] ' + statusColor + '">' + statusLabel + ' · ' + formatOrderDate(o.created_at) + '</div>' +
+            '<div class="text-[10px] ' + statusColor + '">' + statusLabel + ' \u00b7 ' + formatOrderDate(o.created_at) + '</div>' +
           '</div>' +
         '</div>' +
         '<div class="text-xs font-bold text-neon-blue flex-shrink-0">' + fmtUZS(o.price_uzs) + '</div>' +
@@ -929,13 +1008,32 @@ function setTopPeriod(period) {
   renderLeaderboard(period);
 }
 
+/** Небольшой салют вокруг короны 1-го места в рейтинге — чисто декоративно. */
+function launchConfetti() {
+  const box = document.getElementById("podium-confetti");
+  if (!box) return;
+  const colors = ["#D9B45B", "#2AABEE", "#8E8CD8", "#5AC8FA", "#F0DFA0"];
+  let html = "";
+  for (let i = 0; i < 16; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 34 + Math.random() * 30;
+    const tx = Math.round(Math.cos(angle) * dist);
+    const ty = Math.round(Math.sin(angle) * dist - 10);
+    const rot = Math.round((Math.random() - 0.5) * 480);
+    const color = colors[i % colors.length];
+    const delay = Math.round(Math.random() * 120);
+    html += '<span class="confetti-piece" style="--tx:' + tx + 'px; --ty:' + ty + 'px; --rot:' + rot + 'deg; background:' + color + '; animation-delay:' + delay + 'ms;"></span>';
+  }
+  box.innerHTML = html;
+}
+
 async function renderLeaderboard(period) {
   const listEl = document.getElementById("top-list");
   const base = await getShopApiUrl();
   if (!base) {
     listEl.innerHTML =
       '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
-      '<p class="text-3xl mb-2">🏆</p><p class="text-sm font-semibold text-white mb-1">' + t("top_forming") + '</p>' +
+      '<p class="text-3xl mb-2">\ud83c\udfc6</p><p class="text-sm font-semibold text-white mb-1">' + t("top_forming") + '</p>' +
       '<p class="text-xs">' + t("top_hint") + '</p></div>';
     return;
   }
@@ -952,7 +1050,7 @@ async function renderLeaderboard(period) {
     if (!rows.length) {
       listEl.innerHTML =
         '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
-        '<p class="text-3xl mb-2">🏆</p><p class="text-sm font-semibold text-white mb-1">' + t("top_forming") + '</p>' +
+        '<p class="text-3xl mb-2">\ud83c\udfc6</p><p class="text-sm font-semibold text-white mb-1">' + t("top_forming") + '</p>' +
         '<p class="text-xs">' + t("top_hint") + '</p></div>';
       return;
     }
@@ -963,23 +1061,40 @@ async function renderLeaderboard(period) {
       return r.full_name || (r.username ? "@" + r.username : "ID " + r.user_id);
     }
 
+    // Подиум для топ-3: 2 место слева, 1 (приподнятое, с короной) в центре,
+    // 3 справа — у каждого места свой цвет авы под цвет медали, не одинаковый
+    // градиент для всех, плюс плавное появление при заходе на вкладку.
     let podiumHtml = "";
     if (rows.length >= 1) {
-      const order = [1, 0, 2].filter(function(i) { return rows[i]; });
-      const RING = { 0: "ring-neon-yellow shadow-[0_0_18px_rgba(217,180,91,0.5)]", 1: "ring-gray-300/70", 2: "ring-amber-700/70" };
-      const LIFT = { 0: "-mt-3", 1: "mt-2", 2: "mt-4" };
-      const SIZE = { 0: "w-16 h-16 text-xl", 1: "w-12 h-12 text-base", 2: "w-12 h-12 text-base" };
-      const medal = ["🥇", "🥈", "🥉"];
+      const order = [1, 0, 2].filter(function(i) { return rows[i]; }); // 2-1-3 визуально
+      const AVATAR_BG = {
+        0: "background: radial-gradient(circle at 30% 25%, #F3D98A, #D9A93B 70%);",
+        1: "background: radial-gradient(circle at 30% 25%, #D7DCE2, #9AA3AD 70%);",
+        2: "background: radial-gradient(circle at 30% 25%, #E3A567, #B5713A 70%);",
+      };
+      const RING = {
+        0: "ring-2 ring-neon-yellow", 1: "ring-2 ring-gray-300/70", 2: "ring-2 ring-amber-700/60",
+      };
+      const GLOW = { 0: "0 0 26px -2px rgba(217,180,91,0.65)", 1: "0 0 16px -4px rgba(200,205,212,0.4)", 2: "0 0 16px -4px rgba(181,113,58,0.4)" };
+      const LIFT = { 0: "-mt-5", 1: "mt-3", 2: "mt-5" };
+      const SIZE = { 0: "w-[72px] h-[72px] text-2xl", 1: "w-14 h-14 text-lg", 2: "w-14 h-14 text-lg" };
+      const rankBadge = { 0: "🥇", 1: "🥈", 2: "🥉" };
       podiumHtml =
-        '<div class="flex items-end justify-center gap-3 pt-2 pb-5">' +
-        order.map(function(i) {
+        '<div class="flex items-end justify-center gap-4 pt-1 pb-6 overlay-enter">' +
+        order.map(function(i, idx) {
           const r = rows[i];
           const name = personName(r);
           const isMe = myId && r.user_id === myId;
-          return '<div class="flex flex-col items-center ' + LIFT[i] + ' ' + (i === 0 ? "" : "opacity-95") + '">' +
-            '<div class="' + SIZE[i] + ' rounded-full ring-2 ' + RING[i] + ' bg-gradient-to-br from-neon-blue to-neon-purple flex items-center justify-center font-bold' + (isMe ? " outline outline-2 outline-neon-blue outline-offset-2" : "") + '">' + initials(name) + '</div>' +
-            '<div class="text-base leading-none mt-1.5">' + medal[i] + '</div>' +
-            '<div class="text-[11px] font-semibold text-white mt-1 max-w-[80px] truncate text-center">' + name + '</div>' +
+          return '<div class="flex flex-col items-center ' + LIFT[i] + '" style="animation: sheetUp .4s cubic-bezier(.2,.9,.25,1) both; animation-delay:' + (idx * 70) + 'ms;">' +
+            (i === 0 ? '<div class="relative">' +
+              '<div id="podium-confetti" class="absolute inset-0"></div>' +
+              '<div class="text-2xl mb-1 relative" style="animation: float 2.4s ease-in-out infinite;">👑</div>' +
+            '</div>' : '<div class="h-8"></div>') +
+            '<div class="relative">' +
+              '<div class="' + SIZE[i] + ' rounded-full ' + RING[i] + ' flex items-center justify-center font-bold text-white' + (isMe ? " outline outline-2 outline-neon-blue outline-offset-2" : "") + '" style="' + AVATAR_BG[i] + ' box-shadow:' + GLOW[i] + ';">' + initials(name) + '</div>' +
+              '<span class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 text-base leading-none">' + rankBadge[i] + '</span>' +
+            '</div>' +
+            '<div class="text-[11.5px] font-semibold text-white mt-2.5 max-w-[84px] truncate text-center">' + name + '</div>' +
             '<div class="text-[11px] font-bold text-neon-yellow">' + fmtUZS(r.total_uzs) + '</div>' +
           '</div>';
         }).join("") +
@@ -993,9 +1108,9 @@ async function renderLeaderboard(period) {
       return '<div class="press flex items-center justify-between gap-2 rounded-2xl p-3.5 ' +
         (isMe ? "bg-neon-blue/10 border border-neon-blue/40" : "glass-card") + '">' +
         '<div class="flex items-center gap-3 min-w-0">' +
-          '<span class="text-xs text-gray-500 w-5 text-center flex-shrink-0">' + (i + 1) + '</span>' +
+          '<span class="text-[11px] font-bold text-gray-500 w-6 h-6 rounded-full bg-white/[0.06] flex items-center justify-center flex-shrink-0">' + (i + 1) + '</span>' +
           '<div class="min-w-0">' +
-            '<div class="text-xs font-semibold text-white truncate">' + name + (isMe ? ' · <span class="text-neon-blue">' + t("top_you") + '</span>' : '') + '</div>' +
+            '<div class="text-xs font-semibold text-white truncate">' + name + (isMe ? ' \u00b7 <span class="text-neon-blue">' + t("top_you") + '</span>' : '') + '</div>' +
             '<div class="text-[10px] text-gray-400">' + r.orders_count + ' ' + t("top_orders_suffix") + '</div>' +
           '</div>' +
         '</div>' +
@@ -1004,6 +1119,7 @@ async function renderLeaderboard(period) {
     }).join("");
 
     listEl.innerHTML = podiumHtml + '<div class="space-y-2">' + restHtml + '</div>';
+    launchConfetti();
   } catch (e) {
     listEl.innerHTML = '<div class="text-center text-xs text-gray-500 py-6">' + t("top_empty") + '</div>';
   }
@@ -1050,14 +1166,46 @@ async function renderRentTerms() {
     const res = await fetch("/api/rent_terms");
     const d = await res.json();
     document.getElementById("rent-terms-text").textContent = t("rent_terms")(fmtUZS(d.fee_uzs), fmtUZS(d.refund_uzs));
-  } catch (e) { /* тихо */ }
+  } catch (e) { /* тихо игнорируем */ }
 }
 
 /* ---------------- Init ---------------- */
+/**
+ * Тихая диагностика — НЕ показывается пользователю (это была ошибка в
+ * прошлый раз с текстом "DEBUG: ..."). Просто один раз отправляет на сервер
+ * реальную картину того, что видит этот конкретный телефон: есть ли вообще
+ * window.Telegram.WebApp, дождались ли initData/initDataUnsafe.user, сколько
+ * это заняло, какая платформа/версия Telegram. Смотрится потом в логах
+ * Railway — так можно найти причину точно, а не гадать по скриншотам.
+ */
+async function sendDiag() {
+  const base = await getShopApiUrl();
+  if (!base) return;
+  const t0 = Date.now();
+  const initData = await waitForInitData();
+  const user = await waitForUnsafeUser();
+  try {
+    await fetch(base + "/public/_diag", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        tg_exists: !!tg,
+        platform: tg ? tg.platform : null,
+        version: tg ? tg.version : null,
+        initData_len: initData ? initData.length : 0,
+        unsafe_user_exists: !!user,
+        unsafe_user_id: user ? user.id : null,
+        wait_ms: Date.now() - t0,
+        ua: navigator.userAgent,
+      }),
+    });
+  } catch (e) { /* тихо игнорируем — это диагностика, не критично */ }
+}
+
 applyI18n();
 initProfile();
 initSupportInfo();
 initLiveFeed();
+sendDiag();
 
 /* ---------------- Живая лента заказов ---------------- */
 function timeAgoLabel(ts) {
