@@ -84,7 +84,7 @@ const I18N = {
     ao_link_send: "Havolani yuborish", ao_watch_tutorial: "Tutorialni ko'rish (botda)",
     ao_connected: "Sovg'a profilingizga ulandi!",
     ao_err_empty: "Havolani kiriting", ao_err_bad_link: "Havola noto'g'ri. U tc:// bilan boshlanishi kerak.",
-    ao_err_connect: "Ulashda xatolik. Operator tez orada qo'lda ulab beradi.", ao_err_network: "Server bilan bog'lanib bo'lmadi.", ao_cancel: "Buyurtmani bekor qilish", ao_cancel_confirm: "Buyurtma bekor qilinsinmi?", ao_pay_title: "To'lovni amalga oshiring", ao_pay_hint: "Kartaga summani o'tkazing va chek skrinshotini shu yerga yuklang.", ao_pay_upload: "Chek skrinshotini yuklash", ao_receipt_sent: "✅ Chek yuborildi! Admin tez orada tekshiradi.", ao_err_too_big: "Fayl juda katta (8 MB gacha).", ao_err_receipt: "Chekni yuborib bo'lmadi, qayta urinib ko'ring.", ao_err_wrong_status: "Bu buyurtma uchun chek allaqachon yuborilgan.", ao_err_no_image: "Rasmni o'qib bo'lmadi. Galereyadan oddiy rasm (JPG/PNG) tanlang.", ao_err_not_found: "Buyurtma topilmadi.",
+    ao_err_connect: "Ulashda xatolik. Operator tez orada qo'lda ulab beradi.", ao_err_network: "Server bilan bog'lanib bo'lmadi.", ao_cancel: "Buyurtmani bekor qilish", ao_cancel_confirm: "Buyurtma bekor qilinsinmi?", ao_cancel_request: "Bekor qilishni so'rash", ao_cancel_request_confirm: "Buyurtma to'langan. Sotuvchidan bekor qilishni so'raymizmi?", ao_cancel_requested: "📨 So'rov yuborildi. Sotuvchi tez orada ko'rib chiqadi.", ao_pay_title: "To'lovni amalga oshiring", ao_pay_hint: "Kartaga summani o'tkazing va chek skrinshotini shu yerga yuklang.", ao_pay_upload: "Chek skrinshotini yuklash", ao_receipt_sent: "✅ Chek yuborildi! Admin tez orada tekshiradi.", ao_err_too_big: "Fayl juda katta (8 MB gacha).", ao_err_receipt: "Chekni yuborib bo'lmadi, qayta urinib ko'ring.", ao_err_wrong_status: "Bu buyurtma uchun chek allaqachon yuborilgan.", ao_err_no_image: "Rasmni o'qib bo'lmadi. Galereyadan oddiy rasm (JPG/PNG) tanlang.", ao_err_not_found: "Buyurtma topilmadi.",
     profile_stats_title: "Mening statistikam", profile_stats_rank: "Reyting o'rningiz", profile_stats_total: "Jami xarid",
     history_loading: "Yuklanmoqda...", history_open_bot: "Ochish uchun botni Telegram ichida oching.",
     order_success_title: "Buyurtma muvaffaqiyatli qabul qilindi", order_success_hint: "Tez orada tasdiqlaymiz — natija shu botda yoziladi.",
@@ -98,6 +98,7 @@ const I18N = {
     cart_pay_hint: "Kartaga jami summani bitta o'tkazma bilan yuboring, so'ng \"To'ladim\" tugmasini bosing.",
     cart_err_generic: "Buyurtmani yuborib bo'lmadi, qayta urinib ko'ring.",
     cart_err_no_username: "Sizda public username yo'q. Telegram sozlamalaridan o'rnating yoki \"Do'stimga\" tanlang.",
+    cart_err_stars_limit: "Bitta buyurtmada 50 dan 1 000 000 tagacha yulduz olish mumkin. Miqdorni kamaytiring.",
     cart_active_title: "Savat",
     cart_success_hint: "Buyurtmani tasdiqlash uchun bot chatini oching — u yerda \"Tasdiqlash\" tugmasini bosing.",
     flow_step_created: "Qabul qilindi", flow_step_payment: "To'lov", flow_step_doing: "Bajarilmoqda", flow_step_done: "Tayyor",
@@ -149,7 +150,7 @@ const I18N = {
     ao_link_send: "Отправить ссылку", ao_watch_tutorial: "Посмотреть инструкцию (в боте)",
     ao_connected: "Подарок подключён к профилю!",
     ao_err_empty: "Введите ссылку", ao_err_bad_link: "Неверная ссылка. Она должна начинаться с tc://",
-    ao_err_connect: "Ошибка подключения. Оператор скоро подключит вручную.", ao_err_network: "Не удалось связаться с сервером.", ao_cancel: "Отменить заказ", ao_cancel_confirm: "Отменить заказ?", ao_pay_title: "Оплатите заказ", ao_pay_hint: "Переведите сумму на карту и загрузите сюда скриншот чека.", ao_pay_upload: "Загрузить скриншот чека", ao_receipt_sent: "✅ Чек отправлен! Админ скоро проверит.", ao_err_too_big: "Файл слишком большой (до 8 МБ).", ao_err_receipt: "Не удалось отправить чек, попробуйте ещё раз.", ao_err_wrong_status: "Чек по этому заказу уже отправлен.", ao_err_no_image: "Не удалось прочитать изображение. Выберите обычное фото (JPG/PNG).", ao_err_not_found: "Заказ не найден.",
+    ao_err_connect: "Ошибка подключения. Оператор скоро подключит вручную.", ao_err_network: "Не удалось связаться с сервером.", ao_cancel: "Отменить заказ", ao_cancel_confirm: "Отменить заказ?", ao_cancel_request: "Попросить отменить заказ", ao_cancel_request_confirm: "Заказ уже оплачен. Отправить продавцу просьбу отменить его?", ao_cancel_requested: "📨 Запрос отправлен. Продавец скоро его рассмотрит.", ao_pay_title: "Оплатите заказ", ao_pay_hint: "Переведите сумму на карту и загрузите сюда скриншот чека.", ao_pay_upload: "Загрузить скриншот чека", ao_receipt_sent: "✅ Чек отправлен! Админ скоро проверит.", ao_err_too_big: "Файл слишком большой (до 8 МБ).", ao_err_receipt: "Не удалось отправить чек, попробуйте ещё раз.", ao_err_wrong_status: "Чек по этому заказу уже отправлен.", ao_err_no_image: "Не удалось прочитать изображение. Выберите обычное фото (JPG/PNG).", ao_err_not_found: "Заказ не найден.",
     profile_stats_title: "Моя статистика", profile_stats_rank: "Ваше место в рейтинге", profile_stats_total: "Всего куплено",
     history_loading: "Загрузка...", history_open_bot: "Откройте магазин внутри Telegram, чтобы увидеть историю.",
     order_success_title: "Заказ успешно оформлен", order_success_hint: "Скоро подтвердим — результат придёт в этот же чат.",
@@ -163,6 +164,7 @@ const I18N = {
     cart_pay_hint: "Переведите на карту общую сумму одним платежом и нажмите «Я оплатил».",
     cart_err_generic: "Не удалось оформить заказ, попробуйте ещё раз.",
     cart_err_no_username: "У вас нет публичного username. Установите его в настройках Telegram или выберите «Другу».",
+    cart_err_stars_limit: "За один заказ можно купить от 50 до 1 000 000 звёзд. Уменьшите количество.",
     cart_active_title: "Корзина",
     cart_success_hint: "Откройте чат бота и нажмите «Подтвердить» — после этого придут реквизиты и сумма.",
     flow_step_created: "Оформлен", flow_step_payment: "Оплата", flow_step_doing: "Выполняется", flow_step_done: "Готово",
@@ -214,7 +216,7 @@ const I18N = {
     ao_link_send: "Send link", ao_watch_tutorial: "Watch tutorial (in bot)",
     ao_connected: "Gift connected to your profile!",
     ao_err_empty: "Enter the link", ao_err_bad_link: "Invalid link. It should start with tc://",
-    ao_err_connect: "Connection error. An operator will connect it manually soon.", ao_err_network: "Could not reach the server.", ao_cancel: "Cancel order", ao_cancel_confirm: "Cancel this order?", ao_pay_title: "Pay for your order", ao_pay_hint: "Transfer the amount to the card and upload the receipt screenshot here.", ao_pay_upload: "Upload receipt screenshot", ao_receipt_sent: "✅ Receipt sent! The admin will check it shortly.", ao_err_too_big: "File is too large (max 8 MB).", ao_err_receipt: "Could not send the receipt, please try again.", ao_err_wrong_status: "A receipt for this order was already sent.", ao_err_no_image: "Could not read the image. Pick a regular photo (JPG/PNG).", ao_err_not_found: "Order not found.",
+    ao_err_connect: "Connection error. An operator will connect it manually soon.", ao_err_network: "Could not reach the server.", ao_cancel: "Cancel order", ao_cancel_confirm: "Cancel this order?", ao_cancel_request: "Request cancellation", ao_cancel_request_confirm: "This order is already paid. Send the seller a cancellation request?", ao_cancel_requested: "📨 Request sent. The seller will review it shortly.", ao_pay_title: "Pay for your order", ao_pay_hint: "Transfer the amount to the card and upload the receipt screenshot here.", ao_pay_upload: "Upload receipt screenshot", ao_receipt_sent: "✅ Receipt sent! The admin will check it shortly.", ao_err_too_big: "File is too large (max 8 MB).", ao_err_receipt: "Could not send the receipt, please try again.", ao_err_wrong_status: "A receipt for this order was already sent.", ao_err_no_image: "Could not read the image. Pick a regular photo (JPG/PNG).", ao_err_not_found: "Order not found.",
     profile_stats_title: "My stats", profile_stats_rank: "Your rank", profile_stats_total: "Total spent",
     history_loading: "Loading...", history_open_bot: "Open the shop inside Telegram to see your history.",
     order_success_title: "Order placed successfully", order_success_hint: "We'll confirm soon — the result will be posted in this chat.",
@@ -228,6 +230,7 @@ const I18N = {
     cart_pay_hint: "Transfer the total to the card in one payment, then tap \"I've paid\".",
     cart_err_generic: "Could not place the order, please try again.",
     cart_err_no_username: "You don't have a public username. Set one in Telegram settings or choose \"A friend\".",
+    cart_err_stars_limit: "You can buy between 50 and 1,000,000 stars per order. Lower the amount.",
     cart_active_title: "Cart",
     cart_success_hint: "Open the bot chat and tap \"Confirm\" — payment details will arrive there.",
     flow_step_created: "Placed", flow_step_payment: "Payment", flow_step_doing: "In progress", flow_step_done: "Done",
@@ -535,7 +538,9 @@ async function submitCartOrder() {
     });
     const data = await res.json();
     if (!res.ok || data.error) {
-      errorEl.textContent = data.error === "no_username" ? t("cart_err_no_username") : t("cart_err_generic");
+      errorEl.textContent = data.error === "no_username" ? t("cart_err_no_username")
+        : data.error === "stars_limit" ? t("cart_err_stars_limit")
+        : t("cart_err_generic");
       errorEl.classList.remove("hidden");
       return;
     }
@@ -1081,6 +1086,12 @@ function stepGiftQty(delta) {
   document.getElementById("modal-price").textContent = fmtUZS(activeItem.price * giftQty);
 }
 
+// Пределы одного заказа звёзд — столько принимает Fragment/MarketApp
+// (их ошибка: "400: {'detail': '50 - 1,000,000'}"). Те же числа проверяются
+// на сервере: здесь это удобство, там — защита.
+const STARS_MIN = 50;
+const STARS_MAX = 1000000;
+
 let _starsRateCache = null;
 async function openCustomStarsModal() {
   if (!_starsRateCache) {
@@ -1148,10 +1159,17 @@ async function openModal(item) {
   const starsCustomInput = document.getElementById("stars-custom-input");
   starsCustomField.classList.toggle("hidden", item.kind !== "stars_custom");
   if (item.kind === "stars_custom") {
-    starsCustomInput.value = item.raw.qty || 50;
+    starsCustomInput.value = item.raw.qty || STARS_MIN;
     starsCustomInput.oninput = function() {
       let qty = parseInt(starsCustomInput.value, 10);
-      if (isNaN(qty) || qty < 50) qty = 50;
+      if (isNaN(qty) || qty < STARS_MIN) qty = STARS_MIN;
+      // Fragment больше миллиона за раз не продаёт — не даём набрать сумму,
+      // которую потом невозможно будет выполнить. Поле поправляем прямо на
+      // экране, чтобы человек видел, на чём его ограничили.
+      if (qty > STARS_MAX) {
+        qty = STARS_MAX;
+        starsCustomInput.value = STARS_MAX;
+      }
       item.raw.qty = qty;
       item.price = qty * item.raw.rate;
       document.getElementById("modal-price").textContent = fmtUZS(item.price);
@@ -1392,6 +1410,7 @@ async function submitOrder(payload) {
     const data = await res.json();
     if (!res.ok || data.error) {
       errorEl.textContent = data.error === "no_username" ? t("cart_err_no_username")
+        : data.error === "stars_limit" ? t("cart_err_stars_limit")
         : (data.error || "Xatolik yuz berdi, qayta urinib ko'ring.");
       errorEl.classList.remove("hidden");
       return;
@@ -1649,7 +1668,11 @@ function renderOrderFlow(statusChanged) {
     titleEl.textContent = t("flow_review_title");
     subEl.textContent = t("flow_review_sub");
     actionEl.innerHTML = "";
-    buttonsEl.innerHTML = '<button onclick="closeOrderFlow()" class="w-full py-3 text-gray-400 text-xs">' + t("flow_minimize") + '</button>';
+    // Чек отправлен, но оплату ещё не подтвердили — заказ всё ещё можно
+    // отменить самому: денег у продавца пока нет.
+    buttonsEl.innerHTML =
+      '<button onclick="flowCancelOrder(false)" class="w-full py-3 rounded-2xl pill press text-[12px] text-gray-400 mb-2">' + t("ao_cancel") + '</button>' +
+      '<button onclick="closeOrderFlow()" class="w-full py-3 text-gray-400 text-xs">' + t("flow_minimize") + '</button>';
     return;
   }
 
@@ -1675,7 +1698,13 @@ function renderOrderFlow(statusChanged) {
       '<span class="w-4 h-4 border-2 border-white/20 border-t-neon-blue rounded-full flex-shrink-0" style="animation: spin .8s linear infinite;"></span>' +
       '<span id="flow-tip" class="text-[11.5px] text-gray-300 transition-opacity duration-300"></span>' +
     '</div>';
-  buttonsEl.innerHTML = '<button onclick="closeOrderFlow()" class="w-full py-3 text-gray-400 text-xs">' + t("flow_minimize") + '</button>';
+  // Заказ оплачен и выполняется. Сам клиент его закрыть не может, но должен
+  // иметь выход, если что-то пошло не так — кнопка отправляет просьбу
+  // продавцу. Раньше здесь была только «свернуть», и зависший заказ
+  // оставалось только терпеть.
+  buttonsEl.innerHTML =
+    '<button onclick="flowCancelOrder(true)" class="w-full py-3 rounded-2xl pill press text-[12px] text-gray-400 mb-2">' + t("ao_cancel_request") + '</button>' +
+    '<button onclick="closeOrderFlow()" class="w-full py-3 text-gray-400 text-xs">' + t("flow_minimize") + '</button>';
 
   const tips = t("flow_tips") || [];
   const tipEl = document.getElementById("flow-tip");
@@ -1797,20 +1826,28 @@ async function flowSubmitReceipt() {
   }
 }
 
-function flowCancelOrder() {
+function flowCancelOrder(isRequest) {
   if (!flowStatus) return;
-  askConfirm(t("ao_cancel_confirm"), async function() {
-    const base = await getShopApiUrl();
-    const initData = await waitForInitData();
-    if (!base || !initData) return;
-    try {
-      await fetch(base + "/public/cancel_order", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ initData: initData, order_id: flowStatus.order_id }),
-      });
-    } catch (e) { /* молча — статус всё равно перечитаем ниже */ }
-    pollOrderFlow();
-  });
+  askConfirm(
+    t(isRequest ? "ao_cancel_request_confirm" : "ao_cancel_confirm"),
+    async function() {
+      const base = await getShopApiUrl();
+      const initData = await waitForInitData();
+      if (!base || !initData) return;
+      try {
+        const res = await fetch(base + "/public/cancel_order", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ initData: initData, order_id: flowStatus.order_id }),
+        });
+        const data = await res.json().catch(function() { return {}; });
+        if (data && data.requested) {
+          if (tg && tg.showAlert) tg.showAlert(t("ao_cancel_requested"));
+          else alert(t("ao_cancel_requested"));
+        }
+      } catch (e) { /* молча — статус всё равно перечитаем ниже */ }
+      pollOrderFlow();
+    }
+  );
 }
 
 function flowWriteOperator() {
@@ -2348,8 +2385,14 @@ async function refreshActiveOrder() {
       '</div>'
     : "";
 
-  const cancelBtn = (active.status === "awaiting_payment" || active.status === "payment_review")
-    ? '<button onclick="cancelActiveOrder(' + active.id + ')" class="press mt-3 w-full py-2.5 rounded-xl pill text-[11px] font-medium text-gray-400">' + t("ao_cancel") + '</button>'
+  // Кнопка отмены есть на ЛЮБОМ незавершённом заказе, а не только на
+  // неоплаченном. До оплаты она отменяет заказ сразу, после оплаты —
+  // отправляет продавцу просьбу отменить (сам клиент оплаченный заказ
+  // закрыть не может). Без неё зависший заказ нечем было убрать с экрана.
+  const canCancelNow = active.status === "awaiting_payment" || active.status === "payment_review";
+  const canAskCancel = active.status === "paid" || active.status === "fulfilling";
+  const cancelBtn = (canCancelNow || canAskCancel)
+    ? '<button onclick="cancelActiveOrder(' + active.id + ', ' + (canAskCancel ? "true" : "false") + ')" class="press mt-3 w-full py-2.5 rounded-xl pill text-[11px] font-medium text-gray-400">' + t(canAskCancel ? "ao_cancel_request" : "ao_cancel") + '</button>'
     : "";
 
   // Заказ из корзины — показываем все товары списком, иначе человек видел бы
@@ -2388,8 +2431,11 @@ async function refreshActiveOrder() {
     '</div>';
 }
 
-async function cancelActiveOrder(orderId) {
-  askConfirm(t("ao_cancel_confirm"), function() { doCancelActiveOrder(orderId); });
+async function cancelActiveOrder(orderId, isRequest) {
+  askConfirm(
+    t(isRequest ? "ao_cancel_request_confirm" : "ao_cancel_confirm"),
+    function() { doCancelActiveOrder(orderId); }
+  );
 }
 
 async function doCancelActiveOrder(orderId) {
@@ -2397,10 +2443,17 @@ async function doCancelActiveOrder(orderId) {
   const initData = await waitForInitData();
   if (!base || !initData) return;
   try {
-    await fetch(base + "/public/cancel_order", {
+    const res = await fetch(base + "/public/cancel_order", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ initData: initData, order_id: orderId }),
     });
+    const data = await res.json().catch(function() { return {}; });
+    // Оплаченный заказ отменяет продавец — клиенту честно говорим, что ушёл
+    // запрос, а не что заказ уже отменён (иначе он решит, что всё, и уйдёт).
+    if (data && data.requested) {
+      if (tg && tg.showAlert) tg.showAlert(t("ao_cancel_requested"));
+      else alert(t("ao_cancel_requested"));
+    }
   } catch (e) { /* молча — просто обновим баннер ниже */ }
   refreshActiveOrder();
 }
