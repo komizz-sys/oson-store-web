@@ -175,7 +175,48 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px rgba(217,180,91,0.25), 0 14px 34px -18px rgba(0,0,0,0.65);
     }
 
-    .safe-bottom-pad { padding-bottom: calc(6.5rem + var(--safe-bottom)); }
+    .safe-bottom-pad { padding-bottom: calc(8.5rem + var(--safe-bottom)); }
+
+    /* ---------- Растворение контента у нижнего края ----------
+       Нижняя навигация «висит» поверх списка, и карточки, уезжая под неё,
+       обрывались посреди текста — в просвете между панелью и краем экрана
+       торчали отрезанные цены. Эта полоса — градиент в цвет фона под
+       панелью: контент не обрезается, а плавно растворяется. Она только
+       рисуется (pointer-events: none) и лежит НИЖЕ навигации по z-index,
+       чтобы не перехватывать нажатия на вкладки. */
+    .bottom-fade {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      height: calc(9rem + var(--safe-bottom));
+      z-index: 20;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(5,5,7,0) 0%,
+        rgba(5,5,7,0.55) 38%,
+        rgba(5,5,7,0.92) 68%,
+        #050507 88%
+      );
+    }
+
+    /* ---------- Появление карточек при прокрутке ----------
+       Карточка «проявляется» и слегка подъезжает вверх, когда попадает в
+       видимую часть экрана. Список перестаёт выглядеть как резко
+       возникающая простыня — прокрутка ощущается плавной.
+       Без JS (или если браузер не поддерживает IntersectionObserver)
+       карточки просто видны сразу: класс reveal навешивается скриптом,
+       поэтому ничего не пропадёт. */
+    .reveal { opacity: 0; transform: translateY(14px); }
+    .reveal.revealed {
+      opacity: 1;
+      transform: none;
+      transition: opacity .45s cubic-bezier(.2,.7,.3,1), transform .45s cubic-bezier(.2,.7,.3,1);
+    }
+
+    /* Кому важнее спокойствие, чем эффекты, — уважаем системную настройку */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal.revealed { opacity: 1; transform: none; transition: none; }
+    }
   </style>
 </head>
 <body class="bg-background text-white min-h-screen font-sans select-none safe-bottom-pad">
@@ -356,9 +397,8 @@
       </div>
     </div>
     <div id="profile-stats-box" class="hidden glass-card rounded-[22px] p-4 mb-3"></div>
-    <div class="glass-card rounded-2xl p-3 mb-3 flex justify-around items-center text-xl">
-      <span class="flag-wave">🇺🇿</span><span class="flag-wave">🇷🇺</span><span class="flag-wave">🇬🇧</span>
-    </div>
+    <!-- Ряд флагов отсюда убран: он ничего не переключал, а рабочий
+         переключатель языка и так стоит в шапке витрины. -->
     <div class="space-y-2" id="support-rows">
       <div class="glass-card rounded-2xl p-3.5 flex justify-between items-center text-[13px] cursor-pointer press" id="row-operator">
         <span data-i18n="profile_operator">Operator</span>
@@ -376,6 +416,9 @@
   </div>
 
   <!-- ================= NAV ================= -->
+  <!-- Полоса растворения — под навигацией, поверх контента -->
+  <div class="bottom-fade"></div>
+
   <nav class="fixed bottom-3 left-3 right-3 glass-nav rounded-[26px] flex justify-around p-2 z-30" style="margin-bottom: var(--safe-bottom);">
     <button onclick="switchTab('asosiy')" id="tab-asosiy" class="nav-btn press flex flex-col items-center gap-0.5 py-2 px-2 rounded-2xl text-neon-blue">
       <span class="text-lg leading-none">🏠</span><span class="text-[9px] font-semibold" data-i18n="nav_main">Asosiy</span>
