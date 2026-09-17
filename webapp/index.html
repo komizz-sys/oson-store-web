@@ -127,7 +127,6 @@
       75% { transform: rotate(8deg) scale(1.05); }
       100% { transform: rotate(0deg); }
     }
-    .flag-wave { display:inline-block; animation: wave 2.5s ease-in-out infinite; transform-origin: bottom center; }
     .lang-flag { opacity: 0.45; transform: scale(0.9); transition: all .2s ease; }
     .lang-flag.active { opacity: 1; transform: scale(1.05); background: rgba(255,255,255,0.08); animation: wave 2.5s ease-in-out infinite; transform-origin: bottom center; }
     .lang-flag:active { transform: scale(0.85); }
@@ -199,23 +198,36 @@
       );
     }
 
-    /* ---------- Появление карточек при прокрутке ----------
-       Карточка «проявляется» и слегка подъезжает вверх, когда попадает в
-       видимую часть экрана. Список перестаёт выглядеть как резко
-       возникающая простыня — прокрутка ощущается плавной.
-       Без JS (или если браузер не поддерживает IntersectionObserver)
-       карточки просто видны сразу: класс reveal навешивается скриптом,
-       поэтому ничего не пропадёт. */
-    .reveal { opacity: 0; transform: translateY(14px); }
-    .reveal.revealed {
-      opacity: 1;
-      transform: none;
-      transition: opacity .45s cubic-bezier(.2,.7,.3,1), transform .45s cubic-bezier(.2,.7,.3,1);
+    /* ---------- Появление карточек ----------
+       Карточка проявляется и слегка подъезжает вверх, когда попадает в
+       список. Небольшой сдвиг по колонкам даёт «волну» вместо
+       одновременной вспышки всего каталога.
+
+       ВАЖНО, почему это чистый CSS без JavaScript. Сначала здесь был
+       наблюдатель за прокруткой (IntersectionObserver): карточка пряталась
+       и проявлялась при попадании на экран. В WebView Telegram он
+       срабатывал не всегда — например, если каталог отрисовался, пока
+       вкладка ещё скрыта, — и карточки навсегда оставались прозрачными.
+       Магазин выглядел пустым.
+
+       CSS-анимация такого не умеет: она запускается сама, как только
+       элемент появляется на экране, и всегда заканчивается видимым
+       состоянием. Задержка максимум 0.12с — даже если что-то пойдёт не
+       так, невидимой карточка останется на доли секунды, а не навсегда. */
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: none; }
     }
+    .product-card, .rent-card {
+      animation: cardIn .42s cubic-bezier(.2,.7,.3,1) both;
+    }
+    .product-card:nth-child(3n+2) { animation-delay: .06s; }
+    .product-card:nth-child(3n+3) { animation-delay: .12s; }
+    .rent-card:nth-child(2n)      { animation-delay: .08s; }
 
     /* Кому важнее спокойствие, чем эффекты, — уважаем системную настройку */
     @media (prefers-reduced-motion: reduce) {
-      .reveal, .reveal.revealed { opacity: 1; transform: none; transition: none; }
+      .product-card, .rent-card { animation: none; }
     }
   </style>
 </head>
