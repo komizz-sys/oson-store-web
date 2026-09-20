@@ -62,6 +62,16 @@ const I18N = {
     modal_card_label: "To'lov uchun karta (Uzcard/Humo)", modal_card_holder_label: "Qabul qiluvchi",
     modal_copy: "Nusxalash", modal_paid: "To'ladim", modal_cancel: "Bekor qilish",
     modal_buy: "Sotib olish",
+    splash_loading: "YUKLANMOQDA",
+    tour_skip: "O'tkazib yuborish",
+    tour_next: "Keyingisi",
+    tour_start: "Boshladik!",
+    tour1_title: "Mahsulotni tanlang",
+    tour1_text: "Stars, Premium, sovg'a yoki NFT ijarasi — bo'limni tanlab, kerakligini bosing. Kimga: o'zingizga yoki do'stingizga.",
+    tour2_title: "Aniq summani o'tkazing",
+    tour2_text: "«Sotib olish» tugmasidan keyin karta raqami va ANIQ summa chiqadi. Aynan shu summani o'tkazing — bir so'm ham kam yoki ko'p emas, aks holda to'lov avtomatik tasdiqlanmaydi.",
+    tour3_title: "Chekni yuboring — tamom",
+    tour3_text: "To'lov chekini shu yerga yuklang. Buyurtma odatda 3-10 daqiqada bajariladi, holatini shu oynada kuzatib turasiz.",
     modal_friend_start_note: "Do'stingizga tovar yetkazilishi uchun do'stingiz botga 1 marta start bosgan bo'lishi kerak.",
     err_username: "Username kiriting", err_no_username: "Sizda public username yo'q. Telegram sozlamalaridan o'rnating yoki \"Do'stimga\" tanlang.",
     rent_terms: (fee, refund) => "Xizmat haqi: ~" + fee + ". Ijara tugagach ~" + refund + " qaytariladi.",
@@ -84,6 +94,8 @@ const I18N = {
     ao_paid: "To'lov tasdiqlandi", ao_fulfilling: "Bajarilmoqda",
     ao_link_title: "Keyingi qadam: havolani kiriting", ao_link_hint: "Botga yuborilgan tutorial videodagi ko'rsatma bo'yicha olingan havolani joylang.",
     ao_link_send: "Havolani yuborish", ao_watch_tutorial: "Tutorialni ko'rish (botda)",
+    ao_display_video: "Profilda qanday ko'rsatish",
+    flow_display_hint: "Sovg'a hisobingizda. Profilda ko'rinishi uchun fragment.com → My assets bo'limidan ko'rsatishni yoqing — bu bir martalik amal.",
     ao_connected: "Sovg'a profilingizga ulandi!",
     ao_connect_pending: "Havola saqlandi — sovg'a bir necha daqiqada ulanadi",
     ao_err_empty: "Havolani kiriting", ao_err_bad_link: "Havola noto'g'ri. U tc:// bilan boshlanishi kerak.",
@@ -113,6 +125,8 @@ const I18N = {
     flow_done_title: "Bajarildi!", flow_done_sub: "Buyurtmangiz yakunlandi. Xaridingiz uchun rahmat 🙌",
     flow_rejected_title: "Buyurtma bekor qilindi", flow_rejected_sub: "To'lov tasdiqlanmadi. Operatorga yozing yoki qayta urinib ko'ring.",
     flow_pay_exact: "Aynan shu summani o'tkazing:",
+    flow_exact_warn: "Bir so'm ham kam yoki ko'p emas!",
+    buy_confirm: "Diqqat!\n\nKeyingi qadamda ANIQ summa chiqadi — aynan shuni o'tkazing, bir so'm ham kam yoki ko'p emas.\n\nAks holda to'lov avtomatik tasdiqlanmaydi va buyurtma kechikadi.",
     flow_commission_note: "Agar bankingiz o'tkazma uchun komissiya olsa — uni summa USTIGA qo'shing. Kartaga aynan shu summa tushishi kerak, aks holda to'lov avtomatik tasdiqlanmaydi.", flow_minimize: "Yopish (do'konga qaytish)", flow_write_operator: "Operatorga yozish",
     flow_tips: ["Qabul qiluvchi tekshirilmoqda…", "Buyurtma tayyorlanmoqda…", "Yetkazib berilmoqda…", "Deyarli tayyor…"],
     rentals_title: "Mening ijaralarim", rentals_empty: "Aktiv ijara yo'q.",
@@ -133,6 +147,16 @@ const I18N = {
     modal_card_label: "Карта для оплаты (Uzcard/Humo)", modal_card_holder_label: "Получатель",
     modal_copy: "Скопировать", modal_paid: "Я оплатил", modal_cancel: "Отмена",
     modal_buy: "Купить",
+    splash_loading: "ЗАГРУЗКА",
+    tour_skip: "Пропустить",
+    tour_next: "Дальше",
+    tour_start: "Начать!",
+    tour1_title: "Выберите товар",
+    tour1_text: "Stars, Premium, подарок или аренда NFT — откройте раздел и нажмите на нужное. Себе или другу — на ваш выбор.",
+    tour2_title: "Переведите точную сумму",
+    tour2_text: "После кнопки «Купить» появятся номер карты и ТОЧНАЯ сумма. Переведите именно её — ни больше, ни меньше, иначе оплата не подтвердится автоматически.",
+    tour3_title: "Пришлите чек — и всё",
+    tour3_text: "Загрузите чек об оплате прямо здесь. Заказ обычно выполняется за 3-10 минут, статус виден в этом же окне.",
     modal_friend_start_note: "Чтобы товар дошёл до друга, он должен хотя бы один раз нажать «Старт» в боте.",
     err_username: "Введите username", err_no_username: "У вас нет публичного username. Установите в настройках Telegram или выберите \"Другу\".",
     rent_terms: (fee, refund) => "Сервисный сбор: ~" + fee + ". После окончания аренды вернётся ~" + refund + ".",
@@ -155,6 +179,8 @@ const I18N = {
     ao_paid: "Оплата подтверждена", ao_fulfilling: "Выполняется",
     ao_link_title: "Следующий шаг: вставьте ссылку", ao_link_hint: "Вставьте ссылку, полученную по инструкции из видео, которое пришло в бот.",
     ao_link_send: "Отправить ссылку", ao_watch_tutorial: "Посмотреть инструкцию (в боте)",
+    ao_display_video: "Как показать в профиле",
+    flow_display_hint: "Подарок у вас на аккаунте. Чтобы он появился в профиле, включите показ на fragment.com → My assets — это делается один раз.",
     ao_connected: "Подарок подключён к профилю!",
     ao_connect_pending: "Ссылка сохранена — подарок подключится через пару минут",
     ao_err_empty: "Введите ссылку", ao_err_bad_link: "Неверная ссылка. Она должна начинаться с tc://",
@@ -184,6 +210,8 @@ const I18N = {
     flow_done_title: "Выполнено!", flow_done_sub: "Заказ выполнен. Спасибо за покупку 🙌",
     flow_rejected_title: "Заказ отменён", flow_rejected_sub: "Оплата не подтверждена. Напишите оператору или оформите заново.",
     flow_pay_exact: "Переведите ровно:",
+    flow_exact_warn: "Ни сумом больше, ни сумом меньше!",
+    buy_confirm: "Внимание!\n\nНа следующем шаге появится ТОЧНАЯ сумма — переведите именно её, ни больше ни меньше.\n\nИначе оплата не подтвердится автоматически и заказ задержится.",
     flow_commission_note: "Если ваш банк берёт комиссию за перевод — добавьте её СВЕРХУ. На карту должна прийти ровно эта сумма, иначе оплата не подтвердится автоматически.", flow_minimize: "Свернуть (вернуться в магазин)", flow_write_operator: "Написать оператору",
     flow_tips: ["Проверяем получателя…", "Готовим заказ…", "Отправляем…", "Почти готово…"],
     rentals_title: "Мои аренды", rentals_empty: "Активных аренд нет.",
@@ -204,6 +232,16 @@ const I18N = {
     modal_card_label: "Payment card (Uzcard/Humo)", modal_card_holder_label: "Recipient",
     modal_copy: "Copy", modal_paid: "I've paid", modal_cancel: "Cancel",
     modal_buy: "Buy",
+    splash_loading: "LOADING",
+    tour_skip: "Skip",
+    tour_next: "Next",
+    tour_start: "Let's go!",
+    tour1_title: "Pick what you want",
+    tour1_text: "Stars, Premium, a gift or an NFT rental — open a section and tap what you need. For yourself or for a friend.",
+    tour2_title: "Send the exact amount",
+    tour2_text: "After you tap Buy, the card number and the EXACT amount appear. Send precisely that amount — not a som more or less, otherwise the payment won't confirm automatically.",
+    tour3_title: "Upload the receipt — done",
+    tour3_text: "Upload your payment receipt right here. Orders are usually completed in 3-10 minutes, and you can follow the status in this window.",
     modal_friend_start_note: "For the gift to reach your friend, they must press Start in the bot at least once.",
     err_username: "Enter a username", err_no_username: "You don't have a public username. Set one in Telegram settings or choose \"A friend\".",
     rent_terms: (fee, refund) => "Service fee: ~" + fee + ". ~" + refund + " is refunded after the rental ends.",
@@ -226,6 +264,8 @@ const I18N = {
     ao_paid: "Payment confirmed", ao_fulfilling: "In progress",
     ao_link_title: "Next step: paste your link", ao_link_hint: "Paste the link you got by following the tutorial video sent to the bot.",
     ao_link_send: "Send link", ao_watch_tutorial: "Watch tutorial (in bot)",
+    ao_display_video: "How to display it",
+    flow_display_hint: "The gift is on your account. To make it visible on your profile, enable the display on fragment.com → My assets — a one-time step.",
     ao_connected: "Gift connected to your profile!",
     ao_connect_pending: "Link saved — the gift will connect in a few minutes",
     ao_err_empty: "Enter the link", ao_err_bad_link: "Invalid link. It should start with tc://",
@@ -255,6 +295,8 @@ const I18N = {
     flow_done_title: "Done!", flow_done_sub: "Your order is complete. Thanks for your purchase 🙌",
     flow_rejected_title: "Order cancelled", flow_rejected_sub: "The payment wasn't confirmed. Contact the operator or order again.",
     flow_pay_exact: "Transfer exactly:",
+    flow_exact_warn: "Not a som more, not a som less!",
+    buy_confirm: "Heads up!\n\nThe EXACT amount appears on the next step — send precisely that, not a som more or less.\n\nOtherwise the payment won't confirm automatically and your order will be delayed.",
     flow_commission_note: "If your bank charges a transfer fee, add it ON TOP. Exactly this amount must arrive on the card, otherwise the payment won't be confirmed automatically.", flow_minimize: "Minimize (back to shop)", flow_write_operator: "Contact operator",
     flow_tips: ["Checking the recipient…", "Preparing your order…", "Delivering…", "Almost there…"],
     rentals_title: "My rentals", rentals_empty: "No active rentals.",
@@ -1143,6 +1185,7 @@ async function openModal(item) {
   }
   const isRentLike = item.kind === "nft_rent" || item.kind === "nft_rent_extend";
   document.getElementById("modal-price").textContent = fmtUZS(isRentLike ? item.price * rentDays : item.price);
+  confirmedExactAmount = false;   // предупреждение про точную сумму — раз на товар
   document.getElementById("gift-message").value = "";
   document.getElementById("gift-username").value = "";
   document.getElementById("modal-error").classList.add("hidden");
@@ -1321,9 +1364,56 @@ async function initSupportInfo() {
 // повторные нажатия "To'ladim" игнорируются. Без этого двойной тап (частая
 // вещь на телефоне, особенно при медленном интернете) создавал ДВА заказа.
 let orderInFlight = false;
+// Показали ли уже предупреждение про точную сумму по текущему товару.
+let confirmedExactAmount = false;
 
 function sendPaymentInfo() {
   if (orderInFlight) return;
+
+  // Предупреждение ДО оформления. Именно на этом шаге теряются деньги:
+  // человек переводит круглое число вместо выданной суммы, автоподтверждение
+  // не срабатывает, заказ зависает. Один экран здесь дешевле, чем разбор
+  // каждого такого платежа вручную.
+  if (!confirmedExactAmount) {
+    if (tg && tg.showPopup) {
+      // ВАЖНО: колбэк срабатывает и когда окно просто закрыли (кнопкой «назад»
+      // или свайпом) — тогда id приходит пустым. Без этой проверки человек,
+      // который передумал, всё равно получал оформленный заказ.
+      tg.showPopup(
+        {
+          message: t("buy_confirm"),
+          buttons: [
+            { id: "go", type: "default", text: t("modal_buy") },
+            { id: "no", type: "cancel" },
+          ],
+        },
+        function(pressed) {
+          if (pressed !== "go") return;
+          confirmedExactAmount = true;
+          sendPaymentInfo();
+        }
+      );
+      return;
+    }
+    if (tg && tg.showConfirm) {
+      tg.showConfirm(t("buy_confirm"), function(ok) {
+        if (!ok) return;
+        confirmedExactAmount = true;
+        sendPaymentInfo();
+      });
+      return;
+    }
+    // Совсем старый клиент Telegram: окна нет — показываем предупреждение
+    // прямо в карточке и ждём второго нажатия.
+    confirmedExactAmount = true;
+    const warnEl = document.getElementById("modal-error");
+    if (warnEl) {
+      warnEl.textContent = t("flow_exact_warn");
+      warnEl.classList.remove("hidden");
+    }
+    return;
+  }
+
   const errorEl = document.getElementById("modal-error");
   let friendUsername = document.getElementById("gift-username").value.trim();
 
@@ -1620,9 +1710,20 @@ function renderOrderFlow(statusChanged) {
     titleEl.textContent = t("flow_done_title");
     titleEl.className = "text-[19px] font-bold mb-1 text-emerald-400";
     subEl.textContent = t("flow_done_sub");
-    actionEl.innerHTML = "";
+    // У аренды «готово» — это ещё не конец: подарок лежит на аккаунте, но на
+    // профиле сам не появится, показ нужно включить руками на Fragment.
+    // Поэтому сразу даём инструкцию, не дожидаясь вопроса в поддержку.
+    const isRent = s.category === "nft_rent" || s.category === "nft_rent_extend";
+    actionEl.innerHTML = isRent
+      ? '<div class="glass-card rounded-2xl p-3 mb-3 text-left text-[11.5px] text-gray-300 leading-snug">' +
+          '⚠️ ' + t("flow_display_hint") +
+        '</div>'
+      : "";
     buttonsEl.innerHTML =
-      '<button onclick="flowBuyMore()" class="w-full py-3.5 rounded-2xl btn-primary press font-semibold text-white text-sm mb-2.5">' + t("order_success_more") + '</button>' +
+      (isRent
+        ? '<button onclick="watchDisplayVideo(this)" class="press w-full py-3.5 rounded-2xl btn-primary font-semibold text-white text-sm mb-2.5">📹 ' + t("ao_display_video") + '</button>'
+        : "") +
+      '<button onclick="flowBuyMore()" class="w-full py-3.5 rounded-2xl ' + (isRent ? "pill" : "btn-primary") + ' press font-semibold text-white text-sm mb-2.5">' + t("order_success_more") + '</button>' +
       '<button onclick="flowGoTarix()" class="w-full py-3.5 rounded-2xl pill press font-semibold text-sm mb-2.5">' + t("order_success_history") + '</button>' +
       '<button onclick="closeOrderFlow()" class="w-full py-3 text-gray-400 text-xs">' + t("order_success_home") + '</button>';
     launchSuccessConfetti();
@@ -1655,11 +1756,15 @@ function renderOrderFlow(statusChanged) {
     // человек должен видеть, сколько именно перевести, и предупреждение про
     // комиссию банка. Раньше блок появлялся только при уникальной сумме — и
     // без неё предупреждения не было вообще.
+    // Точная сумма — САМОЕ важное на этом экране. Раньше она была мельче
+    // номера карты, люди её проскакивали и переводили круглое число: заказ
+    // не подтверждался автоматически, а продавец разбирал это руками.
     const exact = s.pay_amount
-      ? '<div class="rounded-2xl p-3 mb-3 text-left" style="background: rgba(217,180,91,0.10); border: 1px solid rgba(217,180,91,0.35);">' +
-          '<div class="text-[10px] text-gray-400 uppercase tracking-wider mb-0.5">' + t("flow_pay_exact") + '</div>' +
-          '<div class="text-[19px] font-black text-neon-yellow leading-none mb-2">' + fmtUZS(s.pay_amount) + '</div>' +
-          '<div class="text-[11px] text-gray-300 leading-snug">⚠️ ' + t("flow_commission_note") + '</div>' +
+      ? '<div class="rounded-2xl p-4 mb-3 text-center" style="background: rgba(217,180,91,0.14); border: 2px solid rgba(217,180,91,0.55);">' +
+          '<div class="text-[11px] text-neon-yellow uppercase tracking-wider font-bold mb-1">⚠️ ' + t("flow_pay_exact") + '</div>' +
+          '<div class="text-[30px] font-black text-neon-yellow leading-none mb-1 tracking-tight">' + fmtUZS(s.pay_amount) + '</div>' +
+          '<div class="text-[11px] text-neon-yellow/90 font-semibold mb-2">' + t("flow_exact_warn") + '</div>' +
+          '<div class="text-[11px] text-gray-300 leading-snug text-left">' + t("flow_commission_note") + '</div>' +
         '</div>'
       : "";
     actionEl.innerHTML =
@@ -2215,11 +2320,101 @@ async function sendDiag() {
   } catch (e) { /* тихо игнорируем — это диагностика, не критично */ }
 }
 
+/* ---------------- Заставка и обучение ----------------
+
+Заставка закрывает пустой чёрный экран, который Telegram показывает, пока
+поднимается мини-апп. Правила простые:
+- показываем не меньше MIN (иначе моргнёт и будет выглядеть как глюк);
+- убираем не позже MAX, даже если что-то не догрузилось — держать человека
+  перед логотипом дольше трёх секунд означает потерять его.
+*/
+const SPLASH_MIN_MS = 1100;
+const SPLASH_MAX_MS = 2600;
+const splashStartedAt = Date.now();
+let splashHidden = false;
+
+function hideSplash() {
+  if (splashHidden) return;
+  splashHidden = true;
+  const el = document.getElementById("splash");
+  if (!el) return;
+  el.classList.add("splash-done");
+  setTimeout(function() {
+    el.remove();
+    maybeStartTour();
+  }, 520);
+}
+
+function scheduleSplashHide() {
+  const waited = Date.now() - splashStartedAt;
+  setTimeout(hideSplash, Math.max(0, SPLASH_MIN_MS - waited));
+}
+
+// Страховка: что бы ни случилось с сетью или видео, заставка уйдёт.
+setTimeout(hideSplash, SPLASH_MAX_MS);
+
+/* ---- Обучение для новых покупателей ---- */
+const TOUR_KEY = "oson_tour_done_v1";
+const TOUR_STEPS = [
+  { emoji: "🛍", title: "tour1_title", text: "tour1_text" },
+  { emoji: "💳", title: "tour2_title", text: "tour2_text" },
+  { emoji: "✅", title: "tour3_title", text: "tour3_text" },
+];
+let tourStep = 0;
+
+function tourAlreadySeen() {
+  try { return localStorage.getItem(TOUR_KEY) === "1"; }
+  catch (e) { return true; }  // нет доступа к хранилищу — лучше не показывать
+}
+
+function markTourSeen() {
+  try { localStorage.setItem(TOUR_KEY, "1"); } catch (e) { /* не страшно */ }
+}
+
+function maybeStartTour() {
+  if (tourAlreadySeen()) return;
+  tourStep = 0;
+  renderTour();
+  const el = document.getElementById("tour");
+  if (el) el.classList.remove("hidden");
+}
+
+function renderTour() {
+  const step = TOUR_STEPS[tourStep];
+  if (!step) return;
+  document.getElementById("tour-emoji").textContent = step.emoji;
+  document.getElementById("tour-title").textContent = t(step.title);
+  document.getElementById("tour-text").textContent = t(step.text);
+  document.getElementById("tour-step-label").textContent = (tourStep + 1) + " / " + TOUR_STEPS.length;
+  document.getElementById("tour-next").textContent =
+    tourStep === TOUR_STEPS.length - 1 ? t("tour_start") : t("tour_next");
+  document.getElementById("tour-dots").innerHTML = TOUR_STEPS.map(function(_, i) {
+    return '<span class="rounded-full transition-all" style="width:' + (i === tourStep ? 20 : 6) +
+      'px;height:6px;background:' + (i === tourStep ? "#D9B45B" : "rgba(255,255,255,.18)") + '"></span>';
+  }).join("");
+  const card = document.getElementById("tour-card");
+  if (card) { card.style.animation = "none"; void card.offsetWidth; card.style.animation = ""; }
+}
+
+function tourNext() {
+  if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred("light");
+  if (tourStep < TOUR_STEPS.length - 1) { tourStep++; renderTour(); return; }
+  closeTour();
+}
+
+function closeTour() {
+  markTourSeen();
+  const el = document.getElementById("tour");
+  if (el) el.classList.add("hidden");
+}
+
 applyI18n();
 initProfile();
 initSupportInfo();
 initLiveFeed();
 sendDiag();
+// Каталог отрисован — заставку можно убирать (но не раньше SPLASH_MIN_MS).
+scheduleSplashHide();
 // Аренды тянем на старте, а не только при заходе на вкладку: если срок
 // заканчивается сегодня, человек должен увидеть это сразу.
 renderMyRentals();
@@ -2574,6 +2769,32 @@ async function watchRentTutorial(btn) {
     if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred("success");
     // Закрываем витрину — она открыта поверх чата с ботом, и человек
     // оказывается ровно там, куда только что пришло видео.
+    if (tg && tg.close) tg.close();
+  } catch (e) {
+    showToast(t("ao_err_network"));
+  } finally {
+    if (btn && prev !== null) { btn.disabled = false; btn.innerHTML = prev; }
+  }
+}
+
+async function watchDisplayVideo(btn) {
+  // Шлём инструкцию в чат и закрываем витрину — человек оказывается прямо
+  // там, куда только что пришло видео. То же поведение, что у тутора по
+  // ссылке: два разных экрана с одинаковой логикой только путали бы.
+  const prev = btn ? btn.innerHTML : null;
+  if (btn) { btn.disabled = true; btn.innerHTML = "⏳"; }
+  try {
+    const base = await getShopApiUrl();
+    const initData = await waitForInitData();
+    if (!base || !initData) return;
+
+    const res = await fetch(base + "/public/send_display_video", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData: initData }),
+    });
+    const data = await res.json().catch(function() { return {}; });
+    if (!data.ok) { showToast(t("ao_err_network")); return; }
+    if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred("success");
     if (tg && tg.close) tg.close();
   } catch (e) {
     showToast(t("ao_err_network"));
