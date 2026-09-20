@@ -61,6 +61,8 @@ const I18N = {
     modal_message_placeholder: "Tabrik matni...", modal_rent_days: "Necha kunga?", modal_gift_quantity: "Nechta dona?",
     modal_card_label: "To'lov uchun karta (Uzcard/Humo)", modal_card_holder_label: "Qabul qiluvchi",
     modal_copy: "Nusxalash", modal_paid: "To'ladim", modal_cancel: "Bekor qilish",
+    modal_buy: "Sotib olish",
+    modal_friend_start_note: "Do'stingizga tovar yetkazilishi uchun do'stingiz botga 1 marta start bosgan bo'lishi kerak.",
     err_username: "Username kiriting", err_no_username: "Sizda public username yo'q. Telegram sozlamalaridan o'rnating yoki \"Do'stimga\" tanlang.",
     rent_terms: (fee, refund) => "Xizmat haqi: ~" + fee + ". Ijara tugagach ~" + refund + " qaytariladi.",
     copied: "Nusxalandi!", empty: "Hozircha bo'sh.", rent_days_suffix: "kun", rent_from: "dan", rent_btn: "Ijaraga olish",
@@ -85,7 +87,7 @@ const I18N = {
     ao_connected: "Sovg'a profilingizga ulandi!",
     ao_connect_pending: "Havola saqlandi — sovg'a bir necha daqiqada ulanadi",
     ao_err_empty: "Havolani kiriting", ao_err_bad_link: "Havola noto'g'ri. U tc:// bilan boshlanishi kerak.",
-    ao_err_connect: "Ulashda xatolik. Operator tez orada qo'lda ulab beradi.", ao_err_network: "Server bilan bog'lanib bo'lmadi.", ao_cancel: "Buyurtmani bekor qilish", ao_cancel_confirm: "Buyurtma bekor qilinsinmi?", ao_cancel_request: "Bekor qilishni so'rash", ao_cancel_request_confirm: "Buyurtma to'langan. Sotuvchidan bekor qilishni so'raymizmi?", ao_cancel_requested: "📨 So'rov yuborildi. Sotuvchi tez orada ko'rib chiqadi.", ao_pay_title: "To'lovni amalga oshiring", ao_pay_hint: "Kartaga summani o'tkazing va chek skrinshotini shu yerga yuklang.", ao_pay_upload: "Chek skrinshotini yuklash", ao_receipt_sent: "✅ Chek yuborildi! Admin tez orada tekshiradi.", ao_err_too_big: "Fayl juda katta (8 MB gacha).", ao_err_receipt: "Chekni yuborib bo'lmadi, qayta urinib ko'ring.", ao_err_wrong_status: "Bu buyurtma uchun chek allaqachon yuborilgan.", ao_err_no_image: "Rasmni o'qib bo'lmadi. Galereyadan oddiy rasm (JPG/PNG) tanlang.", ao_err_not_found: "Buyurtma topilmadi.",
+    ao_err_connect: "Ulashda xatolik. Operator tez orada qo'lda ulab beradi.", ao_err_network: "Server bilan bog'lanib bo'lmadi.", ao_cancel: "Buyurtmani bekor qilish", ao_cancel_confirm: "Buyurtma bekor qilinsinmi?", ao_cancel_request: "Bekor qilishni so'rash", ao_cancel_request_confirm: "Buyurtma to'langan. Sotuvchidan bekor qilishni so'raymizmi?", ao_cancel_requested: "📨 So'rov yuborildi. Sotuvchi tez orada ko'rib chiqadi.", ao_pay_title: "To'lovni amalga oshiring", ao_pay_hint: "Kartaga summani o'tkazing va chek skrinshotini shu yerga yuklang.", ao_pay_upload: "Chek skrinshotini yuklash", ao_receipt_sent: "✅ Chek yuborildi! Admin tez orada tekshiradi.", ao_err_too_big: "Fayl juda katta (8 MB gacha).", ao_err_receipt: "Chekni yuborib bo'lmadi, qayta urinib ko'ring.", ao_err_wrong_status: "Bu buyurtma uchun chek allaqachon yuborilgan.", ao_err_no_image: "Rasmni o'qib bo'lmadi. Galereyadan oddiy rasm (JPG/PNG) tanlang.", ao_err_not_found: "Buyurtma topilmadi.", ao_err_duplicate: "Bu chek allaqachon ishlatilgan. Yangi to'lov chekini yuboring.",
     profile_stats_title: "Mening statistikam", profile_stats_rank: "Reyting o'rningiz", profile_stats_total: "Jami xarid",
     history_loading: "Yuklanmoqda...", history_open_bot: "Ochish uchun botni Telegram ichida oching.",
     order_success_title: "Buyurtma muvaffaqiyatli qabul qilindi", order_success_hint: "Tez orada tasdiqlaymiz — natija shu botda yoziladi.",
@@ -96,10 +98,12 @@ const I18N = {
     cart_total: "Jami", cart_pay: "Hammasini to'lash", cart_clear: "Savatni tozalash",
     cart_clear_confirm: "Savatni tozalaymizmi?", cart_to_self: "O'zimga", cart_to: "Kimga",
     cart_items_suffix: "ta mahsulot", cart_go_shop: "Do'konga o'tish",
-    cart_pay_hint: "Kartaga jami summani bitta o'tkazma bilan yuboring, so'ng \"To'ladim\" tugmasini bosing.",
+    cart_pay_hint: "\"Sotib olish\" tugmasini bosing — karta raqami va aniq summa keyingi qadamda chiqadi.",
     cart_err_generic: "Buyurtmani yuborib bo'lmadi, qayta urinib ko'ring.",
     cart_err_no_username: "Sizda public username yo'q. Telegram sozlamalaridan o'rnating yoki \"Do'stimga\" tanlang.",
     cart_err_stars_limit: "Bitta buyurtmada 50 dan 1 000 000 tagacha yulduz olish mumkin. Miqdorni kamaytiring.",
+    cart_err_too_many: "Sizda yopilmagan buyurtmalar juda ko'p. Avvalgilarini to'lang yoki bekor qiling.",
+    err_banned: "Hisobingiz bloklangan. Savol bo'lsa — operatorga yozing.",
     cart_active_title: "Savat",
     cart_success_hint: "Buyurtmani tasdiqlash uchun bot chatini oching — u yerda \"Tasdiqlash\" tugmasini bosing.",
     flow_step_created: "Qabul qilindi", flow_step_payment: "To'lov", flow_step_doing: "Bajarilmoqda", flow_step_done: "Tayyor",
@@ -128,6 +132,8 @@ const I18N = {
     modal_message_placeholder: "Текст поздравления...", modal_rent_days: "На сколько дней?", modal_gift_quantity: "Сколько штук?",
     modal_card_label: "Карта для оплаты (Uzcard/Humo)", modal_card_holder_label: "Получатель",
     modal_copy: "Скопировать", modal_paid: "Я оплатил", modal_cancel: "Отмена",
+    modal_buy: "Купить",
+    modal_friend_start_note: "Чтобы товар дошёл до друга, он должен хотя бы один раз нажать «Старт» в боте.",
     err_username: "Введите username", err_no_username: "У вас нет публичного username. Установите в настройках Telegram или выберите \"Другу\".",
     rent_terms: (fee, refund) => "Сервисный сбор: ~" + fee + ". После окончания аренды вернётся ~" + refund + ".",
     copied: "Скопировано!", empty: "Пока пусто.", rent_days_suffix: "дн.", rent_from: "от", rent_btn: "Арендовать",
@@ -152,7 +158,7 @@ const I18N = {
     ao_connected: "Подарок подключён к профилю!",
     ao_connect_pending: "Ссылка сохранена — подарок подключится через пару минут",
     ao_err_empty: "Введите ссылку", ao_err_bad_link: "Неверная ссылка. Она должна начинаться с tc://",
-    ao_err_connect: "Ошибка подключения. Оператор скоро подключит вручную.", ao_err_network: "Не удалось связаться с сервером.", ao_cancel: "Отменить заказ", ao_cancel_confirm: "Отменить заказ?", ao_cancel_request: "Попросить отменить заказ", ao_cancel_request_confirm: "Заказ уже оплачен. Отправить продавцу просьбу отменить его?", ao_cancel_requested: "📨 Запрос отправлен. Продавец скоро его рассмотрит.", ao_pay_title: "Оплатите заказ", ao_pay_hint: "Переведите сумму на карту и загрузите сюда скриншот чека.", ao_pay_upload: "Загрузить скриншот чека", ao_receipt_sent: "✅ Чек отправлен! Админ скоро проверит.", ao_err_too_big: "Файл слишком большой (до 8 МБ).", ao_err_receipt: "Не удалось отправить чек, попробуйте ещё раз.", ao_err_wrong_status: "Чек по этому заказу уже отправлен.", ao_err_no_image: "Не удалось прочитать изображение. Выберите обычное фото (JPG/PNG).", ao_err_not_found: "Заказ не найден.",
+    ao_err_connect: "Ошибка подключения. Оператор скоро подключит вручную.", ao_err_network: "Не удалось связаться с сервером.", ao_cancel: "Отменить заказ", ao_cancel_confirm: "Отменить заказ?", ao_cancel_request: "Попросить отменить заказ", ao_cancel_request_confirm: "Заказ уже оплачен. Отправить продавцу просьбу отменить его?", ao_cancel_requested: "📨 Запрос отправлен. Продавец скоро его рассмотрит.", ao_pay_title: "Оплатите заказ", ao_pay_hint: "Переведите сумму на карту и загрузите сюда скриншот чека.", ao_pay_upload: "Загрузить скриншот чека", ao_receipt_sent: "✅ Чек отправлен! Админ скоро проверит.", ao_err_too_big: "Файл слишком большой (до 8 МБ).", ao_err_receipt: "Не удалось отправить чек, попробуйте ещё раз.", ao_err_wrong_status: "Чек по этому заказу уже отправлен.", ao_err_no_image: "Не удалось прочитать изображение. Выберите обычное фото (JPG/PNG).", ao_err_not_found: "Заказ не найден.", ao_err_duplicate: "Этот чек уже использовали. Пришлите чек нового платежа.",
     profile_stats_title: "Моя статистика", profile_stats_rank: "Ваше место в рейтинге", profile_stats_total: "Всего куплено",
     history_loading: "Загрузка...", history_open_bot: "Откройте магазин внутри Telegram, чтобы увидеть историю.",
     order_success_title: "Заказ успешно оформлен", order_success_hint: "Скоро подтвердим — результат придёт в этот же чат.",
@@ -163,10 +169,12 @@ const I18N = {
     cart_total: "Итого", cart_pay: "Оплатить всё", cart_clear: "Очистить корзину",
     cart_clear_confirm: "Очистить корзину?", cart_to_self: "Себе", cart_to: "Кому",
     cart_items_suffix: "товар(ов)", cart_go_shop: "Перейти в магазин",
-    cart_pay_hint: "Переведите на карту общую сумму одним платежом и нажмите «Я оплатил».",
+    cart_pay_hint: "Нажмите «Купить» — номер карты и точная сумма появятся на следующем шаге.",
     cart_err_generic: "Не удалось оформить заказ, попробуйте ещё раз.",
     cart_err_no_username: "У вас нет публичного username. Установите его в настройках Telegram или выберите «Другу».",
     cart_err_stars_limit: "За один заказ можно купить от 50 до 1 000 000 звёзд. Уменьшите количество.",
+    cart_err_too_many: "У вас слишком много незакрытых заказов. Оплатите или отмените предыдущие.",
+    err_banned: "Ваш аккаунт заблокирован. По вопросам напишите оператору.",
     cart_active_title: "Корзина",
     cart_success_hint: "Откройте чат бота и нажмите «Подтвердить» — после этого придут реквизиты и сумма.",
     flow_step_created: "Оформлен", flow_step_payment: "Оплата", flow_step_doing: "Выполняется", flow_step_done: "Готово",
@@ -195,6 +203,8 @@ const I18N = {
     modal_message_placeholder: "Congratulation text...", modal_rent_days: "For how many days?", modal_gift_quantity: "How many?",
     modal_card_label: "Payment card (Uzcard/Humo)", modal_card_holder_label: "Recipient",
     modal_copy: "Copy", modal_paid: "I've paid", modal_cancel: "Cancel",
+    modal_buy: "Buy",
+    modal_friend_start_note: "For the gift to reach your friend, they must press Start in the bot at least once.",
     err_username: "Enter a username", err_no_username: "You don't have a public username. Set one in Telegram settings or choose \"A friend\".",
     rent_terms: (fee, refund) => "Service fee: ~" + fee + ". ~" + refund + " is refunded after the rental ends.",
     copied: "Copied!", empty: "Nothing here yet.", rent_days_suffix: "days", rent_from: "from", rent_btn: "Rent",
@@ -219,7 +229,7 @@ const I18N = {
     ao_connected: "Gift connected to your profile!",
     ao_connect_pending: "Link saved — the gift will connect in a few minutes",
     ao_err_empty: "Enter the link", ao_err_bad_link: "Invalid link. It should start with tc://",
-    ao_err_connect: "Connection error. An operator will connect it manually soon.", ao_err_network: "Could not reach the server.", ao_cancel: "Cancel order", ao_cancel_confirm: "Cancel this order?", ao_cancel_request: "Request cancellation", ao_cancel_request_confirm: "This order is already paid. Send the seller a cancellation request?", ao_cancel_requested: "📨 Request sent. The seller will review it shortly.", ao_pay_title: "Pay for your order", ao_pay_hint: "Transfer the amount to the card and upload the receipt screenshot here.", ao_pay_upload: "Upload receipt screenshot", ao_receipt_sent: "✅ Receipt sent! The admin will check it shortly.", ao_err_too_big: "File is too large (max 8 MB).", ao_err_receipt: "Could not send the receipt, please try again.", ao_err_wrong_status: "A receipt for this order was already sent.", ao_err_no_image: "Could not read the image. Pick a regular photo (JPG/PNG).", ao_err_not_found: "Order not found.",
+    ao_err_connect: "Connection error. An operator will connect it manually soon.", ao_err_network: "Could not reach the server.", ao_cancel: "Cancel order", ao_cancel_confirm: "Cancel this order?", ao_cancel_request: "Request cancellation", ao_cancel_request_confirm: "This order is already paid. Send the seller a cancellation request?", ao_cancel_requested: "📨 Request sent. The seller will review it shortly.", ao_pay_title: "Pay for your order", ao_pay_hint: "Transfer the amount to the card and upload the receipt screenshot here.", ao_pay_upload: "Upload receipt screenshot", ao_receipt_sent: "✅ Receipt sent! The admin will check it shortly.", ao_err_too_big: "File is too large (max 8 MB).", ao_err_receipt: "Could not send the receipt, please try again.", ao_err_wrong_status: "A receipt for this order was already sent.", ao_err_no_image: "Could not read the image. Pick a regular photo (JPG/PNG).", ao_err_not_found: "Order not found.", ao_err_duplicate: "This receipt was already used. Send the receipt of a new payment.",
     profile_stats_title: "My stats", profile_stats_rank: "Your rank", profile_stats_total: "Total spent",
     history_loading: "Loading...", history_open_bot: "Open the shop inside Telegram to see your history.",
     order_success_title: "Order placed successfully", order_success_hint: "We'll confirm soon — the result will be posted in this chat.",
@@ -230,10 +240,12 @@ const I18N = {
     cart_total: "Total", cart_pay: "Pay for everything", cart_clear: "Clear cart",
     cart_clear_confirm: "Clear the cart?", cart_to_self: "Myself", cart_to: "For",
     cart_items_suffix: "item(s)", cart_go_shop: "Go to shop",
-    cart_pay_hint: "Transfer the total to the card in one payment, then tap \"I've paid\".",
+    cart_pay_hint: "Tap \"Buy\" — the card number and the exact amount appear on the next step.",
     cart_err_generic: "Could not place the order, please try again.",
     cart_err_no_username: "You don't have a public username. Set one in Telegram settings or choose \"A friend\".",
     cart_err_stars_limit: "You can buy between 50 and 1,000,000 stars per order. Lower the amount.",
+    cart_err_too_many: "You have too many open orders. Pay or cancel the previous ones first.",
+    err_banned: "Your account is blocked. Contact the operator if you have questions.",
     cart_active_title: "Cart",
     cart_success_hint: "Open the bot chat and tap \"Confirm\" — payment details will arrive there.",
     flow_step_created: "Placed", flow_step_payment: "Payment", flow_step_doing: "In progress", flow_step_done: "Done",
@@ -493,10 +505,7 @@ function renderCart() {
   checkoutEl.classList.remove("hidden");
   clearBtn.classList.remove("hidden");
 
-  getPaymentInfo().then(function(pay) {
-    document.getElementById("cart-card-number").textContent = pay.card_number || "—";
-    document.getElementById("cart-card-holder").textContent = pay.card_holder || "—";
-  }).catch(function() { /* реквизиты просто останутся прочерком */ });
+  // Реквизиты в корзине тоже убраны — см. комментарий в openModal().
 }
 
 /** Отправка всей корзины одним заказом — одна сумма, один чек. */
@@ -543,6 +552,8 @@ async function submitCartOrder() {
     if (!res.ok || data.error) {
       errorEl.textContent = data.error === "no_username" ? t("cart_err_no_username")
         : data.error === "stars_limit" ? t("cart_err_stars_limit")
+        : data.error === "too_many_pending" ? t("cart_err_too_many")
+        : data.error === "banned" ? t("err_banned")
         : t("cart_err_generic");
       errorEl.classList.remove("hidden");
       return;
@@ -1154,6 +1165,10 @@ async function openModal(item) {
   if (isRentLike) document.getElementById("days-value").textContent = rentDays;
 
   document.getElementById("gift-quantity-field").classList.toggle("hidden", item.kind !== "simple_gift");
+
+  // Поздравление имеет смысл только у обычного подарка — оно уходит вместе с
+  // ним. У звёзд и премиума текст отправить некуда, а поле сбивало с толку.
+  document.getElementById("message-field").classList.toggle("hidden", item.kind !== "simple_gift");
   if (item.kind === "simple_gift") {
     giftQty = 1;
     document.getElementById("gift-qty-value").textContent = giftQty;
@@ -1193,13 +1208,10 @@ async function openModal(item) {
     previewBtn.onclick = null;
   }
 
-  try {
-    const pay = await getPaymentInfo();
-    document.getElementById("pay-card-number").textContent = pay.card_number || "—";
-    document.getElementById("pay-card-holder").textContent = pay.card_holder || "—";
-  } catch (e) {
-    document.getElementById("pay-card-number").textContent = "—";
-  }
+  // Реквизитов в карточке товара больше нет: человек видел карту ДО заказа,
+  // платил по ней, а потом жал кнопку — и бот заводил ЕЩЁ один заказ с новой
+  // суммой. Отсюда и брались "10 заказов на один чек". Теперь карта и точная
+  // сумма показываются только на экране уже созданного заказа.
 
   if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred("light");
   modal.classList.remove("hidden");
@@ -1416,6 +1428,8 @@ async function submitOrder(payload) {
     if (!res.ok || data.error) {
       errorEl.textContent = data.error === "no_username" ? t("cart_err_no_username")
         : data.error === "stars_limit" ? t("cart_err_stars_limit")
+        : data.error === "too_many_pending" ? t("cart_err_too_many")
+        : data.error === "banned" ? t("err_banned")
         : (data.error || "Xatolik yuz berdi, qayta urinib ko'ring.");
       errorEl.classList.remove("hidden");
       return;
@@ -1822,6 +1836,7 @@ async function flowSubmitReceipt() {
       const reasons = {
         wrong_status: t("ao_err_wrong_status"), too_big: t("ao_err_too_big"),
         no_image: t("ao_err_no_image"), bad_image: t("ao_err_no_image"), not_found: t("ao_err_not_found"),
+        duplicate_receipt: t("ao_err_duplicate"), banned: t("err_banned"),
       };
       errorEl.textContent = reasons[data.error] || (t("ao_err_receipt") + " (" + (data.error || res.status) + ")");
       errorEl.classList.remove("hidden");
@@ -2512,6 +2527,7 @@ async function submitReceipt(orderId) {
         no_image: t("ao_err_no_image"),
         bad_image: t("ao_err_no_image"),
         not_found: t("ao_err_not_found"),
+        banned: t("err_banned"),
       };
       errorEl.textContent = reasons[data.error] || (t("ao_err_receipt") + " (" + (data.error || res.status) + ")");
       errorEl.classList.remove("hidden");
@@ -2603,6 +2619,8 @@ async function submitRentLink() {
       if (flowOrder) { pollOrderFlow(); startFlowPolling(); }
       else openOrderFlow({ order_id: data.order_id });
       refreshActiveOrder();
+    } else if (data.error === "duplicate_receipt") {
+      errorEl.textContent = t("ao_err_duplicate"); errorEl.classList.remove("hidden");
     } else if (data.error === "bad_link") {
       errorEl.textContent = t("ao_err_bad_link"); errorEl.classList.remove("hidden");
     } else {
