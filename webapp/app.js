@@ -62,6 +62,19 @@ const I18N = {
     modal_card_label: "To'lov uchun karta (Uzcard/Humo)", modal_card_holder_label: "Qabul qiluvchi",
     modal_copy: "Nusxalash", modal_paid: "To'ladim", modal_cancel: "Bekor qilish",
     modal_buy: "Sotib olish",
+    bal_title: "Balans", bal_history: "Operatsiyalar", bal_topup: "To'ldirish",
+    bal_hint: "Balansdan to'lov aniq va bir zumda o'tadi — chek yuborish shart emas.",
+    bal_pending_title: "To'lov kutilmoqda", bal_pending_hint: "Shu kartaga o'tkazing. Bank komissiya ushlasa ham — balansga qancha tushsa, shuncha yoziladi.",
+    bal_pay: "Balansdan to'lash", bal_pay_short: "Balans yetarli emas",
+    bal_err_amount: "Summa {min} dan {max} gacha bo'lishi kerak.",
+    bal_empty: "Hozircha operatsiyalar yo'q.",
+    bal_sent: "Rekvizitlar chatga ham yuborildi.",
+    bal_cancel: "Bekor qilish",
+    bal_err_pending: "Sizda {amount} uchun to'lanmagan so'rov bor. Uni to'lang yoki bekor qilib, yangisini yarating.",
+    bal_pay_done: "Bu buyurtma allaqachon to'langan.",
+    bal_pay_busy: "Band, bir soniyadan keyin qayta urinib ko'ring.",
+    tour4_title: "Balans — eng qulayi",
+    tour4_text: "Balansingizni xohlagancha to'ldirib qo'ying va buyurtmalarni bir bosishda to'lang. Bank komissiyasi balansga tushgan summani biroz kamaytiradi, xolos — hech narsa osilib qolmaydi.",
     splash_loading: "YUKLANMOQDA",
     tour_skip: "O'tkazib yuborish",
     tour_next: "Keyingisi",
@@ -95,7 +108,7 @@ const I18N = {
     ao_link_title: "Keyingi qadam: havolani kiriting", ao_link_hint: "Botga yuborilgan tutorial videodagi ko'rsatma bo'yicha olingan havolani joylang.",
     ao_link_send: "Havolani yuborish", ao_watch_tutorial: "Tutorialni ko'rish (botda)",
     ao_display_video: "Profilda qanday ko'rsatish",
-    flow_display_hint: "Sovg'a hisobingizda. Profilda ko'rinishi uchun fragment.com → My assets bo'limidan ko'rsatishni yoqing — bu bir martalik amal.",
+    flow_display_hint: "Sovg'a hisobingizda, lekin profilda o'zi ko'rinmaydi — ko'rsatishni bir marta yoqish kerak. Videoda qanday qilish ko'rsatilgan.",
     ao_connected: "Sovg'a profilingizga ulandi!",
     ao_connect_pending: "Havola saqlandi — sovg'a bir necha daqiqada ulanadi",
     ao_err_empty: "Havolani kiriting", ao_err_bad_link: "Havola noto'g'ri. U tc:// bilan boshlanishi kerak.",
@@ -147,6 +160,19 @@ const I18N = {
     modal_card_label: "Карта для оплаты (Uzcard/Humo)", modal_card_holder_label: "Получатель",
     modal_copy: "Скопировать", modal_paid: "Я оплатил", modal_cancel: "Отмена",
     modal_buy: "Купить",
+    bal_title: "Баланс", bal_history: "Операции", bal_topup: "Пополнить",
+    bal_hint: "С баланса оплата проходит точно и мгновенно — без чеков.",
+    bal_pending_title: "Ждём перевод", bal_pending_hint: "Переведите на эту карту. Даже если банк удержит комиссию — на баланс зачислится столько, сколько дошло.",
+    bal_pay: "Оплатить с баланса", bal_pay_short: "На балансе недостаточно",
+    bal_err_amount: "Сумма должна быть от {min} до {max}.",
+    bal_empty: "Операций пока нет.",
+    bal_sent: "Реквизиты продублировал в чат.",
+    bal_cancel: "Отменить",
+    bal_err_pending: "У вас уже есть неоплаченное пополнение на {amount}. Оплатите его или отмените и создайте новое.",
+    bal_pay_done: "Этот заказ уже оплачен.",
+    bal_pay_busy: "Занято, попробуйте через секунду.",
+    tour4_title: "Баланс — самый удобный способ",
+    tour4_text: "Пополните баланс на любую сумму и оплачивайте заказы в одно нажатие. Комиссия банка просто чуть уменьшит зачисление — и ничего никогда не зависнет.",
     splash_loading: "ЗАГРУЗКА",
     tour_skip: "Пропустить",
     tour_next: "Дальше",
@@ -180,7 +206,7 @@ const I18N = {
     ao_link_title: "Следующий шаг: вставьте ссылку", ao_link_hint: "Вставьте ссылку, полученную по инструкции из видео, которое пришло в бот.",
     ao_link_send: "Отправить ссылку", ao_watch_tutorial: "Посмотреть инструкцию (в боте)",
     ao_display_video: "Как показать в профиле",
-    flow_display_hint: "Подарок у вас на аккаунте. Чтобы он появился в профиле, включите показ на fragment.com → My assets — это делается один раз.",
+    flow_display_hint: "Подарок у вас на аккаунте, но в профиле сам не появится — показ нужно включить один раз. В видео показано, как это сделать.",
     ao_connected: "Подарок подключён к профилю!",
     ao_connect_pending: "Ссылка сохранена — подарок подключится через пару минут",
     ao_err_empty: "Введите ссылку", ao_err_bad_link: "Неверная ссылка. Она должна начинаться с tc://",
@@ -232,6 +258,19 @@ const I18N = {
     modal_card_label: "Payment card (Uzcard/Humo)", modal_card_holder_label: "Recipient",
     modal_copy: "Copy", modal_paid: "I've paid", modal_cancel: "Cancel",
     modal_buy: "Buy",
+    bal_title: "Balance", bal_history: "Transactions", bal_topup: "Top up",
+    bal_hint: "Paying from balance is exact and instant — no receipts.",
+    bal_pending_title: "Awaiting transfer", bal_pending_hint: "Transfer to this card. Even if the bank takes a fee, your balance gets exactly what arrives.",
+    bal_pay: "Pay from balance", bal_pay_short: "Not enough balance",
+    bal_err_amount: "Amount must be between {min} and {max}.",
+    bal_empty: "No transactions yet.",
+    bal_sent: "Card details also sent to the chat.",
+    bal_cancel: "Cancel",
+    bal_err_pending: "You already have an unpaid top-up for {amount}. Pay it, or cancel it and create a new one.",
+    bal_pay_done: "This order is already paid.",
+    bal_pay_busy: "Busy, try again in a second.",
+    tour4_title: "Balance is the easiest way",
+    tour4_text: "Top up your balance with any amount and pay for orders in one tap. A bank fee only lowers what lands on your balance — nothing ever gets stuck.",
     splash_loading: "LOADING",
     tour_skip: "Skip",
     tour_next: "Next",
@@ -265,7 +304,7 @@ const I18N = {
     ao_link_title: "Next step: paste your link", ao_link_hint: "Paste the link you got by following the tutorial video sent to the bot.",
     ao_link_send: "Send link", ao_watch_tutorial: "Watch tutorial (in bot)",
     ao_display_video: "How to display it",
-    flow_display_hint: "The gift is on your account. To make it visible on your profile, enable the display on fragment.com → My assets — a one-time step.",
+    flow_display_hint: "The gift is on your account, but it won't show on your profile by itself — the display has to be turned on once. The video shows how.",
     ao_connected: "Gift connected to your profile!",
     ao_connect_pending: "Link saved — the gift will connect in a few minutes",
     ao_err_empty: "Enter the link", ao_err_bad_link: "Invalid link. It should start with tc://",
@@ -1057,7 +1096,7 @@ function switchTab(tab) {
   if (tab === "savat") renderCart();
   if (tab === "tarix") renderHistory();
   if (tab === "top") renderLeaderboard(currentTopPeriod);
-  if (tab === "profil") { initProfile(); renderProfileStats(); }
+  if (tab === "profil") { initProfile(); renderProfileStats(); loadBalance(); }
 }
 
 /* ---------------- Модалка оплаты ---------------- */
@@ -1778,8 +1817,16 @@ function renderOrderFlow(statusChanged) {
         '</div>' +
       '</div>' +
       exact +
+      // Оплата с баланса — первой кнопкой, если денег хватает: это самый
+      // быстрый и единственный способ заплатить РОВНО, без возни с чеком.
+      (balanceData && balanceData.balance >= (s.pay_amount || s.price_uzs || 0)
+        ? '<button onclick="payFromBalance(this, ' + s.order_id + ')" class="press w-full py-3.5 rounded-2xl btn-primary font-semibold text-white text-sm mb-2">💼 ' +
+            t("bal_pay") + ' · ' + fmtUZS(balanceData.balance) + '</button>'
+        : "") +
       '<input type="file" id="flow-receipt-input" accept="image/*" class="hidden" onchange="flowSubmitReceipt()" />' +
-      '<button onclick="document.getElementById(\'flow-receipt-input\').click()" id="flow-receipt-btn" class="press w-full py-3.5 rounded-2xl btn-primary font-semibold text-white text-sm">📎 ' + t("ao_pay_upload") + '</button>' +
+      '<button onclick="document.getElementById(\'flow-receipt-input\').click()" id="flow-receipt-btn" class="press w-full py-3.5 rounded-2xl ' +
+        ((balanceData && balanceData.balance >= (s.pay_amount || s.price_uzs || 0)) ? "pill" : "btn-primary") +
+        ' font-semibold text-white text-sm">📎 ' + t("ao_pay_upload") + '</button>' +
       '<p id="flow-receipt-error" class="hidden text-red-400 text-[11px] mt-2"></p>';
     buttonsEl.innerHTML =
       '<button onclick="flowCancelOrder()" class="w-full py-3 rounded-2xl pill press text-[12px] text-gray-400 mb-2">' + t("ao_cancel") + '</button>' +
@@ -2320,6 +2367,178 @@ async function sendDiag() {
   } catch (e) { /* тихо игнорируем — это диагностика, не критично */ }
 }
 
+
+/* ---------------- Баланс ----------------
+
+Баланс появился из-за банковской комиссии. Клиент отправляет 50 000, а на
+карту приходит 49 559 — для заказа это провал (сумма не совпала, заказ висит),
+а для баланса просто зачисление на 49 559. Дальше заказы оплачиваются с
+баланса точно и мгновенно, без чеков и без сверок.
+*/
+let balanceData = null;
+
+async function loadBalance() {
+  const base = await getShopApiUrl();
+  const initData = await waitForInitData();
+  if (!base || !initData) return null;
+  try {
+    const res = await fetch(base + "/public/balance", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData: initData }),
+    });
+    balanceData = await res.json();
+    renderBalance();
+    return balanceData;
+  } catch (e) { return null; }
+}
+
+function renderBalance() {
+  const d = balanceData;
+  if (!d) return;
+  const amountEl = document.getElementById("bal-amount");
+  if (amountEl) amountEl.textContent = fmtUZS(d.balance || 0);
+
+  const pend = document.getElementById("bal-pending");
+  if (pend) {
+    if (d.pending_topup) {
+      pend.classList.remove("hidden");
+      document.getElementById("bal-pending-amount").textContent = fmtUZS(d.pending_topup.expected);
+      document.getElementById("bal-pending-card").textContent = d.card_number || "—";
+    } else {
+      pend.classList.add("hidden");
+    }
+  }
+}
+
+function openBalanceHistory() {
+  const box = document.getElementById("bal-history");
+  if (!box) return;
+  if (!box.classList.contains("hidden")) { box.classList.add("hidden"); return; }
+
+  const items = (balanceData && balanceData.history) || [];
+  box.innerHTML = items.length
+    ? items.map(function(h) {
+        const plus = h.delta_uzs > 0;
+        return '<div class="flex justify-between items-center text-[11.5px]">' +
+          '<span class="text-gray-400 truncate mr-2">' + (h.reason || "") + '</span>' +
+          '<span class="font-semibold whitespace-nowrap ' + (plus ? "text-emerald-400" : "text-gray-300") + '">' +
+            (plus ? "+" : "−") + fmtUZS(Math.abs(h.delta_uzs)) +
+          '</span></div>';
+      }).join("")
+    : '<div class="text-[11.5px] text-gray-500">' + t("bal_empty") + '</div>';
+  box.classList.remove("hidden");
+}
+
+async function createTopup(btn) {
+  const input = document.getElementById("bal-input");
+  const errorEl = document.getElementById("bal-error");
+  if (!input) return;
+  errorEl.classList.add("hidden");
+
+  const amount = parseInt(input.value, 10);
+  const min = (balanceData && balanceData.min_uzs) || 5000;
+  const max = (balanceData && balanceData.max_uzs) || 10000000;
+  if (isNaN(amount) || amount < min || amount > max) {
+    errorEl.textContent = t("bal_err_amount").replace("{min}", fmtUZS(min)).replace("{max}", fmtUZS(max));
+    errorEl.classList.remove("hidden");
+    return;
+  }
+
+  const base = await getShopApiUrl();
+  const initData = await waitForInitData();
+  if (!base || !initData) return;
+
+  const prev = btn ? btn.innerHTML : null;
+  if (btn) { btn.disabled = true; btn.innerHTML = "⏳"; }
+  try {
+    const res = await fetch(base + "/public/create_topup", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData: initData, amount: amount }),
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      if (data.error === "already_pending") {
+        // Заявка уже есть. Подменять её сумму молча нельзя — человек
+        // переведёт то, что просил, а совпадёт оно ни с чем.
+        errorEl.textContent = t("bal_err_pending").replace("{amount}", fmtUZS(data.expected));
+        errorEl.classList.remove("hidden");
+        await loadBalance();
+        return;
+      }
+      errorEl.textContent = data.error === "banned" ? t("err_banned") : t("bal_err_amount")
+        .replace("{min}", fmtUZS(min)).replace("{max}", fmtUZS(max));
+      errorEl.classList.remove("hidden");
+      return;
+    }
+    input.value = "";
+    if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred("success");
+    showToast(t("bal_sent"));
+    await loadBalance();
+  } catch (e) {
+    errorEl.textContent = t("ao_err_network");
+    errorEl.classList.remove("hidden");
+  } finally {
+    if (btn && prev !== null) { btn.disabled = false; btn.innerHTML = prev; }
+  }
+}
+
+async function cancelTopup(btn) {
+  const base = await getShopApiUrl();
+  const initData = await waitForInitData();
+  if (!base || !initData) return;
+  if (btn) btn.disabled = true;
+  try {
+    await fetch(base + "/public/cancel_topup", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData: initData }),
+    });
+    await loadBalance();
+  } catch (e) {
+    showToast(t("ao_err_network"));
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+async function payFromBalance(btn, orderId) {
+  const base = await getShopApiUrl();
+  const initData = await waitForInitData();
+  if (!base || !initData) return;
+
+  const prev = btn ? btn.innerHTML : null;
+  if (btn) { btn.disabled = true; btn.innerHTML = "⏳"; }
+  try {
+    const res = await fetch(base + "/public/pay_from_balance", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData: initData, order_id: orderId }),
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      // Баланс мог устареть: деньги потрачены в другом окне, или заказ уже
+      // оплачен. В обоих случаях перечитываем состояние, чтобы кнопка не
+      // показывала того, чего уже нет.
+      showToast(
+        data.error === "insufficient" ? t("bal_pay_short")
+        : data.error === "wrong_status" ? t("bal_pay_done")
+        : data.error === "busy" ? t("bal_pay_busy")
+        : t("ao_err_network")
+      );
+      await loadBalance();
+      pollOrderFlow();
+      return;
+    }
+    if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred("success");
+    balanceData = null;
+    loadBalance();
+    pollOrderFlow();
+    refreshActiveOrder();
+  } catch (e) {
+    showToast(t("ao_err_network"));
+  } finally {
+    if (btn && prev !== null) { btn.disabled = false; btn.innerHTML = prev; }
+  }
+}
+
 /* ---------------- Заставка и обучение ----------------
 
 Заставка закрывает пустой чёрный экран, который Telegram показывает, пока
@@ -2359,6 +2578,7 @@ const TOUR_STEPS = [
   { emoji: "🛍", title: "tour1_title", text: "tour1_text" },
   { emoji: "💳", title: "tour2_title", text: "tour2_text" },
   { emoji: "✅", title: "tour3_title", text: "tour3_text" },
+  { emoji: "💼", title: "tour4_title", text: "tour4_text" },
 ];
 let tourStep = 0;
 
@@ -2413,6 +2633,7 @@ initProfile();
 initSupportInfo();
 initLiveFeed();
 sendDiag();
+loadBalance();   // нужен для кнопки «Оплатить с баланса» на экране заказа
 // Каталог отрисован — заставку можно убирать (но не раньше SPLASH_MIN_MS).
 scheduleSplashHide();
 // Аренды тянем на старте, а не только при заходе на вкладку: если срок
@@ -2580,8 +2801,10 @@ async function refreshActiveOrder() {
         '<input id="rent-link-input" type="text" placeholder="tc://..." class="w-full bg-white/[0.04] border border-white/[0.09] rounded-xl px-3 py-2.5 text-[11px] text-white focus:outline-none focus:border-neon-blue/60 mb-2" />' +
         '<p id="rent-link-error" class="hidden text-red-400 text-[11px] mb-2"></p>' +
         '<button onclick="submitRentLink()" id="rent-link-btn" class="press w-full py-3 rounded-xl btn-primary font-semibold text-white text-[13px] mb-2">' + t("ao_link_send") + '</button>' +
-        '<button onclick="watchRentTutorial(this)" class="press w-full py-2.5 rounded-xl pill text-[11px] font-medium text-neon-blue mb-2">🎥 ' + t("ao_watch_tutorial") + '</button>' +
-        '<button onclick="openBotForTutorial()" class="press w-full py-2.5 rounded-xl pill text-[11px] font-medium">🎥 ' + t("ao_watch_tutorial") + '</button>' +
+        // Кнопка одна. Раньше их было две с ОДИНАКОВОЙ подписью: первая
+        // присылала видео, вторая просто закрывала витрину — человек жал
+        // наугад и в половине случаев оставался без инструкции.
+        '<button onclick="watchRentTutorial(this)" class="press w-full py-2.5 rounded-xl pill text-[11px] font-medium text-neon-blue">🎥 ' + t("ao_watch_tutorial") + '</button>' +
       '</div>'
     : "";
 
@@ -2734,11 +2957,6 @@ async function submitReceipt(orderId) {
     btn.innerHTML = prev;
     input.value = "";
   }
-}
-
-function openBotForTutorial() {
-  // Открываем чат с ботом, где уже лежит видео-инструкция.
-  if (tg && tg.close) tg.close();
 }
 
 /**

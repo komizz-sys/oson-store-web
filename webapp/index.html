@@ -421,6 +421,35 @@
         <p id="profile-id" class="text-[10px] text-gray-500 font-mono"></p>
       </div>
     </div>
+    <!-- БАЛАНС. Стоит выше статистики: это то, ради чего сюда заходят чаще
+         всего — посмотреть остаток и пополнить. -->
+    <div class="glass-card rounded-[22px] p-4 mb-3">
+      <div class="flex justify-between items-center mb-1">
+        <span class="text-[11px] text-gray-400 uppercase tracking-wider" data-i18n="bal_title">Balans</span>
+        <button onclick="openBalanceHistory()" id="bal-history-btn" class="press text-[11px] text-neon-blue" data-i18n="bal_history">Operatsiyalar</button>
+      </div>
+      <div id="bal-amount" class="text-[26px] font-black text-neon-yellow leading-none mb-1">—</div>
+      <p class="text-[11px] text-gray-400 leading-snug mb-3" data-i18n="bal_hint">Balansdan to'lov aniq va bir zumda o'tadi.</p>
+
+      <div id="bal-pending" class="hidden rounded-2xl p-3 mb-3 text-left" style="background: rgba(217,180,91,0.12); border: 1px solid rgba(217,180,91,0.4);">
+        <div class="text-[10px] text-neon-yellow uppercase tracking-wider font-bold mb-1" data-i18n="bal_pending_title">Kutilmoqda</div>
+        <div class="text-[19px] font-black text-neon-yellow leading-none mb-1" id="bal-pending-amount">—</div>
+        <div class="text-[11px] font-mono text-white tracking-wider mb-1" id="bal-pending-card">—</div>
+        <div class="text-[11px] text-gray-300 leading-snug" data-i18n="bal_pending_hint">Shu summani o'tkazing.</div>
+        <div class="flex gap-2 mt-2">
+          <button onclick="copyActiveCard(document.getElementById('bal-pending-card').textContent)" class="press bg-neon-blue/15 text-neon-blue px-3 py-1.5 rounded-lg text-[10px] font-semibold" data-i18n="modal_copy">Nusxalash</button>
+          <button onclick="cancelTopup(this)" class="press pill px-3 py-1.5 rounded-lg text-[10px] font-semibold text-gray-400" data-i18n="bal_cancel">Bekor qilish</button>
+        </div>
+      </div>
+
+      <div id="bal-form" class="flex gap-2">
+        <input type="number" id="bal-input" inputmode="numeric" placeholder="50000" class="flex-1 min-w-0 bg-white/[0.04] border border-white/[0.09] rounded-2xl px-3.5 py-3 text-sm text-white focus:outline-none focus:border-neon-yellow/60" />
+        <button onclick="createTopup(this)" class="press px-4 rounded-2xl btn-primary font-semibold text-white text-[13px] whitespace-nowrap" data-i18n="bal_topup">To'ldirish</button>
+      </div>
+      <p id="bal-error" class="hidden text-red-400 text-[11px] mt-2"></p>
+      <div id="bal-history" class="hidden mt-3 pt-3 border-t border-white/[0.08] space-y-1.5"></div>
+    </div>
+
     <div id="profile-stats-box" class="hidden glass-card rounded-[22px] p-4 mb-3"></div>
     <!-- Ряд флагов отсюда убран: он ничего не переключал, а рабочий
          переключатель языка и так стоит в шапке витрины. -->
