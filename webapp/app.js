@@ -73,6 +73,7 @@ const I18N = {
     bal_send_receipt: "📎 To'lov chekini yuborish",
     bal_receipt_sent: "Chek yuborildi — tekshirib, balansga yozamiz.",
     bal_receipt_dup: "Bu chek allaqachon yuborilgan.",
+    bal_topped_up: "💼 Balans to'ldirildi: +{amount}",
     bal_err_pending: "Sizda {amount} uchun to'lanmagan so'rov bor. Uni to'lang yoki bekor qilib, yangisini yarating.",
     bal_pay_done: "Bu buyurtma allaqachon to'langan.",
     bal_pay_busy: "Band, bir soniyadan keyin qayta urinib ko'ring.",
@@ -174,6 +175,7 @@ const I18N = {
     bal_send_receipt: "📎 Отправить чек об оплате",
     bal_receipt_sent: "Чек отправлен — проверим и зачислим на баланс.",
     bal_receipt_dup: "Этот чек уже присылали.",
+    bal_topped_up: "💼 Баланс пополнен: +{amount}",
     bal_err_pending: "У вас уже есть неоплаченное пополнение на {amount}. Оплатите его или отмените и создайте новое.",
     bal_pay_done: "Этот заказ уже оплачен.",
     bal_pay_busy: "Занято, попробуйте через секунду.",
@@ -275,6 +277,7 @@ const I18N = {
     bal_send_receipt: "📎 Send payment receipt",
     bal_receipt_sent: "Receipt sent — we'll check it and credit your balance.",
     bal_receipt_dup: "This receipt was already submitted.",
+    bal_topped_up: "💼 Balance topped up: +{amount}",
     bal_err_pending: "You already have an unpaid top-up for {amount}. Pay it, or cancel it and create a new one.",
     bal_pay_done: "This order is already paid.",
     bal_pay_busy: "Busy, try again in a second.",
@@ -2401,11 +2404,31 @@ async function loadBalance() {
   } catch (e) { return null; }
 }
 
+let lastBalanceShown = null;
+
 function renderBalance() {
   const d = balanceData;
   if (!d) return;
   const amountEl = document.getElementById("bal-amount");
   if (amountEl) amountEl.textContent = fmtUZS(d.balance || 0);
+
+  // Плашка в шапке — она видна с любой вкладки, и именно по ней человек
+  // понимает, что деньги дошли.
+  const chip = document.getElementById("bal-chip-amount");
+  if (chip) chip.textContent = fmtUZS(d.balance || 0);
+
+  const chipBox = document.getElementById("bal-chip");
+  if (chipBox && lastBalanceShown !== null && lastBalanceShown !== d.balance) {
+    // Подсвечиваем ТОЛЬКО реальное изменение, а не каждый опрос.
+    chipBox.classList.remove("bal-changed");
+    void chipBox.offsetWidth;
+    chipBox.classList.add("bal-changed");
+    if (d.balance > lastBalanceShown) {
+      if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred("success");
+      showToast(t("bal_topped_up").replace("{amount}", fmtUZS(d.balance - lastBalanceShown)));
+    }
+  }
+  lastBalanceShown = d.balance;
 
   const pend = document.getElementById("bal-pending");
   if (pend) {
@@ -2418,6 +2441,33 @@ function renderBalance() {
     }
   }
 }
+
+/*
+Автообновление баланса.
+
+Зачем: деньги зачисляются на стороне бота — по SMS или когда владелец нажал
+кнопку под чеком. Витрина об этом никак не узнает, и раньше человек видел
+старую сумму, пока не закроет и не откроет мини-апп заново. Он думает, что
+платёж не дошёл, и идёт писать оператору.
+
+Опрашиваем раз в 15 секунд и ТОЛЬКО пока витрина на экране: в свёрнутом
+приложении это просто трата батареи и запросов.
+*/
+const BALANCE_POLL_MS = 15000;
+let balancePollTimer = null;
+
+function startBalancePolling() {
+  if (balancePollTimer) return;
+  balancePollTimer = setInterval(function() {
+    if (document.hidden) return;
+    loadBalance();
+  }, BALANCE_POLL_MS);
+}
+
+document.addEventListener("visibilitychange", function() {
+  // Вернулся в витрину — обновляем сразу, не дожидаясь следующего опроса.
+  if (!document.hidden) loadBalance();
+});
 
 function openBalanceHistory() {
   const box = document.getElementById("bal-history");
@@ -2695,7 +2745,8 @@ initProfile();
 initSupportInfo();
 initLiveFeed();
 sendDiag();
-loadBalance();   // нужен для кнопки «Оплатить с баланса» на экране заказа
+loadBalance();          // нужен для кнопки «Оплатить с баланса» на экране заказа
+startBalancePolling();  // и чтобы зачисление было видно без перезахода
 // Каталог отрисован — заставку можно убирать (но не раньше SPLASH_MIN_MS).
 scheduleSplashHide();
 // Аренды тянем на старте, а не только при заходе на вкладку: если срок
