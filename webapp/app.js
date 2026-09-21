@@ -70,6 +70,9 @@ const I18N = {
     bal_empty: "Hozircha operatsiyalar yo'q.",
     bal_sent: "Rekvizitlar chatga ham yuborildi.",
     bal_cancel: "Bekor qilish",
+    bal_send_receipt: "📎 To'lov chekini yuborish",
+    bal_receipt_sent: "Chek yuborildi — tekshirib, balansga yozamiz.",
+    bal_receipt_dup: "Bu chek allaqachon yuborilgan.",
     bal_err_pending: "Sizda {amount} uchun to'lanmagan so'rov bor. Uni to'lang yoki bekor qilib, yangisini yarating.",
     bal_pay_done: "Bu buyurtma allaqachon to'langan.",
     bal_pay_busy: "Band, bir soniyadan keyin qayta urinib ko'ring.",
@@ -168,6 +171,9 @@ const I18N = {
     bal_empty: "Операций пока нет.",
     bal_sent: "Реквизиты продублировал в чат.",
     bal_cancel: "Отменить",
+    bal_send_receipt: "📎 Отправить чек об оплате",
+    bal_receipt_sent: "Чек отправлен — проверим и зачислим на баланс.",
+    bal_receipt_dup: "Этот чек уже присылали.",
     bal_err_pending: "У вас уже есть неоплаченное пополнение на {amount}. Оплатите его или отмените и создайте новое.",
     bal_pay_done: "Этот заказ уже оплачен.",
     bal_pay_busy: "Занято, попробуйте через секунду.",
@@ -266,6 +272,9 @@ const I18N = {
     bal_empty: "No transactions yet.",
     bal_sent: "Card details also sent to the chat.",
     bal_cancel: "Cancel",
+    bal_send_receipt: "📎 Send payment receipt",
+    bal_receipt_sent: "Receipt sent — we'll check it and credit your balance.",
+    bal_receipt_dup: "This receipt was already submitted.",
     bal_err_pending: "You already have an unpaid top-up for {amount}. Pay it, or cancel it and create a new one.",
     bal_pay_done: "This order is already paid.",
     bal_pay_busy: "Busy, try again in a second.",
@@ -2479,6 +2488,59 @@ async function createTopup(btn) {
     errorEl.classList.remove("hidden");
   } finally {
     if (btn && prev !== null) { btn.disabled = false; btn.innerHTML = prev; }
+  }
+}
+
+async function sendTopupReceipt() {
+  const input = document.getElementById("bal-receipt-input");
+  const btn = document.getElementById("bal-receipt-btn");
+  const errorEl = document.getElementById("bal-receipt-error");
+  const file = input && input.files && input.files[0];
+  if (!file) return;
+  errorEl.classList.add("hidden");
+
+  const base = await getShopApiUrl();
+  const initData = await waitForInitData();
+  if (!base || !initData) return;
+
+  const prev = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full align-middle" style="animation: spin .7s linear infinite;"></span>';
+
+  try {
+    // Сжимаем тем же способом, что и чек по заказу: фото с телефона весит
+    // несколько мегабайт, а для чтения суммы хватает 1600px.
+    const compressed = await compressReceipt(file, 1600, 0.8);
+    const b64 = compressed || (await new Promise(function(resolve) {
+      const r = new FileReader();
+      r.onload = function() { resolve(r.result); };
+      r.onerror = function() { resolve(null); };
+      r.readAsDataURL(file);
+    }));
+    if (!b64) { errorEl.textContent = t("ao_err_network"); errorEl.classList.remove("hidden"); return; }
+
+    const res = await fetch(base + "/public/topup_receipt", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData: initData, image_base64: b64 }),
+    });
+    const data = await res.json().catch(function() { return {}; });
+    if (!data.ok) {
+      errorEl.textContent =
+        data.error === "duplicate_receipt" ? t("bal_receipt_dup")
+        : data.error === "no_topup" ? t("bal_err_pending").replace("{amount}", "")
+        : t("ao_err_network");
+      errorEl.classList.remove("hidden");
+      return;
+    }
+    if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred("success");
+    showToast(t("bal_receipt_sent"));
+  } catch (e) {
+    errorEl.textContent = t("ao_err_network");
+    errorEl.classList.remove("hidden");
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = prev;
+    input.value = "";
   }
 }
 

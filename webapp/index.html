@@ -440,6 +440,11 @@
           <button onclick="copyActiveCard(document.getElementById('bal-pending-card').textContent)" class="press bg-neon-blue/15 text-neon-blue px-3 py-1.5 rounded-lg text-[10px] font-semibold" data-i18n="modal_copy">Nusxalash</button>
           <button onclick="cancelTopup(this)" class="press pill px-3 py-1.5 rounded-lg text-[10px] font-semibold text-gray-400" data-i18n="bal_cancel">Bekor qilish</button>
         </div>
+        <!-- Чек — главный путь. По SMS не видно, КТО заплатил, а по чеку
+             владелец всегда видит и сумму, и клиента рядом. -->
+        <input type="file" id="bal-receipt-input" accept="image/*" class="hidden" onchange="sendTopupReceipt()" />
+        <button onclick="document.getElementById('bal-receipt-input').click()" id="bal-receipt-btn" class="press w-full mt-2 py-3 rounded-2xl btn-primary font-semibold text-white text-[13px]" data-i18n="bal_send_receipt">📎 To'lov chekini yuborish</button>
+        <p id="bal-receipt-error" class="hidden text-red-400 text-[11px] mt-2"></p>
       </div>
 
       <div id="bal-form" class="flex gap-2">
