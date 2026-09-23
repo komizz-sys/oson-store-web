@@ -237,6 +237,107 @@
       100% { box-shadow: 0 0 0 14px rgba(217,180,91,0); border-color: rgba(255,255,255,.10) }
     }
     #bal-chip.bal-changed { animation: balPulse 1.1s ease-out 2; }
+    /* ---------- Профиль ---------- */
+    .pf-head { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 0 18px; }
+    .pf-ring { padding: 3px; border-radius: 50%;
+      background: conic-gradient(from 0deg, #2AABEE, #8E8CD8, #D9B45B, #2AABEE);
+      animation: ringSpin 6s linear infinite; box-shadow: 0 10px 40px -10px rgba(42,171,238,0.55); }
+    .pf-ava { position: relative; width: 96px; height: 96px; border-radius: 50%; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; font-size: 38px; font-weight: 800; color: #fff;
+      background: radial-gradient(circle at 30% 25%, #3a4a6b, #141824 75%); border: 3px solid #050507;
+      animation: ringSpin 6s linear infinite reverse; }
+    .pf-ava img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .pf-tile { border-radius: 20px; padding: 13px 14px; background: var(--surface); border: 1px solid var(--line); }
+    .pf-tile-label { font-size: 10.5px; color: #8b93a0; display: flex; align-items: center; gap: 5px; }
+    .pf-tile-val { font-size: 19px; font-weight: 900; color: #fff; margin-top: 5px; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+
+    .pm-group { border-radius: 22px; overflow: hidden; margin-bottom: 12px; background: var(--surface); border: 1px solid var(--line); }
+    .pm-row { display: flex; align-items: center; gap: 13px; padding: 13px 14px; cursor: pointer; }
+    .pm-row.hidden { display: none; }
+    .pm-row + .pm-row { border-top: 1px solid rgba(255,255,255,0.06); }
+    .pm-row:active { background: rgba(255,255,255,0.04); }
+    .pm-ico { width: 42px; height: 42px; border-radius: 13px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      background: rgba(217,180,91,0.13); border: 1px solid rgba(217,180,91,0.32); }
+    .pm-ico svg { width: 21px; height: 21px; fill: none; stroke: #E3C06E; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .pm-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .pm-title { font-size: 15px; font-weight: 700; color: #fff; }
+    .pm-sub { font-size: 12px; line-height: 1.3; color: #8b93a0; margin-top: 2px; }
+    .pm-val { font-size: 12.5px; font-weight: 700; color: #E3C06E; flex-shrink: 0; max-width: 40%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pm-chev { width: 16px; height: 16px; flex-shrink: 0; fill: none; stroke: #5b6270; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ---------- TOP ---------- */
+    .top-cup { font-size: 30px; filter: drop-shadow(0 6px 14px rgba(217,180,91,0.45)); animation: float 3s ease-in-out infinite; }
+    .top-seg { background: rgba(255,255,255,0.04); border: 1px solid var(--line); }
+    .top-seg-btn { flex: 1; padding: 8px 4px; border-radius: 12px; font-size: 11.5px; font-weight: 600; color: #9aa0a8; }
+    .top-seg-btn.active { color: #1a1204; background: linear-gradient(135deg, #F0D48A, #C99A3E); box-shadow: 0 6px 16px -8px rgba(217,180,91,0.7); }
+
+    .top-stage {
+      position: relative; border-radius: 26px; padding: 18px 10px 0; overflow: hidden;
+      background:
+        radial-gradient(120% 70% at 50% 0%, rgba(217,180,91,0.22), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+      border: 1px solid var(--line);
+    }
+    /* Луч прожектора над первым местом */
+    .top-beam {
+      position: absolute; left: 50%; top: -30px; width: 170px; height: 330px; transform: translateX(-50%);
+      background: linear-gradient(180deg, rgba(255,226,150,0.28), rgba(255,226,150,0) 75%);
+      clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
+      animation: beamPulse 3.6s ease-in-out infinite; pointer-events: none;
+    }
+    @keyframes beamPulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+    .top-spark { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #F3D98A;
+      box-shadow: 0 0 6px 1px rgba(243,217,138,.8); animation: sparkle 2.6s ease-in-out infinite; pointer-events: none; }
+    @keyframes sparkle { 0%,100% { opacity: 0; transform: scale(.4); } 50% { opacity: 1; transform: scale(1); } }
+
+    .pod-col { display: flex; flex-direction: column; align-items: center; width: 33%; max-width: 118px; }
+    .top-ava { position: relative; border-radius: 50%; overflow: hidden; display: flex; align-items: center;
+      justify-content: center; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .top-ava img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s ease; }
+    .top-ava img.ok { opacity: 1; }
+    .pod-ring { position: relative; border-radius: 50%; padding: 3px; }
+    .pod-ring.r1 { background: conic-gradient(from 0deg, #FFF1B8, #D9A93B, #8a6415, #F3D98A, #FFF1B8); animation: ringSpin 5s linear infinite; }
+    .pod-ring.r2 { background: linear-gradient(135deg, #F2F4F7, #9AA3AD); }
+    .pod-ring.r3 { background: linear-gradient(135deg, #F0B67A, #9C5F2C); }
+    .pod-ring.r1 > .top-ava { animation: ringSpin 5s linear infinite reverse; }
+    @keyframes ringSpin { to { transform: rotate(360deg); } }
+    .pod-medal { position: absolute; right: -4px; bottom: -4px; font-size: 18px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.5)); }
+    .pod-crown { font-size: 26px; margin-bottom: 2px; animation: float 2.4s ease-in-out infinite; filter: drop-shadow(0 4px 10px rgba(217,180,91,.7)); }
+
+    /* Блок пьедестала — с «крышкой» в перспективе, чтобы выглядел объёмным,
+       и вырастает снизу при заходе на вкладку. */
+    .pod-block { position: relative; width: 100%; margin-top: 18px; border-radius: 6px 6px 0 0;
+      display: flex; align-items: flex-start; justify-content: center; padding-top: 10px;
+      transform-origin: bottom; animation: podRise .7s cubic-bezier(.2,.9,.25,1) both; }
+    .pod-block::before { content: ""; position: absolute; left: 0; right: 0; top: -12px; height: 12px;
+      border-radius: 6px 6px 0 0; transform: perspective(70px) rotateX(38deg); transform-origin: bottom; }
+    .pod-block::after { content: ""; position: absolute; inset: 0; border-radius: inherit;
+      background: linear-gradient(100deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 35%); pointer-events: none; }
+    .pod-block.b1 { height: 112px; background: linear-gradient(180deg, #D9B45B, #7d5a1c); }
+    .pod-block.b1::before { background: linear-gradient(180deg, #FFE7A3, #E0BE68); }
+    .pod-block.b2 { height: 82px; background: linear-gradient(180deg, #A9B2BD, #4d545d); }
+    .pod-block.b2::before { background: linear-gradient(180deg, #EEF1F4, #BCC4CD); }
+    .pod-block.b3 { height: 62px; background: linear-gradient(180deg, #C1814A, #5e3818); }
+    .pod-block.b3::before { background: linear-gradient(180deg, #F5C08E, #CE8D55); }
+    .pod-num { font-size: 34px; font-weight: 900; line-height: 1; color: rgba(255,255,255,0.92);
+      text-shadow: 0 2px 0 rgba(0,0,0,.25), 0 6px 14px rgba(0,0,0,.35); }
+    @keyframes podRise { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+
+    .top-row { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 18px;
+      background: var(--surface); border: 1px solid var(--line); animation: sheetUp .4s cubic-bezier(.2,.9,.25,1) both; }
+    .top-row.me { background: rgba(42,171,238,0.10); border-color: rgba(42,171,238,0.45); }
+    .top-rank { width: 22px; text-align: center; font-size: 13px; font-weight: 800; color: #6b7280; flex-shrink: 0; }
+    .top-amt { font-size: 12.5px; font-weight: 800; color: #D9B45B; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+
+    .top-me { position: sticky; bottom: calc(6.3rem + var(--safe-bottom)); z-index: 25; margin-top: 14px;
+      display: flex; align-items: center; gap: 10px; padding: 11px 13px; border-radius: 18px;
+      background: rgba(14,24,38,0.92); border: 1px solid rgba(42,171,238,0.45);
+      -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+      box-shadow: 0 12px 30px -12px rgba(0,0,0,0.8); }
+    .top-me.hidden { display: none; }
+    .top-me-bar { height: 4px; border-radius: 4px; background: rgba(255,255,255,0.08); overflow: hidden; margin-top: 6px; }
+    .top-me-bar > i { display: block; height: 100%; border-radius: 4px; background: linear-gradient(90deg, #2AABEE, #D9B45B); transition: width .8s ease; }
+
     /* Баланс-«карта» */
     .bal-wallet {
       background: linear-gradient(135deg, #2f6fd6 0%, #5b4fcf 55%, #8a5cc9 100%);
@@ -445,33 +546,43 @@
 
   <!-- ================= TOP ================= -->
   <div id="view-top" class="view-hidden p-4">
-    <h2 class="text-[20px] font-bold mb-1 tracking-tight" data-i18n="top_title">Reyting</h2>
-    <p class="text-[13px] text-gray-400 mb-3" data-i18n="top_subtitle">Eng faol mijozlar</p>
-    <div class="flex gap-2 mb-4 overflow-x-auto scrollbar-hide">
-      <button id="top-period-today" onclick="setTopPeriod('today')" class="press px-3.5 py-2 rounded-full pill text-[11px] whitespace-nowrap" data-i18n="top_period_today">Bugun</button>
-      <button id="top-period-week" onclick="setTopPeriod('week')" class="press px-3.5 py-2 rounded-full pill text-[11px] whitespace-nowrap" data-i18n="top_period_week">Hafta</button>
-      <button id="top-period-month" onclick="setTopPeriod('month')" class="press px-3.5 py-2 rounded-full pill text-[11px] whitespace-nowrap" data-i18n="top_period_month">Oy</button>
-      <button id="top-period-all" onclick="setTopPeriod('all')" class="press px-3.5 py-2 rounded-full pill-gold text-[11px] font-semibold whitespace-nowrap" data-i18n="top_period_all">Hammasi</button>
+    <div class="flex items-end justify-between mb-3">
+      <div>
+        <h2 class="text-[22px] font-black tracking-tight leading-none" data-i18n="top_title">Reyting</h2>
+        <p class="text-[12px] text-gray-400 mt-1.5"><span data-i18n="top_subtitle">Eng faol mijozlar</span><span id="top-people"></span></p>
+      </div>
+      <div class="top-cup">🏆</div>
     </div>
-    <div id="top-list" class="space-y-2">
+    <div class="top-seg flex gap-1 mb-4 p-1 rounded-2xl">
+      <button id="top-period-today" onclick="setTopPeriod('today')" class="top-seg-btn press" data-i18n="top_period_today">Bugun</button>
+      <button id="top-period-week" onclick="setTopPeriod('week')" class="top-seg-btn press" data-i18n="top_period_week">Hafta</button>
+      <button id="top-period-month" onclick="setTopPeriod('month')" class="top-seg-btn press" data-i18n="top_period_month">Oy</button>
+      <button id="top-period-all" onclick="setTopPeriod('all')" class="top-seg-btn press active" data-i18n="top_period_all">Hammasi</button>
+    </div>
+    <div id="top-list">
       <div class="glass-card rounded-[22px] p-8 text-center text-gray-400">
         <p class="text-3xl mb-2">🏆</p>
         <p class="text-[14px] font-semibold text-white mb-1" data-i18n="top_forming">Reyting shakllanmoqda</p>
         <p class="text-[13px]" data-i18n="top_hint">Birinchi xaridni amalga oshiring!</p>
       </div>
     </div>
+    <!-- «Где я» — прилипает над нижней навигацией. Пустой, пока не узнали место. -->
+    <div id="top-me" class="top-me hidden"></div>
   </div>
 
   <!-- ================= PROFIL ================= -->
   <div id="view-profil" class="view-hidden p-4">
-    <div class="glass-card rounded-[22px] p-4 mb-4 flex items-center gap-3">
-      <div class="w-13 h-13 bg-gradient-to-br from-neon-blue to-neon-purple rounded-full flex items-center justify-center text-xl font-bold" style="width:52px;height:52px" id="profile-avatar">👤</div>
-      <div>
-        <h2 id="profile-name" class="text-[15px] font-bold">—</h2>
-        <p id="profile-username" class="text-[13px] text-neon-blue"></p>
-        <p id="profile-id" class="text-[10px] text-gray-500 font-mono"></p>
+    <!-- Шапка профиля: крупная аватарка по центру, как визитка. -->
+    <div class="pf-head">
+      <div class="pf-ring">
+        <div id="profile-avatar" class="pf-ava">👤</div>
       </div>
+      <h2 id="profile-name" class="text-[21px] font-black tracking-tight mt-3 leading-tight">—</h2>
+      <p id="profile-username" class="text-[13px] text-gray-400 mt-0.5"></p>
+      <p id="profile-id" class="hidden"></p>
     </div>
+    <!-- Итог покупок и место в рейтинге — две плитки; заполняет renderProfileStats. -->
+    <div id="profile-stats-box" class="hidden grid grid-cols-2 gap-2.5 mb-3"></div>
     <!-- БАЛАНС. Стоит выше статистики: это то, ради чего сюда заходят чаще
          всего — посмотреть остаток и пополнить. -->
     <div class="glass-card rounded-[22px] p-3 mb-3">
@@ -545,21 +656,38 @@
       <div id="bal-history" class="hidden mt-3 pt-3 border-t border-white/[0.08] space-y-1.5"></div>
     </div>
 
-    <div id="profile-stats-box" class="hidden glass-card rounded-[22px] p-4 mb-3"></div>
-    <!-- Ряд флагов отсюда убран: он ничего не переключал, а рабочий
-         переключатель языка и так стоит в шапке витрины. -->
-    <div class="space-y-2" id="support-rows">
-      <div class="glass-card rounded-2xl p-3.5 flex justify-between items-center text-[13px] cursor-pointer press" id="row-operator">
-        <span data-i18n="profile_operator">Operator</span>
-        <span class="text-gray-400" id="operator-handle">—</span>
+    <!-- Меню профиля. Способ оплаты, рефералка и подпись внизу убраны намеренно. -->
+    <div class="pm-group">
+      <div class="pm-row press" id="row-lang" onclick="openLangPicker()">
+        <span class="pm-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9c-2.6-2.8-3.9-5.8-3.9-9S9.4 5.8 12 3z"/></svg></span>
+        <span class="pm-txt"><span class="pm-title" data-i18n="pm_lang">Til</span><span class="pm-sub" data-i18n="pm_lang_sub">Tilni tanlang</span></span>
+        <span class="pm-val" id="pm-lang-value">O'zbekcha</span>
+        <svg class="pm-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
       </div>
-      <div class="glass-card rounded-2xl p-3.5 hidden justify-between items-center text-[13px] cursor-pointer press" id="row-channel">
-        <span data-i18n="profile_channel">📢 Bot kanali</span>
-        <span class="text-gray-400" id="channel-handle">—</span>
+      <div class="pm-row press" id="row-myorders" onclick="switchTab('tarix')">
+        <span class="pm-ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg></span>
+        <span class="pm-txt"><span class="pm-title" data-i18n="pm_orders">Mening buyurtmalarim</span><span class="pm-sub" data-i18n="pm_orders_sub">Xaridlar tarixi</span></span>
+        <svg class="pm-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
       </div>
-      <div class="glass-card rounded-2xl p-3.5 hidden justify-between items-center text-[13px] cursor-pointer press" id="row-orders">
-        <span data-i18n="profile_orders_channel">🛒 Savdo/Orderlar</span>
-        <span class="text-gray-400" id="orders-handle">—</span>
+    </div>
+    <div class="pm-group" id="support-rows">
+      <div class="pm-row press" id="row-operator">
+        <span class="pm-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.6"/><path d="M5.6 5.6l3.9 3.9M14.5 14.5l3.9 3.9M18.4 5.6l-3.9 3.9M9.5 14.5l-3.9 3.9"/></svg></span>
+        <span class="pm-txt"><span class="pm-title" data-i18n="pm_help">Yordam</span><span class="pm-sub" data-i18n="pm_help_sub">Savollar va muammolar</span></span>
+        <span class="pm-val" id="operator-handle">—</span>
+        <svg class="pm-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+      <div class="pm-row press hidden" id="row-channel">
+        <span class="pm-ico"><svg viewBox="0 0 24 24"><path d="M4 10v4h3l6 4V6L7 10z"/><path d="M16.5 9a4 4 0 010 6M7 14l1.5 5h2.5l-1-5"/></svg></span>
+        <span class="pm-txt"><span class="pm-title" data-i18n="pm_channel">Kanal</span><span class="pm-sub" data-i18n="pm_channel_sub">Yangiliklar va aksiyalar</span></span>
+        <span class="pm-val" id="channel-handle">—</span>
+        <svg class="pm-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+      <div class="pm-row press hidden" id="row-orders">
+        <span class="pm-ico"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></span>
+        <span class="pm-txt"><span class="pm-title" data-i18n="pm_reviews">Buyurtmalar kanali</span><span class="pm-sub" data-i18n="pm_reviews_sub">Bajarilgan buyurtmalar</span></span>
+        <span class="pm-val" id="orders-handle">—</span>
+        <svg class="pm-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
       </div>
     </div>
   </div>

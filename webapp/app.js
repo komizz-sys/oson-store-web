@@ -53,6 +53,16 @@ const I18N = {
   uz: {
     ijara_title: "Gift Arendasi", history_title: "Xaridlar tarixi",
     history_empty: "Hozircha xaridlar tarixi bo'sh.", history_hint: "To'liq tarix - botdagi \"Mening buyurtmalarim\" bo'limida.",
+    top_people: " · {n} kishi", top_list: "Ro'yxat", top_gifts: "sovg'a", top_rents: "ijara",
+    top_me_first: "Siz 1-o'rindasiz 👑", top_me_in: "Siz TOP-8 dasiz 🔥", top_me_place: "#{rank} o'rin",
+    top_me_up: "#{next} o'ringa {amount} qoldi", top_me_out: "TOP-8 ga kirish uchun {amount} qoldi",
+    top_me_none: "Siz hali reytingda yo'qsiz", top_me_none_hint: "Birinchi xariddan keyin shu yerda paydo bo'lasiz",
+    lang_name: "O'zbekcha", pm_lang: "Til", pm_lang_sub: "Tilni tanlang",
+    pm_orders: "Mening buyurtmalarim", pm_orders_sub: "Xaridlar tarixi",
+    pm_help: "Yordam", pm_help_sub: "Savollar va muammolar",
+    pm_channel: "Kanal", pm_channel_sub: "Yangiliklar va aksiyalar",
+    pm_reviews: "Buyurtmalar kanali", pm_reviews_sub: "Bajarilgan buyurtmalar",
+    pf_spent: "Jami xarid", pf_rank: "Reyting", pf_rank_none: "Hali yo'q",
     top_title: "Reyting", top_subtitle: "Eng faol mijozlar", top_forming: "Reyting shakllanmoqda", top_hint: "Birinchi xaridni amalga oshiring!",
     profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot kanali", profile_orders_channel: "\ud83d\uded2 Savdo/Orderlar",
     nav_main: "Asosiy", nav_rent: "Ijara", nav_history: "Tarix", nav_profile: "Profil",
@@ -160,6 +170,16 @@ const I18N = {
   ru: {
     ijara_title: "Аренда гифтов", history_title: "История покупок",
     history_empty: "Пока пусто.", history_hint: "Полная история - в разделе «Мои заказы» в боте.",
+    top_people: " · {n} чел.", top_list: "Список", top_gifts: "подарк.", top_rents: "аренд.",
+    top_me_first: "Вы на 1-м месте 👑", top_me_in: "Вы в TOP-8 🔥", top_me_place: "#{rank} место",
+    top_me_up: "До #{next} места — {amount}", top_me_out: "До TOP-8 осталось {amount}",
+    top_me_none: "Вас пока нет в рейтинге", top_me_none_hint: "Появитесь здесь после первой покупки",
+    lang_name: "Русский", pm_lang: "Язык", pm_lang_sub: "Выберите язык",
+    pm_orders: "Мои заказы", pm_orders_sub: "История покупок",
+    pm_help: "Помощь", pm_help_sub: "Вопросы и проблемы",
+    pm_channel: "Канал", pm_channel_sub: "Новости и акции",
+    pm_reviews: "Канал заказов", pm_reviews_sub: "Выполненные заказы",
+    pf_spent: "Всего куплено", pf_rank: "Рейтинг", pf_rank_none: "Пока нет",
     top_title: "Рейтинг", top_subtitle: "Самые активные клиенты", top_forming: "Рейтинг формируется", top_hint: "Сделайте первую покупку!",
     profile_operator: "Оператор", profile_channel: "\ud83d\udce2 Канал бота", profile_orders_channel: "\ud83d\uded2 Заказы/Отзывы",
     nav_main: "Главная", nav_rent: "Аренда", nav_history: "История", nav_profile: "Профиль",
@@ -267,6 +287,16 @@ const I18N = {
   en: {
     ijara_title: "Gift rental", history_title: "Purchase history",
     history_empty: "Nothing here yet.", history_hint: "Full history is in \"My orders\" in the bot chat.",
+    top_people: " · {n} people", top_list: "List", top_gifts: "gifts", top_rents: "rentals",
+    top_me_first: "You're #1 👑", top_me_in: "You're in the TOP-8 🔥", top_me_place: "#{rank} place",
+    top_me_up: "{amount} to reach #{next}", top_me_out: "{amount} to enter the TOP-8",
+    top_me_none: "You're not in the rating yet", top_me_none_hint: "You'll appear here after your first purchase",
+    lang_name: "English", pm_lang: "Language", pm_lang_sub: "Choose a language",
+    pm_orders: "My orders", pm_orders_sub: "Purchase history",
+    pm_help: "Help", pm_help_sub: "Questions and issues",
+    pm_channel: "Channel", pm_channel_sub: "News and deals",
+    pm_reviews: "Orders channel", pm_reviews_sub: "Completed orders",
+    pf_spent: "Total spent", pf_rank: "Rating", pf_rank_none: "Not yet",
     top_title: "Rating", top_subtitle: "Most active customers", top_forming: "Rating is forming", top_hint: "Make your first purchase!",
     profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot channel", profile_orders_channel: "\ud83d\uded2 Orders channel",
     nav_main: "Home", nav_rent: "Rent", nav_history: "History", nav_profile: "Profile",
@@ -385,7 +415,11 @@ function applyI18n() {
   document.querySelectorAll("[data-i18n-placeholder]").forEach(function(el) {
     el.placeholder = t(el.dataset.i18nPlaceholder);
   });
+  const langVal = document.getElementById("pm-lang-value");
+  if (langVal) langVal.textContent = t("lang_name");
   renderRentTerms();
+  if (currentTab === "top") renderLeaderboard(currentTopPeriod);
+  if (currentTab === "profil") renderProfileStats();
   if (currentTab === "ijara") { renderIjara(); renderMyRentals(); }
   else if (currentTab === "savat") renderCart();
   else renderItems();
@@ -397,14 +431,35 @@ function setActiveFlagUI() {
   });
 }
 
+function setLang(code) {
+  if (!I18N[code]) return;
+  lang = code;
+  setActiveFlagUI();
+  applyI18n();
+  if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred("light");
+}
+
 Array.prototype.forEach.call(document.querySelectorAll(".lang-flag"), function(btn) {
-  btn.addEventListener("click", function() {
-    lang = btn.dataset.lang;
-    setActiveFlagUI();
-    applyI18n();
-    if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred("light");
-  });
+  btn.addEventListener("click", function() { setLang(btn.dataset.lang); });
 });
+
+/* «Til» в профиле: у окна Telegram ровно три кнопки — как раз на три языка. */
+function openLangPicker() {
+  if (tg && tg.showPopup) {
+    tg.showPopup({
+      title: t("pm_lang"),
+      message: t("pm_lang_sub"),
+      buttons: [
+        { id: "uz", type: "default", text: "🇺🇿 O'zbekcha" },
+        { id: "ru", type: "default", text: "🇷🇺 Русский" },
+        { id: "en", type: "default", text: "🇬🇧 English" },
+      ],
+    }, function(id) { if (id) setLang(id); });
+    return;
+  }
+  const codes = ["uz", "ru", "en"];
+  setLang(codes[(codes.indexOf(lang) + 1) % codes.length]);
+}
 setActiveFlagUI();
 
 /* ---------------- Форматирование ---------------- */
@@ -717,11 +772,17 @@ let currentRentSort = "recently_touch";
 let currentRentCollection = null;
 let currentRentCollectionName = null;
 
+const STARS_MAX_PACKAGE = 150000;
+
 async function loadCatalog(cat, forceReload) {
   if (catalog[cat].length && !forceReload) return catalog[cat];
   const res = await fetch("/api/" + cat);
   if (!res.ok) throw new Error("bad response " + cat);
-  const data = await res.json();
+  let data = await res.json();
+  // Пакеты Stars больше 150 000 не показываем: их никто не берёт, а карточки
+  // с 10-значными числами ломают сетку. Нужна большая сумма — есть
+  // «Boshqa miqdor».
+  if (cat === "stars") data = data.filter(function(r) { return r && r.amount <= STARS_MAX_PACKAGE; });
   catalog[cat] = data.map(normalizeItem(cat));
   return catalog[cat];
 }
@@ -2098,10 +2159,21 @@ async function initProfile() {
     // не из настоящего Telegram-клиента). Тихо оставляем плейсхолдер.
     return;
   }
-  document.getElementById("profile-name").textContent = u.first_name || "Mijoz";
+  document.getElementById("profile-name").textContent =
+    [u.first_name, u.last_name].filter(Boolean).join(" ") || "Mijoz";
   document.getElementById("profile-username").textContent = u.username ? "@" + u.username : "";
   document.getElementById("profile-id").textContent = "ID: " + u.id;
-  document.getElementById("profile-avatar").textContent = (u.first_name ? u.first_name.charAt(0) : "?").toUpperCase();
+  const ava = document.getElementById("profile-avatar");
+  ava.textContent = (Array.from(u.first_name || "?")[0] || "?").toUpperCase();
+  // photo_url Telegram отдаёт не всегда (зависит от клиента и настроек
+  // приватности) — нет фото, остаётся буква.
+  if (u.photo_url && /^https:\/\//.test(u.photo_url)) {
+    const img = document.createElement("img");
+    img.alt = "";
+    img.onerror = function() { img.remove(); };
+    img.src = u.photo_url;
+    ava.appendChild(img);
+  }
 }
 
 /* ---------------- API бота-магазина (Tarix/TOP/Profil) ---------------- */
@@ -2315,11 +2387,9 @@ function setTopPeriod(period) {
   currentTopPeriod = period;
   ["today","week","month","all"].forEach(function(p) {
     const btn = document.getElementById("top-period-" + p);
-    if (!btn) return;
-    btn.className = p === period
-      ? "press px-3.5 py-2 rounded-full pill-gold text-[11px] font-semibold whitespace-nowrap"
-      : "press px-3.5 py-2 rounded-full pill text-[11px] whitespace-nowrap";
+    if (btn) btn.classList.toggle("active", p === period);
   });
+  if (tg && tg.HapticFeedback) tg.HapticFeedback.selectionChanged();
   renderLeaderboard(period);
 }
 
@@ -2353,112 +2423,189 @@ function launchConfetti() {
   burst("podium-confetti-right", -1); // летит влево, к центру
 }
 
+function escHTML(v) {
+  return String(v == null ? "" : v).replace(/[&<>"']/g, function(c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+
+/* Аватарка: сразу видна буква на цветном фоне, а фото из Telegram плавно
+   проявляется поверх, если оно есть. Нет фото — просто остаётся буква. */
+function topAvatarHTML(r, px, bg, base) {
+  const name = (r.full_name || r.username || "?").trim();
+  const letter = escHTML((Array.from(name)[0] || "?").toUpperCase());
+  return '<div class="top-ava" style="width:' + px + 'px;height:' + px + 'px;font-size:' + Math.round(px * 0.4) + 'px;background:' + bg + ';">' +
+    '<span>' + letter + '</span>' +
+    (base ? '<img src="' + base + '/public/avatar/' + Number(r.user_id) + '" alt="" loading="lazy" onload="this.classList.add(\'ok\')" onerror="this.remove()">' : '') +
+  '</div>';
+}
+
+function topPersonName(r) {
+  return r.full_name || (r.username ? "@" + r.username : "ID " + r.user_id);
+}
+
+/* Что человек покупал: «1 000 ⭐ · 2 sovg'a · 1 premium» — живее, чем «3 заказа». */
+function topBreakdown(r) {
+  const parts = [];
+  if (r.stars) parts.push(Number(r.stars).toLocaleString("ru-RU").replace(/,/g, " ") + " ⭐");
+  if (r.gifts) parts.push(r.gifts + " " + t("top_gifts"));
+  if (r.premium) parts.push(r.premium + " premium");
+  if (r.rents) parts.push(r.rents + " " + t("top_rents"));
+  return parts.length ? parts.join(" · ") : r.orders_count + " " + t("top_orders_suffix");
+}
+
 async function renderLeaderboard(period) {
   const listEl = document.getElementById("top-list");
+  const meEl = document.getElementById("top-me");
+  const peopleEl = document.getElementById("top-people");
+  const emptyHTML =
+    '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
+    '<p class="text-3xl mb-2">🏆</p><p class="text-sm font-semibold text-white mb-1">' + t("top_forming") + '</p>' +
+    '<p class="text-xs">' + t("top_hint") + '</p></div>';
+
   const base = await getShopApiUrl();
-  if (!base) {
-    listEl.innerHTML =
-      '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
-      '<p class="text-3xl mb-2">\ud83c\udfc6</p><p class="text-sm font-semibold text-white mb-1">' + t("top_forming") + '</p>' +
-      '<p class="text-xs">' + t("top_hint") + '</p></div>';
-    return;
-  }
-  listEl.innerHTML = '<div class="text-center text-xs text-gray-500 py-6">' + t("history_loading") + '</div>';
+  if (!base) { listEl.innerHTML = emptyHTML; meEl.classList.add("hidden"); return; }
+  listEl.innerHTML = '<div class="skeleton h-[300px] mb-3"></div>' + skeletonHTML(3, "h-[60px] mb-2");
 
   const myUser = await waitForUnsafeUser();
   const myId = myUser ? myUser.id : null;
 
+  let rows = [], totalPeople = 0;
   try {
     const res = await fetch(base + "/public/leaderboard?period=" + period);
     const data = await res.json();
-    const rows = data.leaderboard || [];
-
-    if (!rows.length) {
-      listEl.innerHTML =
-        '<div class="glass-card rounded-[22px] p-6 text-center text-gray-400">' +
-        '<p class="text-3xl mb-2">\ud83c\udfc6</p><p class="text-sm font-semibold text-white mb-1">' + t("top_forming") + '</p>' +
-        '<p class="text-xs">' + t("top_hint") + '</p></div>';
-      return;
-    }
-
-    const initials = function(name) { return (name || "?").trim().charAt(0).toUpperCase(); };
-
-    function personName(r) {
-      return r.full_name || (r.username ? "@" + r.username : "ID " + r.user_id);
-    }
-
-    // Подиум для топ-3: 2 место слева, 1 (приподнятое, с короной) в центре,
-    // 3 справа — у каждого места свой цвет авы под цвет медали, не одинаковый
-    // градиент для всех, плюс плавное появление при заходе на вкладку.
-    let podiumHtml = "";
-    if (rows.length >= 1) {
-      const order = [1, 0, 2].filter(function(i) { return rows[i]; }); // 2-1-3 визуально
-      const AVATAR_BG = {
-        0: "background: radial-gradient(circle at 30% 25%, #F3D98A, #D9A93B 70%);",
-        1: "background: radial-gradient(circle at 30% 25%, #D7DCE2, #9AA3AD 70%);",
-        2: "background: radial-gradient(circle at 30% 25%, #E3A567, #B5713A 70%);",
-      };
-      const RING = {
-        0: "ring-2 ring-neon-yellow", 1: "ring-2 ring-gray-300/70", 2: "ring-2 ring-amber-700/60",
-      };
-      const GLOW = { 0: "0 0 26px -2px rgba(217,180,91,0.65)", 1: "0 0 16px -4px rgba(200,205,212,0.4)", 2: "0 0 16px -4px rgba(181,113,58,0.4)" };
-      const SIZE = { 0: "w-[72px] h-[72px] text-2xl -mt-9", 1: "w-14 h-14 text-lg -mt-7", 2: "w-14 h-14 text-lg -mt-7" };
-      // Настоящие блоки пьедестала — разной высоты (1 место выше всех),
-      // с крупным номером, как на олимпийском подиуме.
-      const BLOCK_H = { 0: "h-24", 1: "h-16", 2: "h-12" };
-      const BLOCK_BG = {
-        0: "background: linear-gradient(180deg, #F3D98A 0%, #C99A3E 100%);",
-        1: "background: linear-gradient(180deg, #E3E7EC 0%, #9AA3AD 100%);",
-        2: "background: linear-gradient(180deg, #E3A567 0%, #A9713C 100%);",
-      };
-      const BLOCK_NUM_COLOR = { 0: "#6b4e11", 1: "#4a5058", 2: "#5c3a17" };
-      podiumHtml =
-        '<div class="relative overlay-enter">' +
-          '<div id="podium-confetti-left" class="absolute left-2 top-8 w-0 h-0"></div>' +
-          '<div id="podium-confetti-right" class="absolute right-2 top-8 w-0 h-0"></div>' +
-          '<div class="flex items-end justify-center gap-2.5 pt-1 pb-2">' +
-          order.map(function(i, idx) {
-            const r = rows[i];
-            const name = personName(r);
-            const isMe = myId && r.user_id === myId;
-            return '<div class="flex flex-col items-center w-[92px]" style="animation: sheetUp .4s cubic-bezier(.2,.9,.25,1) both; animation-delay:' + (idx * 70) + 'ms;">' +
-              (i === 0 ? '<div class="text-2xl mb-1" style="animation: float 2.4s ease-in-out infinite;">👑</div>' : '<div class="h-8"></div>') +
-              '<div class="relative z-10">' +
-                '<div class="' + SIZE[i] + ' rounded-full ' + RING[i] + ' flex items-center justify-center font-bold text-white' + (isMe ? " outline outline-2 outline-neon-blue outline-offset-2" : "") + '" style="' + AVATAR_BG[i] + ' box-shadow:' + GLOW[i] + ';">' + initials(name) + '</div>' +
-              '</div>' +
-              '<div class="text-[11.5px] font-semibold text-white mt-2 max-w-[90px] truncate text-center px-1">' + name + '</div>' +
-              '<div class="text-[11px] font-bold text-neon-yellow mb-2">' + fmtUZS(r.total_uzs) + '</div>' +
-              '<div class="w-full ' + BLOCK_H[i] + ' rounded-t-xl flex items-start justify-center pt-1.5 shadow-[0_-2px_10px_rgba(0,0,0,0.25)]" style="' + BLOCK_BG[i] + '">' +
-                '<span class="text-2xl font-black" style="color:' + BLOCK_NUM_COLOR[i] + '">' + (i + 1) + '</span>' +
-              '</div>' +
-            '</div>';
-          }).join("") +
-          '</div>' +
-        '</div>';
-    }
-
-    const restHtml = rows.slice(3).map(function(r, idx) {
-      const i = idx + 3;
-      const name = personName(r);
-      const isMe = myId && r.user_id === myId;
-      return '<div class="press flex items-center justify-between gap-2 rounded-2xl p-3.5 ' +
-        (isMe ? "bg-neon-blue/10 border border-neon-blue/40" : "glass-card") + '">' +
-        '<div class="flex items-center gap-3 min-w-0">' +
-          '<span class="text-[11px] font-bold text-gray-500 w-6 h-6 rounded-full bg-white/[0.06] flex items-center justify-center flex-shrink-0">' + (i + 1) + '</span>' +
-          '<div class="min-w-0">' +
-            '<div class="text-xs font-semibold text-white truncate">' + name + (isMe ? ' \u00b7 <span class="text-neon-blue">' + t("top_you") + '</span>' : '') + '</div>' +
-            '<div class="text-[10px] text-gray-400">' + r.orders_count + ' ' + t("top_orders_suffix") + '</div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="text-xs font-bold text-neon-yellow flex-shrink-0">' + fmtUZS(r.total_uzs) + '</div>' +
-      '</div>';
-    }).join("");
-
-    listEl.innerHTML = podiumHtml + '<div class="space-y-2">' + restHtml + '</div>';
-    launchConfetti();
+    rows = data.leaderboard || [];
+    totalPeople = data.total_people || 0;
   } catch (e) {
     listEl.innerHTML = '<div class="text-center text-xs text-gray-500 py-6">' + t("top_empty") + '</div>';
+    return;
   }
+  // Пока грузилось, человек мог переключить период — старый ответ не рисуем.
+  if (period !== currentTopPeriod) return;
+
+  peopleEl.textContent = totalPeople ? t("top_people").replace("{n}", totalPeople) : "";
+  if (!rows.length) { listEl.innerHTML = emptyHTML; renderTopMe(period, rows); return; }
+
+  const AVA_BG = {
+    0: "radial-gradient(circle at 30% 25%, #F3D98A, #B8862F 75%)",
+    1: "radial-gradient(circle at 30% 25%, #E6EAEE, #8C96A1 75%)",
+    2: "radial-gradient(circle at 30% 25%, #EBB07A, #9C5F2C 75%)",
+  };
+  const MEDAL = { 0: "🥇", 1: "🥈", 2: "🥉" };
+  const AVA_PX = { 0: 76, 1: 58, 2: 58 };
+
+  // 2 — 1 — 3: первое место в центре и выше всех
+  const order = [1, 0, 2].filter(function(i) { return rows[i]; });
+  let sparks = "";
+  for (let k = 0; k < 9; k++) {
+    sparks += '<span class="top-spark" style="left:' + (8 + Math.round(Math.random() * 84)) + '%;top:' +
+      (6 + Math.round(Math.random() * 55)) + '%;animation-delay:' + (Math.random() * 2.6).toFixed(2) + 's"></span>';
+  }
+  const podiumHTML =
+    '<div class="top-stage mb-4">' +
+      '<div class="top-beam"></div>' + sparks +
+      '<div id="podium-confetti-left" class="absolute left-3 top-24 w-0 h-0"></div>' +
+      '<div id="podium-confetti-right" class="absolute right-3 top-24 w-0 h-0"></div>' +
+      '<div class="relative flex items-end justify-center gap-2">' +
+      order.map(function(i, idx) {
+        const r = rows[i];
+        const isMe = myId && r.user_id === myId;
+        return '<div class="pod-col" style="animation: sheetUp .45s cubic-bezier(.2,.9,.25,1) both; animation-delay:' + (idx * 90) + 'ms;">' +
+          (i === 0 ? '<div class="pod-crown">👑</div>' : '') +
+          // Медаль — снаружи кольца: кольцо у 1-го места вращается, и медаль
+          // крутилась бы вместе с ним.
+          '<div class="relative">' +
+            '<div class="pod-ring r' + (i + 1) + '"' + (isMe ? ' style="box-shadow:0 0 0 2px #2AABEE"' : '') + '>' +
+              topAvatarHTML(r, AVA_PX[i], AVA_BG[i], base) +
+            '</div>' +
+            '<span class="pod-medal">' + MEDAL[i] + '</span>' +
+          '</div>' +
+          '<div class="text-[12px] font-bold text-white mt-2 w-full truncate text-center px-1">' + escHTML(topPersonName(r)) + '</div>' +
+          '<div class="text-[11.5px] font-extrabold mt-0.5 ' + (i === 0 ? "text-neon-yellow" : "text-gray-300") + '" style="font-variant-numeric:tabular-nums">' + fmtUZS(r.total_uzs) + '</div>' +
+          '<div class="pod-block b' + (i + 1) + '" style="animation-delay:' + (150 + idx * 90) + 'ms"><span class="pod-num">' + (i + 1) + '</span></div>' +
+        '</div>';
+      }).join("") +
+      '</div>' +
+    '</div>';
+
+  const restHTML = rows.slice(3).map(function(r, idx) {
+    const isMe = myId && r.user_id === myId;
+    return '<div class="top-row' + (isMe ? " me" : "") + '" style="animation-delay:' + (idx * 50) + 'ms">' +
+      '<span class="top-rank">' + (idx + 4) + '</span>' +
+      topAvatarHTML(r, 38, "linear-gradient(135deg, #2AABEE, #7B7FE0)", base) +
+      '<div class="min-w-0 flex-1">' +
+        '<div class="text-[13px] font-semibold text-white truncate">' + escHTML(topPersonName(r)) +
+          (isMe ? ' <span class="text-neon-blue">· ' + t("top_you") + '</span>' : '') + '</div>' +
+        '<div class="text-[10.5px] text-gray-400 truncate mt-0.5">' + escHTML(topBreakdown(r)) + '</div>' +
+      '</div>' +
+      '<span class="top-amt">' + fmtUZS(r.total_uzs) + '</span>' +
+    '</div>';
+  }).join("");
+
+  listEl.innerHTML = podiumHTML +
+    (restHTML ? '<div class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.16em] mb-2 px-1">' + t("top_list") + '</div>' +
+      '<div class="space-y-2">' + restHTML + '</div>' : '');
+  launchConfetti();
+  renderTopMe(period, rows);
+}
+
+/* Полоска «где я» внизу TOP: место, и сколько осталось до следующего —
+   даёт повод купить ещё, в отличие от сухого номера. */
+async function renderTopMe(period, rows) {
+  const el = document.getElementById("top-me");
+  const base = await getShopApiUrl();
+  const initData = await waitForInitData();
+  if (!base || !initData) { el.classList.add("hidden"); return; }
+  let me;
+  try {
+    const res = await fetch(base + "/public/leaderboard_me", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData: initData, period: period }),
+    });
+    me = await res.json();
+  } catch (e) { el.classList.add("hidden"); return; }
+  if (period !== currentTopPeriod || !me || !me.ok) { if (!me || !me.ok) el.classList.add("hidden"); return; }
+
+  const u = await waitForUnsafeUser();
+  const self = { user_id: u ? u.id : 0, full_name: u ? u.first_name : "?", username: u ? u.username : "" };
+  const topSize = me.top_size || 8;
+  let title, sub = "", progress = null, right = "";
+
+  if (!me.rank) {
+    title = t("top_me_none");
+    sub = t("top_me_none_hint");
+    right = "—";
+  } else {
+    right = fmtUZS(me.total_uzs);
+    if (me.rank === 1) {
+      title = t("top_me_first");
+    } else {
+      title = (me.rank <= topSize ? t("top_me_in") + " · " : "") + t("top_me_place").replace("{rank}", me.rank);
+      let target, label;
+      if (me.rank > topSize && rows.length >= topSize) {
+        target = rows[topSize - 1].total_uzs;
+        label = t("top_me_out");
+      } else {
+        target = me.next_total_uzs;
+        label = t("top_me_up").replace("{next}", me.rank - 1);
+      }
+      if (target) {
+        const gap = Math.max(1, target - me.total_uzs + 1);
+        sub = label.replace("{amount}", fmtUZS(gap));
+        progress = Math.max(6, Math.min(100, Math.round(me.total_uzs / target * 100)));
+      }
+    }
+  }
+  el.innerHTML =
+    '<div class="text-[13px] font-extrabold text-neon-blue w-8 text-center flex-shrink-0">' + (me.rank ? "#" + me.rank : "—") + '</div>' +
+    topAvatarHTML(self, 36, "linear-gradient(135deg, #2AABEE, #7B7FE0)", "") +
+    '<div class="min-w-0 flex-1">' +
+      '<div class="text-[12.5px] font-bold text-white truncate">' + escHTML(title) + '</div>' +
+      (sub ? '<div class="text-[10.5px] text-gray-400 leading-snug mt-0.5">' + escHTML(sub) + '</div>' : '') +
+      (progress !== null ? '<div class="top-me-bar"><i style="width:' + progress + '%"></i></div>' : '') +
+    '</div>' +
+    '<span class="top-amt">' + right + '</span>';
+  el.classList.remove("hidden");
 }
 
 async function renderProfileStats() {
@@ -2473,30 +2620,19 @@ async function renderProfileStats() {
       body: JSON.stringify({ initData: initData }),
     });
     const stats = await res.json();
-
-    const catRows = Object.keys(CATEGORY_EMOJI).map(function(cat) {
-      const amount = (stats.by_category || {})[cat] || 0;
-      if (!amount) return "";
-      return '<div class="flex justify-between items-center text-xs py-1.5 border-b border-white/5 last:border-0">' +
-        '<span class="text-gray-300">' + t("cat_" + cat) + '</span>' +
-        '<span class="font-semibold text-white">' + fmtUZS(amount) + '</span></div>';
-    }).join("");
-
-    box.classList.remove("hidden");
-    const hasPurchases = (stats.total_uzs || 0) > 0;
     box.innerHTML =
-      // Крупная сумма как герой блока — раньше "Jami xarid" терялся мелким
-      // текстом в строке и выглядел пустым у новых клиентов.
-      '<div class="text-center pb-3">' +
-        '<div class="text-[10px] text-gray-500 uppercase tracking-wider mb-1">' + t("profile_stats_total") + '</div>' +
-        '<div class="text-[26px] font-black text-white leading-none tracking-tight">' + fmtUZS(stats.total_uzs || 0) + '</div>' +
-        (stats.rank
-          ? '<div class="inline-flex items-center gap-1.5 mt-2.5 pill-gold px-3 py-1 rounded-full text-[10px] font-bold">' +
-              '<span>🏆</span><span>' + t("profile_stats_rank") + ' #' + stats.rank + '</span>' +
-            '</div>'
-          : '<div class="text-[11px] text-gray-500 mt-2">' + t("profile_no_purchases") + '</div>') +
+      '<div class="pf-tile">' +
+        '<div class="pf-tile-label"><span>🛍</span><span>' + t("pf_spent") + '</span></div>' +
+        '<div class="pf-tile-val">' + fmtUZS(stats.total_uzs || 0) + '</div>' +
       '</div>' +
-      (hasPurchases ? '<div class="pt-3 border-t border-white/[0.08] space-y-0.5">' + catRows + '</div>' : '');
+      // Плитка рейтинга ведёт в TOP — там видно, сколько до следующего места.
+      '<div class="pf-tile press cursor-pointer" onclick="switchTab(\'top\')">' +
+        '<div class="pf-tile-label"><span>🏆</span><span>' + t("pf_rank") + '</span></div>' +
+        '<div class="pf-tile-val ' + (stats.rank ? "text-neon-yellow" : "") + '">' +
+          (stats.rank ? "#" + stats.rank : '<span class="text-[14px] text-gray-400 font-bold">' + t("pf_rank_none") + '</span>') +
+        '</div>' +
+      '</div>';
+    box.classList.remove("hidden");
   } catch (e) {
     box.classList.add("hidden");
   }
