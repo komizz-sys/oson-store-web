@@ -63,6 +63,11 @@ const I18N = {
     pm_channel: "Kanal", pm_channel_sub: "Yangiliklar va aksiyalar",
     pm_reviews: "Buyurtmalar kanali", pm_reviews_sub: "Bajarilgan buyurtmalar",
     pf_spent: "Jami xarid", pf_rank: "Reyting", pf_rank_none: "Hali yo'q",
+    rv_title: "Mijozlar fikri", rv_count: "{n} ta sharh", rv_empty: "Hozircha sharhlar yo'q.",
+    rate_title: "Buyurtma qanday bo'ldi?", rate_sub: "Baholang — bu boshqa xaridorlarga yordam beradi",
+    rate_labels: ["", "Juda yomon", "Yomon", "O'rtacha", "Yaxshi", "Zo'r! 🔥"],
+    rate_ph_good: "Izoh (ixtiyoriy)", rate_ph_bad: "Nima yoqmadi? Yozing — albatta ko'rib chiqamiz",
+    rate_send: "Yuborish", rate_thanks: "🙏 Rahmat! Sharhingiz qabul qilindi", rate_err: "Yuborib bo'lmadi, qayta urinib ko'ring",
     top_title: "Reyting", top_subtitle: "Eng faol mijozlar", top_forming: "Reyting shakllanmoqda", top_hint: "Birinchi xaridni amalga oshiring!",
     profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot kanali", profile_orders_channel: "\ud83d\uded2 Savdo/Orderlar",
     nav_main: "Asosiy", nav_rent: "Ijara", nav_history: "Tarix", nav_profile: "Profil",
@@ -124,6 +129,7 @@ const I18N = {
     howto_steps: ["Gift va ijara muddatini tanlang", "Buyurtmani rasmiylashtiring va to'lovni amalga oshiring", "Admin to'lovni tasdiqlaydi", "Telegram botga tutorial video yuboriladi", "Videoni ko'rib, Telegram'dan shaxsiy havolangizni oling", "Havolani shu yerdagi maydonga joylang", "Havola tekshiriladi va sovg'a ulanadi", "Sovg'a profilingizda ko'rinadi ✅"],
     ao_title: "Aktiv buyurtma", ao_awaiting_payment: "To'lov kutilmoqda", ao_payment_review: "To'lov tekshirilmoqda",
     ao_paid: "To'lov tasdiqlandi", ao_fulfilling: "Bajarilmoqda",
+    ao_android_hint: "📱 Android'da: fragment.com'ni <b>Chrome</b>'da oching. Havolani nusxalagach, sahifani <b>yopmang va yangilamang</b> — sovg'a aynan o'sha sahifada ulanadi. Ulanmasa — yangi havola oling va qayta yuboring.",
     ao_link_title: "Keyingi qadam: havolani kiriting", ao_link_hint: "Botga yuborilgan tutorial videodagi ko'rsatma bo'yicha olingan havolani joylang.",
     ao_link_send: "Havolani yuborish", ao_watch_tutorial: "Tutorialni ko'rish (botda)",
     ao_display_video: "Profilda qanday ko'rsatish",
@@ -180,6 +186,11 @@ const I18N = {
     pm_channel: "Канал", pm_channel_sub: "Новости и акции",
     pm_reviews: "Канал заказов", pm_reviews_sub: "Выполненные заказы",
     pf_spent: "Всего куплено", pf_rank: "Рейтинг", pf_rank_none: "Пока нет",
+    rv_title: "Отзывы клиентов", rv_count: "{n} отзыв(ов)", rv_empty: "Отзывов пока нет.",
+    rate_title: "Как прошёл заказ?", rate_sub: "Оцените — это поможет другим покупателям",
+    rate_labels: ["", "Очень плохо", "Плохо", "Нормально", "Хорошо", "Отлично! 🔥"],
+    rate_ph_good: "Комментарий (необязательно)", rate_ph_bad: "Что не понравилось? Напишите — обязательно разберёмся",
+    rate_send: "Отправить", rate_thanks: "🙏 Спасибо! Отзыв принят", rate_err: "Не удалось отправить, попробуйте ещё раз",
     top_title: "Рейтинг", top_subtitle: "Самые активные клиенты", top_forming: "Рейтинг формируется", top_hint: "Сделайте первую покупку!",
     profile_operator: "Оператор", profile_channel: "\ud83d\udce2 Канал бота", profile_orders_channel: "\ud83d\uded2 Заказы/Отзывы",
     nav_main: "Главная", nav_rent: "Аренда", nav_history: "История", nav_profile: "Профиль",
@@ -241,6 +252,7 @@ const I18N = {
     howto_steps: ["Выберите подарок и срок аренды", "Оформите заказ и оплатите", "Админ подтверждает оплату", "В Telegram-бот приходит видео-инструкция", "Посмотрите видео и получите свою персональную ссылку", "Вставьте ссылку в поле здесь", "Ссылка проверяется, подарок подключается", "Подарок появляется в вашем профиле ✅"],
     ao_title: "Активный заказ", ao_awaiting_payment: "Ждём оплату", ao_payment_review: "Проверяем оплату",
     ao_paid: "Оплата подтверждена", ao_fulfilling: "Выполняется",
+    ao_android_hint: "📱 На Android: открывайте fragment.com в <b>Chrome</b>. Скопировав ссылку, <b>не закрывайте и не обновляйте</b> страницу — подарок подключится именно на ней. Не подключилось — возьмите новую ссылку и отправьте снова.",
     ao_link_title: "Следующий шаг: вставьте ссылку", ao_link_hint: "Вставьте ссылку, полученную по инструкции из видео, которое пришло в бот.",
     ao_link_send: "Отправить ссылку", ao_watch_tutorial: "Посмотреть инструкцию (в боте)",
     ao_display_video: "Как показать в профиле",
@@ -297,6 +309,11 @@ const I18N = {
     pm_channel: "Channel", pm_channel_sub: "News and deals",
     pm_reviews: "Orders channel", pm_reviews_sub: "Completed orders",
     pf_spent: "Total spent", pf_rank: "Rating", pf_rank_none: "Not yet",
+    rv_title: "Customer reviews", rv_count: "{n} reviews", rv_empty: "No reviews yet.",
+    rate_title: "How was your order?", rate_sub: "Rate us — it helps other buyers",
+    rate_labels: ["", "Terrible", "Bad", "Okay", "Good", "Excellent! 🔥"],
+    rate_ph_good: "Comment (optional)", rate_ph_bad: "What went wrong? Tell us — we'll look into it",
+    rate_send: "Send", rate_thanks: "🙏 Thank you! Review received", rate_err: "Couldn't send, please try again",
     top_title: "Rating", top_subtitle: "Most active customers", top_forming: "Rating is forming", top_hint: "Make your first purchase!",
     profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot channel", profile_orders_channel: "\ud83d\uded2 Orders channel",
     nav_main: "Home", nav_rent: "Rent", nav_history: "History", nav_profile: "Profile",
@@ -358,6 +375,7 @@ const I18N = {
     howto_steps: ["Pick a gift and rental period", "Place the order and pay", "Admin confirms your payment", "A tutorial video is sent to the Telegram bot", "Watch it and get your personal link from Telegram", "Paste the link into the field here", "The link is verified and the gift is connected", "The gift appears on your profile ✅"],
     ao_title: "Active order", ao_awaiting_payment: "Awaiting payment", ao_payment_review: "Checking payment",
     ao_paid: "Payment confirmed", ao_fulfilling: "In progress",
+    ao_android_hint: "📱 On Android: open fragment.com in <b>Chrome</b>. After copying the link, <b>don't close or refresh</b> the page — the gift connects on that exact page. Didn't connect? Get a new link and send it again.",
     ao_link_title: "Next step: paste your link", ao_link_hint: "Paste the link you got by following the tutorial video sent to the bot.",
     ao_link_send: "Send link", ao_watch_tutorial: "Watch tutorial (in bot)",
     ao_display_video: "How to display it",
@@ -415,6 +433,7 @@ function applyI18n() {
   document.querySelectorAll("[data-i18n-placeholder]").forEach(function(el) {
     el.placeholder = t(el.dataset.i18nPlaceholder);
   });
+  if (typeof renderReviewsBanner === "function" && reviewsData) renderReviewsBanner();
   const langVal = document.getElementById("pm-lang-value");
   if (langVal) langVal.textContent = t("lang_name");
   renderRentTerms();
@@ -1858,11 +1877,11 @@ function renderOrderFlow(statusChanged) {
     // профиле сам не появится, показ нужно включить руками на Fragment.
     // Поэтому сразу даём инструкцию, не дожидаясь вопроса в поддержку.
     const isRent = s.category === "nft_rent" || s.category === "nft_rent_extend";
-    actionEl.innerHTML = isRent
+    actionEl.innerHTML = (s.reviewed === false ? rateBoxHTML() : "") + (isRent
       ? '<div class="glass-card rounded-2xl p-3 mb-3 text-left text-[11.5px] text-gray-300 leading-snug">' +
           '⚠️ ' + t("flow_display_hint") +
         '</div>'
-      : "";
+      : "");
     buttonsEl.innerHTML =
       (isRent
         ? '<button onclick="watchDisplayVideo(this)" class="press w-full py-3.5 rounded-2xl btn-primary font-semibold text-white text-sm mb-2.5">📹 ' + t("ao_display_video") + '</button>'
@@ -1962,6 +1981,7 @@ function renderOrderFlow(statusChanged) {
     ? '<div class="glass-card rounded-2xl p-3.5 text-left mb-3">' +
         '<div class="text-[12px] font-semibold text-white mb-1">🔗 ' + t("ao_link_title") + '</div>' +
         '<div class="text-[11px] text-gray-400 mb-2.5 leading-snug">' + t("ao_link_hint") + '</div>' +
+        androidLinkHintHTML() +
         '<input id="rent-link-input" type="text" placeholder="tc://..." class="w-full bg-white/[0.04] border border-white/[0.09] rounded-xl px-3 py-2.5 text-[11px] text-white focus:outline-none focus:border-neon-blue/60 mb-2" />' +
         '<p id="rent-link-error" class="hidden text-red-400 text-[11px] mb-2"></p>' +
         '<button onclick="submitRentLink()" id="rent-link-btn" class="press w-full py-3 rounded-xl btn-primary font-semibold text-white text-[13px]">' + t("ao_link_send") + '</button>' +
@@ -3253,6 +3273,7 @@ async function refreshActiveOrder() {
     ? '<div class="mt-3 pt-3 border-t border-white/[0.08]">' +
         '<div class="text-[12px] font-semibold text-white mb-1">🔗 ' + t("ao_link_title") + '</div>' +
         '<div class="text-[11px] text-gray-400 mb-2.5 leading-snug">' + t("ao_link_hint") + '</div>' +
+        androidLinkHintHTML() +
         '<input id="rent-link-input" type="text" placeholder="tc://..." class="w-full bg-white/[0.04] border border-white/[0.09] rounded-xl px-3 py-2.5 text-[11px] text-white focus:outline-none focus:border-neon-blue/60 mb-2" />' +
         '<p id="rent-link-error" class="hidden text-red-400 text-[11px] mb-2"></p>' +
         '<button onclick="submitRentLink()" id="rent-link-btn" class="press w-full py-3 rounded-xl btn-primary font-semibold text-white text-[13px] mb-2">' + t("ao_link_send") + '</button>' +
@@ -3476,6 +3497,20 @@ async function watchDisplayVideo(btn) {
   }
 }
 
+/* Ссылка tc:// живёт, пока открыта страница Fragment, которая её выдала.
+   Android часто перезагружает эту вкладку, пока человек бегает в бот, —
+   бот пишет «подключено», а на Fragment пусто. Поэтому андроидщикам
+   показываем, как этого избежать, прямо рядом с полем для ссылки. */
+function isAndroidClient() {
+  const pf = (tg && tg.platform) || "";
+  return /android/i.test(pf) || (!pf && /android/i.test(navigator.userAgent || ""));
+}
+function androidLinkHintHTML() {
+  if (!isAndroidClient()) return "";
+  return '<div class="rounded-xl p-2.5 mb-2.5 text-[11px] leading-snug text-gray-200" ' +
+    'style="background:rgba(217,180,91,0.10);border:1px solid rgba(217,180,91,0.35)">' + t("ao_android_hint") + '</div>';
+}
+
 async function submitRentLink() {
   const input = document.getElementById("rent-link-input");
   const errorEl = document.getElementById("rent-link-error");
@@ -3529,3 +3564,160 @@ async function submitRentLink() {
 }
 
 refreshActiveOrder();
+
+
+/* ================= Отзывы ================= */
+
+/* Экран «Bajarildi»: пять звёзд, после выбора — поле для комментария и
+   кнопка. Оценка уходит одним запросом вместе с комментарием. */
+let rateValue = 0;
+function rateBoxHTML() {
+  rateValue = 0;
+  let stars = "";
+  for (let i = 1; i <= 5; i++) {
+    stars += '<button class="rate-star" data-v="' + i + '" onclick="pickRate(' + i + ')" aria-label="' + i + '">★</button>';
+  }
+  return '<div id="rate-box" class="rate-box">' +
+      '<div class="text-[15px] font-bold text-white">' + t("rate_title") + '</div>' +
+      '<div class="text-[11.5px] text-gray-400 mt-0.5">' + t("rate_sub") + '</div>' +
+      '<div class="rate-stars">' + stars + '</div>' +
+      '<div class="rate-hint" id="rate-hint"></div>' +
+      '<div class="rate-extra">' +
+        '<textarea id="rate-comment" class="rate-comment" maxlength="500" placeholder="' + escHTML(t("rate_ph_good")) + '"></textarea>' +
+        '<p id="rate-error" class="hidden text-red-400 text-[11px] mt-1.5"></p>' +
+        '<button id="rate-send" onclick="sendRate()" class="press w-full mt-2.5 py-3 rounded-xl btn-primary font-semibold text-white text-[13px]">' + t("rate_send") + '</button>' +
+      '</div>' +
+    '</div>';
+}
+
+function pickRate(v) {
+  rateValue = v;
+  const box = document.getElementById("rate-box");
+  if (!box) return;
+  Array.prototype.forEach.call(box.querySelectorAll(".rate-star"), function(b) {
+    const n = Number(b.dataset.v);
+    b.classList.toggle("on", n <= v);
+    b.classList.remove("pop");
+    if (n === v) { void b.offsetWidth; b.classList.add("pop"); setTimeout(function() { b.classList.remove("pop"); }, 200); }
+  });
+  const labels = t("rate_labels");
+  document.getElementById("rate-hint").textContent = Array.isArray(labels) ? labels[v] : "";
+  document.getElementById("rate-comment").placeholder = t(v <= 3 ? "rate_ph_bad" : "rate_ph_good");
+  box.classList.add("picked");
+  if (tg && tg.HapticFeedback) tg.HapticFeedback.selectionChanged();
+}
+
+async function sendRate() {
+  if (!rateValue || !flowOrder) return;
+  const btn = document.getElementById("rate-send");
+  const errEl = document.getElementById("rate-error");
+  const base = await getShopApiUrl();
+  const initData = await waitForInitData();
+  if (!base || !initData) return;
+  errEl.classList.add("hidden");
+  const prev = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full align-middle" style="animation: spin .7s linear infinite;"></span>';
+  try {
+    const res = await fetch(base + "/public/review", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        initData: initData,
+        order_id: (flowStatus && flowStatus.order_id) || flowOrder.order_id,
+        rating: rateValue,
+        comment: (document.getElementById("rate-comment").value || "").trim(),
+      }),
+    });
+    const data = await res.json();
+    // «already» — уже оценил (например, кнопкой в чате): это не ошибка.
+    if (data.ok || data.error === "already") {
+      if (flowStatus) flowStatus.reviewed = true;
+      const box = document.getElementById("rate-box");
+      if (box) {
+        box.classList.remove("picked");
+        box.innerHTML = '<div class="text-[15px] font-bold text-white py-1">' + t("rate_thanks") + '</div>' +
+          '<div class="rv-item-stars text-[16px] mt-1">' + "★".repeat(rateValue) + '</div>';
+      }
+      if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred("success");
+      loadReviewsSummary(true);
+      return;
+    }
+    errEl.textContent = t("rate_err"); errEl.classList.remove("hidden");
+  } catch (e) {
+    errEl.textContent = t("rate_err"); errEl.classList.remove("hidden");
+  }
+  btn.disabled = false;
+  btn.innerHTML = prev;
+}
+
+/* Плашка «★ 4.9 · 312 ta sharh» на главной и лист со свежими отзывами. */
+var reviewsData = null;  // var, а не let: applyI18n может обратиться к ней раньше этой строки
+let rvQuoteTimer = null;
+
+async function loadReviewsSummary(force) {
+  const base = await getShopApiUrl();
+  if (!base) return;
+  try {
+    const res = await fetch(base + "/public/reviews" + (force ? "?t=" + Date.now() : ""));
+    reviewsData = await res.json();
+  } catch (e) { return; }
+  renderReviewsBanner();
+}
+
+function starsText(avg) {
+  const full = Math.round(avg || 0);
+  return "★★★★★".slice(0, full) + "☆☆☆☆☆".slice(0, 5 - full);
+}
+
+function renderReviewsBanner() {
+  const banner = document.getElementById("rv-banner");
+  const d = reviewsData;
+  if (!banner || !d || !d.count) { if (banner) banner.classList.add("hidden"); return; }
+  document.getElementById("rv-avg").textContent = Number(d.avg).toFixed(1);
+  document.getElementById("rv-count").textContent = t("rv_count").replace("{n}", d.count);
+  banner.classList.remove("hidden");
+
+  // Под числом по очереди показываем короткие цитаты из отзывов с текстом.
+  const quotes = (d.items || []).filter(function(i) { return i.comment; }).slice(0, 8);
+  const q = document.getElementById("rv-quote");
+  if (rvQuoteTimer) { clearInterval(rvQuoteTimer); rvQuoteTimer = null; }
+  if (!quotes.length) { q.textContent = ""; return; }
+  let k = 0;
+  const show = function() {
+    const it = quotes[k % quotes.length]; k++;
+    q.style.opacity = 0;
+    setTimeout(function() { q.textContent = "«" + it.comment + "» — " + it.name; q.style.opacity = 1; }, 250);
+  };
+  show();
+  if (quotes.length > 1) rvQuoteTimer = setInterval(show, 4500);
+}
+
+function openReviewsSheet() {
+  const d = reviewsData;
+  if (!d) return;
+  document.getElementById("rv-sheet-avg").textContent = d.avg ? Number(d.avg).toFixed(1) : "—";
+  document.getElementById("rv-sheet-stars").textContent = starsText(d.avg);
+  document.getElementById("rv-sheet-count").textContent = t("rv_count").replace("{n}", d.count || 0);
+  const list = document.getElementById("rv-list");
+  list.innerHTML = (d.items || []).length
+    ? d.items.map(function(r) {
+        const what = r.cart_size > 1 ? "🛒 " + r.cart_size : r.item;
+        return '<div class="rv-item">' +
+          '<div class="flex items-center justify-between gap-2">' +
+            '<span class="text-[13px] font-semibold text-white truncate">' + escHTML(r.name) + '</span>' +
+            '<span class="rv-item-stars flex-shrink-0">' + "★".repeat(r.rating) + '<span style="color:rgba(255,255,255,.15)">' + "★".repeat(5 - r.rating) + '</span></span>' +
+          '</div>' +
+          (r.comment ? '<div class="text-[12.5px] text-gray-200 mt-1.5 leading-snug">' + escHTML(r.comment) + '</div>' : '') +
+          '<div class="text-[10.5px] text-gray-500 mt-1.5">' + escHTML(what) + ' · ' + escHTML(formatOrderDate(r.created_at)) + '</div>' +
+        '</div>';
+      }).join("")
+    : '<p class="text-center text-xs text-gray-500 py-6">' + t("rv_empty") + '</p>';
+  document.getElementById("rv-sheet").classList.remove("hidden");
+  if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred("light");
+}
+
+function closeReviewsSheet() {
+  document.getElementById("rv-sheet").classList.add("hidden");
+}
+
+loadReviewsSummary(false);
