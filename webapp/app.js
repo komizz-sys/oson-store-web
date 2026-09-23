@@ -62,9 +62,14 @@ const I18N = {
     modal_card_label: "To'lov uchun karta (Uzcard/Humo)", modal_card_holder_label: "Qabul qiluvchi",
     modal_copy: "Nusxalash", modal_paid: "To'ladim", modal_cancel: "Bekor qilish",
     modal_buy: "Sotib olish",
-    bal_title: "Balans", bal_history: "Operatsiyalar", bal_topup: "To'ldirish",
-    bal_hint: "Balansdan to'lov aniq va bir zumda o'tadi — chek yuborish shart emas.",
-    bal_pending_title: "To'lov kutilmoqda", bal_pending_hint: "Shu kartaga o'tkazing. Bank komissiya ushlasa ham — balansga qancha tushsa, shuncha yoziladi.",
+    bal_title: "Mening balansim", bal_history: "Operatsiyalar", bal_topup: "To'ldirish",
+    bal_hint: "Balansdan bir bosishda to'lanadi — chek kerak emas.",
+    bal_available: "Mavjud mablag'", bal_how_title: "Qanday ishlaydi?",
+    bal_step1: "Summani kiriting", bal_step2: "Aniq summani o'tkazing", bal_step3: "Balans avtomatik to'ladi",
+    bal_step1_short: "1-qadam: shu kartaga o'tkazing", bal_step2_short: "2-qadam: chekni yuboring — tezroq tekshiramiz",
+    bal_note: "🔒 Balansdagi pul faqat do'kondagi xaridlar uchun, naqd pulga qaytarilmaydi.",
+    topup_confirm: "Diqqat!\n\nKeyingi qadamda ANIQ summa chiqadi (masalan 50 042) — aynan shuni o'tkazing, shunda balans avtomatik to'ldiriladi.\n\nChekni ham yuboring. Balansdagi pul faqat xaridlarga, qaytarilmaydi.",
+    bal_pending_title: "Aynan shu summani o'tkazing", bal_pending_hint: "Aynan shu summa kelsa, balans avtomatik to'ldiriladi. Bank komissiya ushlasa ham — qancha tushsa, shuncha yoziladi.",
     bal_pay: "Balansdan to'lash", bal_pay_short: "Balans yetarli emas",
     bal_err_amount: "Summa {min} dan {max} gacha bo'lishi kerak.",
     bal_empty: "Hozircha operatsiyalar yo'q.",
@@ -164,9 +169,14 @@ const I18N = {
     modal_card_label: "Карта для оплаты (Uzcard/Humo)", modal_card_holder_label: "Получатель",
     modal_copy: "Скопировать", modal_paid: "Я оплатил", modal_cancel: "Отмена",
     modal_buy: "Купить",
-    bal_title: "Баланс", bal_history: "Операции", bal_topup: "Пополнить",
-    bal_hint: "С баланса оплата проходит точно и мгновенно — без чеков.",
-    bal_pending_title: "Ждём перевод", bal_pending_hint: "Переведите на эту карту. Даже если банк удержит комиссию — на баланс зачислится столько, сколько дошло.",
+    bal_title: "Мой баланс", bal_history: "Операции", bal_topup: "Пополнить",
+    bal_hint: "С баланса оплата в одно нажатие — без чеков.",
+    bal_available: "Доступно", bal_how_title: "Как это работает?",
+    bal_step1: "Введите сумму", bal_step2: "Переведите точную сумму", bal_step3: "Баланс пополнится сам",
+    bal_step1_short: "Шаг 1: переведите на эту карту", bal_step2_short: "Шаг 2: отправьте чек — так проверим быстрее",
+    bal_note: "🔒 Деньги на балансе — только для покупок в магазине, наличными не возвращаются.",
+    topup_confirm: "Внимание!\n\nДальше появится ТОЧНАЯ сумма (например 50 042) — переведите именно её, тогда баланс пополнится автоматически.\n\nЧек тоже отправьте. Баланс — только на покупки, не возвращается.",
+    bal_pending_title: "Переведите ровно эту сумму", bal_pending_hint: "Когда придёт именно эта сумма, баланс пополнится автоматически. Если банк удержит комиссию — зачислим, сколько дошло.",
     bal_pay: "Оплатить с баланса", bal_pay_short: "На балансе недостаточно",
     bal_err_amount: "Сумма должна быть от {min} до {max}.",
     bal_empty: "Операций пока нет.",
@@ -266,9 +276,14 @@ const I18N = {
     modal_card_label: "Payment card (Uzcard/Humo)", modal_card_holder_label: "Recipient",
     modal_copy: "Copy", modal_paid: "I've paid", modal_cancel: "Cancel",
     modal_buy: "Buy",
-    bal_title: "Balance", bal_history: "Transactions", bal_topup: "Top up",
-    bal_hint: "Paying from balance is exact and instant — no receipts.",
-    bal_pending_title: "Awaiting transfer", bal_pending_hint: "Transfer to this card. Even if the bank takes a fee, your balance gets exactly what arrives.",
+    bal_title: "My balance", bal_history: "Transactions", bal_topup: "Top up",
+    bal_hint: "Pay from balance in one tap — no receipts.",
+    bal_available: "Available", bal_how_title: "How it works",
+    bal_step1: "Enter an amount", bal_step2: "Transfer the exact amount", bal_step3: "Balance fills automatically",
+    bal_step1_short: "Step 1: transfer to this card", bal_step2_short: "Step 2: send the receipt — we'll check faster",
+    bal_note: "🔒 Balance can only be spent in the shop and is not refundable as cash.",
+    topup_confirm: "Heads up!\n\nThe EXACT amount appears next (e.g. 50 042) — send exactly that and your balance tops up automatically.\n\nSend the receipt too. Balance is for purchases only, non-refundable.",
+    bal_pending_title: "Transfer exactly this amount", bal_pending_hint: "When this exact amount arrives, your balance is topped up automatically. If the bank takes a fee, we credit what arrives.",
     bal_pay: "Pay from balance", bal_pay_short: "Not enough balance",
     bal_err_amount: "Amount must be between {min} and {max}.",
     bal_empty: "No transactions yet.",
@@ -793,7 +808,7 @@ async function renderItems() {
         '<div class="p-3 flex flex-col items-center text-center">' +
           '<div class="flex items-baseline gap-0.5 mt-1">' +
             '<span class="text-[22px] font-black text-white leading-none tracking-tight">' + amount.toLocaleString("ru-RU").replace(/,/g, " ") + '</span>' +
-            '<span class="text-[11px]">⭐️</span>' +
+            ceHTML(CE_STARS, 15, "⭐️") +
           '</div>' +
           '<div class="text-[11px] font-bold text-neon-yellow mt-2">' + fmtUZS(it.price) + '</div>' +
           '<div class="text-[9px] text-gray-500 mt-0.5">' + perStar + " " + t("per_star") + '</div>' +
@@ -815,6 +830,8 @@ async function renderItems() {
       '</div>' +
     '</div>';
   }).join("") + customCardHTML;
+
+  hydrateCustomEmoji(grid);
 
   const customCard = document.getElementById("stars-custom-card");
   if (customCard) customCard.addEventListener("click", openCustomStarsModal);
@@ -1016,6 +1033,9 @@ async function renderPremiumList() {
   document.getElementById("products-grid").classList.add("hidden");
   const container = document.getElementById("premium-list");
   container.classList.remove("hidden");
+  // Крупный эмодзи в шапке лежит прямо в index.html — оживляем его здесь,
+  // когда экран Premium впервые показан.
+  hydrateCustomEmoji(container);
 
   const optionsEl = document.getElementById("premium-options");
   optionsEl.innerHTML = skeletonHTML(3, "h-16");
@@ -1052,11 +1072,14 @@ async function renderPremiumList() {
           '<span class="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ' + (selected ? "border-neon-blue" : "border-gray-600") + '">' +
             (selected ? '<span class="w-2.5 h-2.5 rounded-full bg-neon-blue"></span>' : "") +
           '</span>' +
+          ceHTML(CE_PREMIUM, 20, "💎") +
           '<span class="text-[13.5px] font-semibold text-white leading-tight">' + it.title + '</span>' +
         '</div>' +
         '<span class="text-[13.5px] font-bold text-neon-yellow flex-shrink-0">' + fmtUZS(it.price) + '</span>' +
       '</div>';
     }).join("");
+
+    hydrateCustomEmoji(optionsEl);
 
     Array.prototype.forEach.call(optionsEl.querySelectorAll(".premium-option"), function(row) {
       row.addEventListener("click", function() {
@@ -1232,7 +1255,16 @@ async function openModal(item) {
     emojiEl.innerHTML = '<img src="' + item.image + '" class="' + bigClass + ' rounded-2xl object-cover" onerror="this.parentElement.textContent=\'' + item.emoji + '\';" />';
   } else {
     emojiEl.className = "text-4xl animated-gift";
-    emojiEl.textContent = item.emoji;
+    // У Stars и Premium вместо обычного символа — анимированный эмодзи
+    // Telegram; если он не загрузится, на его месте останется тот же символ.
+    const ceId = (item.kind === "stars" || item.kind === "stars_custom") ? CE_STARS
+               : (item.kind === "premium" ? CE_PREMIUM : null);
+    if (ceId) {
+      emojiEl.innerHTML = ceHTML(ceId, 40, item.emoji);
+      hydrateCustomEmoji(emojiEl);
+    } else {
+      emojiEl.textContent = item.emoji;
+    }
   }
   const isRentLike = item.kind === "nft_rent" || item.kind === "nft_rent_extend";
   document.getElementById("modal-price").textContent = fmtUZS(isRentLike ? item.price * rentDays : item.price);
@@ -2086,6 +2118,137 @@ async function getShopApiUrl() {
   return shopApiUrl;
 }
 
+/* ---------------- \u0410\u043d\u0438\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0435 (\u043f\u0440\u0435\u043c\u0438\u0430\u043b\u044c\u043d\u044b\u0435) \u044d\u043c\u043e\u0434\u0437\u0438 Telegram ----------------
+   \u0412 Telegram \u0442\u0430\u043a\u043e\u0439 \u044d\u043c\u043e\u0434\u0437\u0438 \u2014 \u044d\u0442\u043e \u043d\u0435 \u0441\u0438\u043c\u0432\u043e\u043b, \u0430 id (5375583215157280942).
+   \u0412 \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0438 \u0431\u043e\u0442 \u0443\u043c\u0435\u0435\u0442 \u0435\u0433\u043e \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u044c, \u0430 \u0432\u0438\u0442\u0440\u0438\u043d\u0430 \u2014 \u043e\u0431\u044b\u0447\u043d\u0430\u044f \u0432\u0435\u0431-\u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430, \u0438
+   \u0431\u0440\u0430\u0443\u0437\u0435\u0440 \u043f\u0440\u043e \u044d\u0442\u043e\u0442 id \u043d\u0438\u0447\u0435\u0433\u043e \u043d\u0435 \u0437\u043d\u0430\u0435\u0442. \u041f\u043e\u044d\u0442\u043e\u043c\u0443 \u0441\u0430\u043c \u0444\u0430\u0439\u043b \u044d\u043c\u043e\u0434\u0437\u0438 \u043e\u0442\u0434\u0430\u0451\u0442 \u0431\u043e\u0442
+   (/public/emoji/<id>), \u0430 \u0437\u0434\u0435\u0441\u044c \u043c\u044b \u0435\u0433\u043e \u0440\u0430\u0437\u0432\u043e\u0440\u0430\u0447\u0438\u0432\u0430\u0435\u043c: webm \u2014 \u0432 <video>,
+   \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443 \u2014 \u0432 <img>, tgs (Lottie) \u2014 \u043f\u043b\u0435\u0435\u0440\u043e\u043c.
+
+   \u0413\u043b\u0430\u0432\u043d\u043e\u0435 \u043f\u0440\u0430\u0432\u0438\u043b\u043e: \u043f\u043e\u043a\u0430 \u0444\u0430\u0439\u043b \u043d\u0435 \u043f\u0440\u0438\u0448\u0451\u043b \u2014 \u0438 \u0435\u0441\u043b\u0438 \u043d\u0435 \u043f\u0440\u0438\u0434\u0451\u0442 \u0432\u043e\u0432\u0441\u0435 \u2014 \u043d\u0430 \u043c\u0435\u0441\u0442\u0435
+   \u044d\u043c\u043e\u0434\u0437\u0438 \u0441\u0442\u043e\u0438\u0442 \u043e\u0431\u044b\u0447\u043d\u044b\u0439 \u0441\u0438\u043c\u0432\u043e\u043b. \u0412\u0438\u0442\u0440\u0438\u043d\u0430 \u043d\u0435 \u0434\u043e\u043b\u0436\u043d\u0430 \u0432\u044b\u0433\u043b\u044f\u0434\u0435\u0442\u044c \u0441\u043b\u043e\u043c\u0430\u043d\u043d\u043e\u0439 \u0438\u0437-\u0437\u0430
+   \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u044f.                                                               */
+const CE_STARS = "5375583215157280942";
+const CE_PREMIUM = "5375333763456729352";
+
+const _ceCache = {};
+const _ceAnims = [];
+let _ceLottiePromise = null;
+let _ceObserver = null;
+
+function ceLoad(id) {
+  if (_ceCache[id]) return _ceCache[id];
+  _ceCache[id] = (async function() {
+    const base = await getShopApiUrl();
+    const res = await fetch(base + "/public/emoji/" + id);
+    if (!res.ok) throw new Error("emoji " + res.status);
+    const ct = (res.headers.get("content-type") || "").toLowerCase();
+    if (ct.indexOf("json") !== -1) return { kind: "lottie", data: await res.json() };
+    const url = URL.createObjectURL(await res.blob());
+    return { kind: ct.indexOf("video") !== -1 ? "video" : "image", url: url };
+  })().catch(function(e) {
+    // \u041d\u0435 \u0437\u0430\u043f\u043e\u043c\u0438\u043d\u0430\u0435\u043c \u043d\u0435\u0443\u0434\u0430\u0447\u0443 \u043d\u0430\u0432\u0441\u0435\u0433\u0434\u0430: \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0430\u044f \u043f\u0435\u0440\u0435\u0440\u0438\u0441\u043e\u0432\u043a\u0430 \u043f\u043e\u043f\u0440\u043e\u0431\u0443\u0435\u0442 \u0441\u043d\u043e\u0432\u0430.
+    delete _ceCache[id];
+    throw e;
+  });
+  return _ceCache[id];
+}
+
+/* \u0417\u0430\u0433\u043b\u0443\u0448\u043a\u0430 \u0432 \u0440\u0430\u0437\u043c\u0435\u0442\u043a\u0435. fallback \u2014 \u043e\u0431\u044b\u0447\u043d\u044b\u0439 \u044d\u043c\u043e\u0434\u0437\u0438, \u043a\u043e\u0442\u043e\u0440\u044b\u0439 \u0432\u0438\u0434\u043d\u043e \u0441\u0440\u0430\u0437\u0443. */
+function ceHTML(id, sizePx, fallback) {
+  return '<span class="ce" data-ce-id="' + id + '" data-ce-size="' + sizePx + '" ' +
+    'style="display:inline-flex;align-items:center;justify-content:center;' +
+    'width:' + sizePx + 'px;height:' + sizePx + 'px;font-size:' + Math.round(sizePx * 0.9) + 'px;' +
+    'line-height:1;vertical-align:middle;">' + fallback + '</span>';
+}
+
+function ceLottieLib() {
+  if (_ceLottiePromise) return _ceLottiePromise;
+  _ceLottiePromise = new Promise(function(resolve, reject) {
+    const s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie_svg.min.js";
+    s.onload = function() { resolve(window.lottie); };
+    s.onerror = function() { _ceLottiePromise = null; reject(new Error("lottie")); };
+    document.head.appendChild(s);
+  });
+  return _ceLottiePromise;
+}
+
+/* \u042d\u043c\u043e\u0434\u0437\u0438 \u0437\u0430 \u043f\u0440\u0435\u0434\u0435\u043b\u0430\u043c\u0438 \u044d\u043a\u0440\u0430\u043d\u0430 \u043d\u0435 \u043a\u0440\u0443\u0442\u0438\u043c: \u043d\u0430 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435 \u0438\u0445 \u0431\u044b\u0432\u0430\u0435\u0442 \u043f\u043e\u043b\u0442\u043e\u0440\u0430 \u0434\u0435\u0441\u044f\u0442\u043a\u0430,
+   \u0438 \u043e\u0434\u043d\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u0430\u044f \u0430\u043d\u0438\u043c\u0430\u0446\u0438\u044f \u0432\u0441\u0435\u0445 \u0437\u0430\u043c\u0435\u0442\u043d\u043e \u0433\u0440\u0435\u0435\u0442 \u0442\u0435\u043b\u0435\u0444\u043e\u043d. */
+function ceObserver() {
+  if (_ceObserver) return _ceObserver;
+  if (typeof IntersectionObserver === "undefined") return null;
+  _ceObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(en) {
+      const el = en.target;
+      if (en.isIntersecting) {
+        if (el._ceAnim) el._ceAnim.play();
+        else if (el.play) { const p = el.play(); if (p && p.catch) p.catch(function() {}); }
+      } else {
+        if (el._ceAnim) el._ceAnim.pause();
+        else if (el.pause) el.pause();
+      }
+    });
+  }, { rootMargin: "120px" });
+  return _ceObserver;
+}
+
+function hydrateCustomEmoji(root) {
+  // \u0412\u0438\u0442\u0440\u0438\u043d\u0430 \u043f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e \u043f\u0435\u0440\u0435\u0440\u0438\u0441\u043e\u0432\u044b\u0432\u0430\u0435\u0442 \u0441\u043f\u0438\u0441\u043a\u0438 \u0447\u0435\u0440\u0435\u0437 innerHTML \u2014 Lottie-\u043f\u043b\u0435\u0435\u0440\u044b \u043e\u0442
+  // \u0432\u044b\u0431\u0440\u043e\u0448\u0435\u043d\u043d\u044b\u0445 \u043a\u0430\u0440\u0442\u043e\u0447\u0435\u043a \u043d\u0430\u0434\u043e \u0433\u0430\u0441\u0438\u0442\u044c, \u0438\u043d\u0430\u0447\u0435 \u043e\u043d\u0438 \u043f\u0440\u043e\u0434\u043e\u043b\u0436\u0430\u044e\u0442 \u0441\u0447\u0438\u0442\u0430\u0442\u044c \u043a\u0430\u0434\u0440\u044b.
+  for (let i = _ceAnims.length - 1; i >= 0; i--) {
+    if (!_ceAnims[i].el.isConnected) {
+      try { _ceAnims[i].anim.destroy(); } catch (e) {}
+      _ceAnims.splice(i, 1);
+    }
+  }
+
+  const scope = root || document;
+  Array.prototype.forEach.call(scope.querySelectorAll(".ce[data-ce-id]"), function(span) {
+    if (span.dataset.ceDone === "1") return;
+    span.dataset.ceDone = "1";
+    const id = span.dataset.ceId;
+    const size = Number(span.dataset.ceSize) || 20;
+
+    ceLoad(id).then(function(em) {
+      if (!span.isConnected) return;
+      if (em.kind === "video") {
+        const v = document.createElement("video");
+        v.src = em.url;
+        v.loop = true; v.autoplay = true; v.muted = true; v.playsInline = true;
+        // \u0410\u0442\u0440\u0438\u0431\u0443\u0442\u044b \u0434\u0443\u0431\u043b\u0438\u0440\u0443\u0435\u043c \u0441\u0442\u0440\u043e\u043a\u043e\u0439: \u0431\u0435\u0437 \u043d\u0438\u0445 iOS \u043e\u0442\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0438\u0433\u0440\u044b\u0432\u0430\u0442\u044c
+        // \u0432\u0438\u0434\u0435\u043e \u0431\u0435\u0437 \u0437\u0432\u0443\u043a\u0430 \u0432 \u0444\u043e\u043d\u0435 \u0438 \u0440\u0430\u0437\u0432\u043e\u0440\u0430\u0447\u0438\u0432\u0430\u0435\u0442 \u0435\u0433\u043e \u043d\u0430 \u0432\u0435\u0441\u044c \u044d\u043a\u0440\u0430\u043d.
+        v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("loop", "");
+        v.style.width = size + "px"; v.style.height = size + "px"; v.style.objectFit = "contain";
+        span.innerHTML = ""; span.appendChild(v);
+        const p = v.play(); if (p && p.catch) p.catch(function() {});
+        const ob = ceObserver(); if (ob) ob.observe(v);
+      } else if (em.kind === "image") {
+        const img = document.createElement("img");
+        img.src = em.url;
+        img.style.width = size + "px"; img.style.height = size + "px"; img.style.objectFit = "contain";
+        span.innerHTML = ""; span.appendChild(img);
+      } else {
+        ceLottieLib().then(function(lottie) {
+          if (!lottie || !span.isConnected) return;
+          const box = document.createElement("div");
+          box.style.width = size + "px"; box.style.height = size + "px";
+          span.innerHTML = ""; span.appendChild(box);
+          const anim = lottie.loadAnimation({
+            container: box, renderer: "svg", loop: true, autoplay: true, animationData: em.data,
+          });
+          box._ceAnim = anim;
+          _ceAnims.push({ el: box, anim: anim });
+          const ob = ceObserver(); if (ob) ob.observe(box);
+        }).catch(function() {});
+      }
+    }).catch(function() {
+      // \u041c\u043e\u043b\u0447\u0430 \u043e\u0441\u0442\u0430\u0451\u043c\u0441\u044f \u043d\u0430 \u043e\u0431\u044b\u0447\u043d\u043e\u043c \u044d\u043c\u043e\u0434\u0437\u0438-\u0437\u0430\u0433\u043b\u0443\u0448\u043a\u0435.
+    });
+  });
+}
+
 const CATEGORY_EMOJI = { stars: "\u2b50", premium: "\ud83d\udc8e", simple_gift: "\ud83c\udf81", nft_rent: "\ud83d\uddbc" };
 const STATUS_KEY = {
   awaiting_payment: "status_awaiting_payment", payment_review: "status_payment_review",
@@ -2432,6 +2595,8 @@ function renderBalance() {
 
   const pend = document.getElementById("bal-pending");
   if (pend) {
+    const area = document.getElementById("bal-topup-area");
+    if (area) area.classList.toggle("hidden", !!d.pending_topup);
     if (d.pending_topup) {
       pend.classList.remove("hidden");
       document.getElementById("bal-pending-amount").textContent = fmtUZS(d.pending_topup.expected);
@@ -2488,6 +2653,41 @@ function openBalanceHistory() {
   box.classList.remove("hidden");
 }
 
+function confirmTopup() {
+  return new Promise(function(resolve) {
+    if (tg && tg.showPopup) {
+      // Колбэк приходит и при простом закрытии окна (id пустой) — поэтому
+      // проверяем именно нашу кнопку, как и в окне перед покупкой.
+      tg.showPopup(
+        {
+          message: t("topup_confirm"),
+          buttons: [
+            { id: "go", type: "default", text: t("bal_topup") },
+            { id: "no", type: "cancel" },
+          ],
+        },
+        function(pressed) { resolve(pressed === "go"); }
+      );
+      return;
+    }
+    if (tg && tg.showConfirm) {
+      tg.showConfirm(t("topup_confirm"), function(ok) { resolve(!!ok); });
+      return;
+    }
+    resolve(window.confirm(t("topup_confirm")));
+  });
+}
+
+function setTopupAmount(v) {
+  const input = document.getElementById("bal-input");
+  if (!input) return;
+  input.value = v;
+  Array.prototype.forEach.call(document.querySelectorAll(".bal-quick"), function(b) {
+    b.classList.toggle("active", b.textContent.replace(/\s/g, "") === String(v));
+  });
+  if (tg && tg.HapticFeedback) tg.HapticFeedback.selectionChanged();
+}
+
 async function createTopup(btn) {
   const input = document.getElementById("bal-input");
   const errorEl = document.getElementById("bal-error");
@@ -2502,6 +2702,11 @@ async function createTopup(btn) {
     errorEl.classList.remove("hidden");
     return;
   }
+
+  // Предупреждение ДО заявки — то же окно, что перед покупкой. Главное, что
+  // человек должен вынести: без чека деньги не зачислятся, и баланс не
+  // возвращается. Иначе переводят, молчат и потом пишут оператору.
+  if (!(await confirmTopup())) return;
 
   const base = await getShopApiUrl();
   const initData = await waitForInitData();
@@ -2530,6 +2735,7 @@ async function createTopup(btn) {
       return;
     }
     input.value = "";
+    Array.prototype.forEach.call(document.querySelectorAll(".bal-quick"), function(b) { b.classList.remove("active"); });
     if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred("success");
     showToast(t("bal_sent"));
     await loadBalance();

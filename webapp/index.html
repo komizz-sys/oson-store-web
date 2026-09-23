@@ -237,6 +237,35 @@
       100% { box-shadow: 0 0 0 14px rgba(217,180,91,0); border-color: rgba(255,255,255,.10) }
     }
     #bal-chip.bal-changed { animation: balPulse 1.1s ease-out 2; }
+    /* Баланс-«карта» */
+    .bal-wallet {
+      background: linear-gradient(135deg, #2f6fd6 0%, #5b4fcf 55%, #8a5cc9 100%);
+      box-shadow: 0 10px 30px -12px rgba(91,79,207,0.7), inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+    .bal-wallet-glow {
+      position: absolute; right: -40px; top: -50px; width: 170px; height: 170px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,120,0.45), transparent 65%);
+      animation: walletGlow 6s ease-in-out infinite alternate;
+    }
+    @keyframes walletGlow { from { transform: translate(0,0) scale(1); } to { transform: translate(-25px,20px) scale(1.15); } }
+    .bal-wallet-icon {
+      width: 32px; height: 32px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center;
+      font-size: 17px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.2);
+    }
+    .bal-step {
+      position: relative; text-align: center; padding: 10px 4px 8px; border-radius: 14px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+    }
+    .bal-step-num {
+      position: absolute; top: 5px; left: 6px; font-size: 9px; font-weight: 800; color: #d9b45b;
+    }
+    .bal-step-ico { font-size: 18px; line-height: 1; margin-bottom: 5px; }
+    .bal-step-txt { font-size: 9.5px; line-height: 1.25; color: #cbd5e1; }
+    .bal-quick {
+      flex-shrink: 0; padding: 6px 11px; border-radius: 10px; font-size: 11px; font-weight: 700; color: #e5e7eb;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    }
+    .bal-quick.active { color: #d9b45b; border-color: rgba(217,180,91,0.55); background: rgba(217,180,91,0.1); }
 
     /* Заставка: точка-пульс под логотипом */
     @keyframes splashDot { 0%,100% { opacity:.25 } 50% { opacity:1 } }
@@ -310,7 +339,12 @@
       <div class="glass-card rounded-[26px] p-6 mb-4 text-center relative overflow-hidden">
         <div class="absolute inset-0 opacity-40" style="background: radial-gradient(circle at 30% 0%, rgba(217,180,91,0.25), transparent 60%);"></div>
         <div class="relative">
-          <div class="text-4xl mb-2">💎</div>
+          <!-- Анимированный премиальный эмодзи; пока файл не пришёл от бота,
+               на его месте видно обычный 💎 (см. hydrateCustomEmoji в app.js). -->
+          <div class="mb-2 flex justify-center">
+            <span class="ce" data-ce-id="5375333763456729352" data-ce-size="46"
+                  style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;font-size:40px;line-height:1;">💎</span>
+          </div>
           <div class="text-[17px] font-bold text-white" data-i18n="premium_title">Telegram Premium olish</div>
           <div class="text-[13px] text-gray-400 mt-1" data-i18n="premium_subtitle">O'zingiz yoki yaqiningiz uchun</div>
         </div>
@@ -440,18 +474,35 @@
     </div>
     <!-- БАЛАНС. Стоит выше статистики: это то, ради чего сюда заходят чаще
          всего — посмотреть остаток и пополнить. -->
-    <div class="glass-card rounded-[22px] p-4 mb-3">
-      <div class="flex justify-between items-center mb-1">
-        <span class="text-[11px] text-gray-400 uppercase tracking-wider" data-i18n="bal_title">Balans</span>
-        <button onclick="openBalanceHistory()" id="bal-history-btn" class="press text-[11px] text-neon-blue" data-i18n="bal_history">Operatsiyalar</button>
+    <div class="glass-card rounded-[22px] p-3 mb-3">
+      <!-- Сам баланс оформлен как банковская карта: так с первого взгляда
+           понятно, что это «кошелёк» с деньгами, а не очередная цифра статистики. -->
+      <div class="bal-wallet relative overflow-hidden rounded-[18px] p-4 mb-3">
+        <div class="bal-wallet-glow"></div>
+        <div class="relative flex justify-between items-start">
+          <div class="flex items-center gap-2">
+            <span class="bal-wallet-icon">💼</span>
+            <div>
+              <div class="text-[12px] font-bold text-white leading-tight" data-i18n="bal_title">Mening balansim</div>
+              <div class="text-[9.5px] text-white/60 uppercase tracking-[0.14em]">OsonStore Wallet</div>
+            </div>
+          </div>
+          <button onclick="openBalanceHistory()" id="bal-history-btn" class="press text-[10.5px] font-semibold text-white/90 bg-white/10 border border-white/15 px-2.5 py-1 rounded-lg" data-i18n="bal_history">Operatsiyalar</button>
+        </div>
+        <div class="relative mt-4">
+          <div class="text-[10px] text-white/55 mb-1" data-i18n="bal_available">Mavjud mablag'</div>
+          <div id="bal-amount" class="text-[30px] font-black text-white leading-none tracking-tight">—</div>
+        </div>
+        <div class="relative mt-3 flex items-center gap-1.5 text-[10.5px] text-white/75">
+          <span>⚡️</span><span data-i18n="bal_hint">Balansdan bir bosishda to'lanadi — chek kerak emas.</span>
+        </div>
       </div>
-      <div id="bal-amount" class="text-[26px] font-black text-neon-yellow leading-none mb-1">—</div>
-      <p class="text-[11px] text-gray-400 leading-snug mb-3" data-i18n="bal_hint">Balansdan to'lov aniq va bir zumda o'tadi.</p>
 
-      <div id="bal-pending" class="hidden rounded-2xl p-3 mb-3 text-left" style="background: rgba(217,180,91,0.12); border: 1px solid rgba(217,180,91,0.4);">
-        <div class="text-[10px] text-neon-yellow uppercase tracking-wider font-bold mb-1" data-i18n="bal_pending_title">Kutilmoqda</div>
-        <div class="text-[19px] font-black text-neon-yellow leading-none mb-1" id="bal-pending-amount">—</div>
-        <div class="text-[11px] font-mono text-white tracking-wider mb-1" id="bal-pending-card">—</div>
+      <div id="bal-pending" class="hidden rounded-2xl p-3 mb-1 text-left" style="background: rgba(217,180,91,0.12); border: 1px solid rgba(217,180,91,0.4);">
+        <div class="text-[10px] text-neon-yellow uppercase tracking-wider font-bold mb-1" data-i18n="bal_pending_title">Aynan shu summani o'tkazing</div>
+        <div class="text-[19px] font-black text-neon-yellow leading-none mb-2" id="bal-pending-amount">—</div>
+        <div class="text-[10px] text-gray-400 mb-0.5" data-i18n="bal_step1_short">1-qadam: shu kartaga o'tkazing</div>
+        <div class="text-[13px] font-mono text-white tracking-wider mb-1" id="bal-pending-card">—</div>
         <div class="text-[11px] text-gray-300 leading-snug" data-i18n="bal_pending_hint">Shu summani o'tkazing.</div>
         <div class="flex gap-2 mt-2">
           <button onclick="copyActiveCard(document.getElementById('bal-pending-card').textContent)" class="press bg-neon-blue/15 text-neon-blue px-3 py-1.5 rounded-lg text-[10px] font-semibold" data-i18n="modal_copy">Nusxalash</button>
@@ -459,16 +510,38 @@
         </div>
         <!-- Чек — главный путь. По SMS не видно, КТО заплатил, а по чеку
              владелец всегда видит и сумму, и клиента рядом. -->
+        <div class="text-[10px] text-gray-400 mt-3 mb-1" data-i18n="bal_step2_short">2-qadam: chekni yuboring — tezroq tekshiramiz</div>
         <input type="file" id="bal-receipt-input" accept="image/*" class="hidden" onchange="sendTopupReceipt()" />
-        <button onclick="document.getElementById('bal-receipt-input').click()" id="bal-receipt-btn" class="press w-full mt-2 py-3 rounded-2xl btn-primary font-semibold text-white text-[13px]" data-i18n="bal_send_receipt">📎 To'lov chekini yuborish</button>
+        <button onclick="document.getElementById('bal-receipt-input').click()" id="bal-receipt-btn" class="press w-full py-3 rounded-2xl btn-primary font-semibold text-white text-[13px]" data-i18n="bal_send_receipt">📎 To'lov chekini yuborish</button>
         <p id="bal-receipt-error" class="hidden text-red-400 text-[11px] mt-2"></p>
       </div>
 
-      <div id="bal-form" class="flex gap-2">
-        <input type="number" id="bal-input" inputmode="numeric" placeholder="50000" class="flex-1 min-w-0 bg-white/[0.04] border border-white/[0.09] rounded-2xl px-3.5 py-3 text-sm text-white focus:outline-none focus:border-neon-yellow/60" />
-        <button onclick="createTopup(this)" class="press px-4 rounded-2xl btn-primary font-semibold text-white text-[13px] whitespace-nowrap" data-i18n="bal_topup">To'ldirish</button>
+      <!-- Форма пополнения. Пока есть неоплаченная заявка — прячем её:
+           вторая заявка всё равно не создастся, а две суммы на экране путают. -->
+      <div id="bal-topup-area">
+        <div class="text-[12px] font-bold text-white mb-2 px-0.5" data-i18n="bal_how_title">Qanday ishlaydi?</div>
+        <div class="grid grid-cols-3 gap-1.5 mb-3">
+          <div class="bal-step"><div class="bal-step-num">1</div><div class="bal-step-ico">✍️</div><div class="bal-step-txt" data-i18n="bal_step1">Summani kiriting</div></div>
+          <div class="bal-step"><div class="bal-step-num">2</div><div class="bal-step-ico">💸</div><div class="bal-step-txt" data-i18n="bal_step2">Aniq summani o'tkazing</div></div>
+          <div class="bal-step"><div class="bal-step-num">3</div><div class="bal-step-ico">✅</div><div class="bal-step-txt" data-i18n="bal_step3">Balans avtomatik to'ladi</div></div>
+        </div>
+
+        <div class="flex gap-1.5 mb-2 overflow-x-auto scrollbar-hide">
+          <button onclick="setTopupAmount(20000)" class="bal-quick press">20 000</button>
+          <button onclick="setTopupAmount(50000)" class="bal-quick press">50 000</button>
+          <button onclick="setTopupAmount(100000)" class="bal-quick press">100 000</button>
+          <button onclick="setTopupAmount(200000)" class="bal-quick press">200 000</button>
+        </div>
+        <div id="bal-form" class="flex gap-2">
+          <div class="relative flex-1 min-w-0">
+            <input type="number" id="bal-input" inputmode="numeric" placeholder="50000" class="w-full bg-white/[0.04] border border-white/[0.09] rounded-2xl pl-3.5 pr-12 py-3 text-sm text-white focus:outline-none focus:border-neon-yellow/60" />
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-[12px] text-gray-500 pointer-events-none">so'm</span>
+          </div>
+          <button onclick="createTopup(this)" class="press px-4 rounded-2xl btn-primary font-semibold text-white text-[13px] whitespace-nowrap" data-i18n="bal_topup">To'ldirish</button>
+        </div>
+        <p id="bal-error" class="hidden text-red-400 text-[11px] mt-2"></p>
+        <p class="text-[10px] text-gray-500 leading-snug mt-2.5 px-0.5" data-i18n="bal_note">🔒 Balansdagi pul faqat do'kondagi xaridlar uchun, naqd pulga qaytarilmaydi.</p>
       </div>
-      <p id="bal-error" class="hidden text-red-400 text-[11px] mt-2"></p>
       <div id="bal-history" class="hidden mt-3 pt-3 border-t border-white/[0.08] space-y-1.5"></div>
     </div>
 
