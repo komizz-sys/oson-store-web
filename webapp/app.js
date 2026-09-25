@@ -75,6 +75,12 @@ const I18N = {
     tut_android: "🤖 Android uchun qo'llanma", tut_ios: "🍏 iPhone uchun qo'llanma",
     relink_btn: "🔄 Qayta ulash", relink_title: "Yangi havola", relink_hint: "Fragment'da ulanmadimi? Yangi havola oling va shu yerga joylang. Havolani nusxalagach Fragment sahifasini yopmang.",
     relink_send: "Qayta ulash", relink_ok: "Yangi havola yuborildi — natija botda",
+    up_stars: "💎 Telegram Premium ham oling — profilda status belgisi, katta fayllar va boshqa imtiyozlar.",
+    up_premium: "🎁 Profilingizni bezang — noyob sovg'alarni ijaraga oling yoki oddiy sovg'a sotib oling.",
+    up_simple_gift: "⭐ Stars ham qulay narxda — do'stlaringizga sovg'a qilish uchun ajoyib.",
+    up_nft_rent: "⭐💎 Stars yoki Telegram Premium ham oling — ikkalasi ham qulay narxda.",
+    up_go_stars: "⭐ Stars", up_go_premium: "💎 Premium", up_go_gift: "🎁 Sovg'alar", up_go_rent: "🖼 Ijara",
+    up_title: "Sizga yoqishi mumkin",
     top_title: "Reyting", top_subtitle: "Eng faol mijozlar", top_forming: "Reyting shakllanmoqda", top_hint: "Birinchi xaridni amalga oshiring!",
     profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot kanali", profile_orders_channel: "\ud83d\uded2 Savdo/Orderlar",
     nav_main: "Asosiy", nav_rent: "Ijara", nav_history: "Tarix", nav_profile: "Profil",
@@ -205,6 +211,12 @@ const I18N = {
     tut_android: "🤖 Инструкция для Android", tut_ios: "🍏 Инструкция для iPhone",
     relink_btn: "🔄 Переподключить", relink_title: "Новая ссылка", relink_hint: "Не подключилось на Fragment? Возьмите новую ссылку и вставьте сюда. Скопировав ссылку, не закрывайте страницу Fragment.",
     relink_send: "Переподключить", relink_ok: "Новая ссылка отправлена — результат придёт в бот",
+    up_stars: "💎 Возьмите и Telegram Premium — значок в профиле, большие файлы и другие плюшки.",
+    up_premium: "🎁 Украсьте профиль — арендуйте уникальный подарок или купите обычный.",
+    up_simple_gift: "⭐ Stars тоже по хорошей цене — отличный подарок друзьям.",
+    up_nft_rent: "⭐💎 Загляните и в Stars или Premium — там тоже приятные цены.",
+    up_go_stars: "⭐ Stars", up_go_premium: "💎 Premium", up_go_gift: "🎁 Подарки", up_go_rent: "🖼 Аренда",
+    up_title: "Вам может понравиться",
     top_title: "Рейтинг", top_subtitle: "Самые активные клиенты", top_forming: "Рейтинг формируется", top_hint: "Сделайте первую покупку!",
     profile_operator: "Оператор", profile_channel: "\ud83d\udce2 Канал бота", profile_orders_channel: "\ud83d\uded2 Заказы/Отзывы",
     nav_main: "Главная", nav_rent: "Аренда", nav_history: "История", nav_profile: "Профиль",
@@ -335,6 +347,12 @@ const I18N = {
     tut_android: "🤖 Android guide", tut_ios: "🍏 iPhone guide",
     relink_btn: "🔄 Reconnect", relink_title: "New link", relink_hint: "Didn't connect on Fragment? Get a new link and paste it here. After copying the link, don't close the Fragment page.",
     relink_send: "Reconnect", relink_ok: "New link sent — the result will arrive in the bot",
+    up_stars: "💎 Get Telegram Premium too — a profile badge, bigger files and more.",
+    up_premium: "🎁 Dress up your profile — rent a unique gift or buy a regular one.",
+    up_simple_gift: "⭐ Stars are great value too — a perfect gift for friends.",
+    up_nft_rent: "⭐💎 Check out Stars or Premium — great prices there too.",
+    up_go_stars: "⭐ Stars", up_go_premium: "💎 Premium", up_go_gift: "🎁 Gifts", up_go_rent: "🖼 Rent",
+    up_title: "You might also like",
     top_title: "Rating", top_subtitle: "Most active customers", top_forming: "Rating is forming", top_hint: "Make your first purchase!",
     profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot channel", profile_orders_channel: "\ud83d\uded2 Orders channel",
     nav_main: "Home", nav_rent: "Rent", nav_history: "History", nav_profile: "Profile",
@@ -1901,11 +1919,13 @@ function renderOrderFlow(statusChanged) {
     // профиле сам не появится, показ нужно включить руками на Fragment.
     // Поэтому сразу даём инструкцию, не дожидаясь вопроса в поддержку.
     const isRent = s.category === "nft_rent" || s.category === "nft_rent_extend";
+    // Порядок: оценка → (для аренды) как показать подарок → допродажа.
+    // Инструкция по аренде важнее рекламы, поэтому она выше.
     actionEl.innerHTML = (s.reviewed === false ? rateBoxHTML() : "") + (isRent
       ? '<div class="glass-card rounded-2xl p-3 mb-3 text-left text-[11.5px] text-gray-300 leading-snug">' +
           '⚠️ ' + t("flow_display_hint") +
         '</div>'
-      : "");
+      : "") + upsellHTML(s.category);
     buttonsEl.innerHTML =
       (isRent
         ? '<div class="mb-2.5">' + tutorialButtonsHTML(true) + '</div>'
@@ -2188,6 +2208,39 @@ function flowWriteOperator() {
 function flowGoTarix() {
   closeOrderFlow();
   switchTab("tarix");
+}
+
+/* Допродажа на экране «Bajarildi»: что предложить после покупки.
+   Раньше это было отдельным сообщением бота в чате — терялось среди
+   инструкций. Здесь человек видит предложение в момент, когда он доволен,
+   и одной кнопкой попадает прямо в нужный раздел. */
+const UPSELL = {
+  stars:       { text: "up_stars",       go: [["premium", "up_go_premium"]] },
+  premium:     { text: "up_premium",     go: [["ijara", "up_go_rent"], ["simple_gift", "up_go_gift"]] },
+  simple_gift: { text: "up_simple_gift", go: [["stars", "up_go_stars"]] },
+  nft_rent:    { text: "up_nft_rent",    go: [["stars", "up_go_stars"], ["premium", "up_go_premium"]] },
+};
+
+function upsellHTML(category) {
+  const u = UPSELL[category];
+  if (!u) return "";
+  return '<div class="rounded-2xl p-3.5 mb-3 text-left" style="background:linear-gradient(135deg,rgba(42,171,238,0.12),rgba(142,140,216,0.10));border:1px solid rgba(42,171,238,0.3)">' +
+      '<div class="text-[10px] font-bold uppercase tracking-wider text-neon-blue mb-1">' + t("up_title") + '</div>' +
+      '<div class="text-[12.5px] text-gray-200 leading-snug mb-2.5">' + t(u.text) + '</div>' +
+      '<div class="flex gap-2">' +
+        u.go.map(function(g) {
+          return '<button onclick="flowGoCategory(\'' + g[0] + '\')" class="press flex-1 py-2.5 rounded-xl pill-gold text-[12px] font-bold">' + t(g[1]) + '</button>';
+        }).join("") +
+      '</div>' +
+    '</div>';
+}
+
+function flowGoCategory(target) {
+  closeOrderFlow();
+  if (target === "ijara") { switchTab("ijara"); return; }
+  switchTab("asosiy");
+  setCategory(target);
+  window.scrollTo(0, 0);
 }
 
 function flowBuyMore() {
