@@ -68,6 +68,13 @@ const I18N = {
     rate_labels: ["", "Juda yomon", "Yomon", "O'rtacha", "Yaxshi", "Zo'r! 🔥"],
     rate_ph_good: "Izoh (ixtiyoriy)", rate_ph_bad: "Nima yoqmadi? Yozing — albatta ko'rib chiqamiz",
     rate_send: "Yuborish", rate_thanks: "🙏 Rahmat! Sharhingiz qabul qilindi", rate_err: "Yuborib bo'lmadi, qayta urinib ko'ring",
+    pc_title: "Premium'ni olish uchun adminga yozing", pc_hint: "Tugmani bosing — xabar tayyor bo'ladi, faqat yuboring.",
+    pc_write: "✍️ Adminga yozish", pc_spam: "🚫 Men spamdaman", pc_spam_done: "✅ Adminga xabar berildi — u sizga bot orqali yozadi",
+    pc_spam_hint: "Telegram sizga birinchi yozishni cheklagan bo'lsa, shu tugmani bosing.",
+    pc_msg: "Assalomu alaykum! {item} Premium uchun pul to'ladim ✅\nBuyurtma #{id}",
+    tut_android: "🤖 Android uchun qo'llanma", tut_ios: "🍏 iPhone uchun qo'llanma",
+    relink_btn: "🔄 Qayta ulash", relink_title: "Yangi havola", relink_hint: "Fragment'da ulanmadimi? Yangi havola oling va shu yerga joylang. Havolani nusxalagach Fragment sahifasini yopmang.",
+    relink_send: "Qayta ulash", relink_ok: "Yangi havola yuborildi — natija botda",
     top_title: "Reyting", top_subtitle: "Eng faol mijozlar", top_forming: "Reyting shakllanmoqda", top_hint: "Birinchi xaridni amalga oshiring!",
     profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot kanali", profile_orders_channel: "\ud83d\uded2 Savdo/Orderlar",
     nav_main: "Asosiy", nav_rent: "Ijara", nav_history: "Tarix", nav_profile: "Profil",
@@ -116,7 +123,7 @@ const I18N = {
     modal_preview: "Telegram-da ko'rish",
     sort_recent: "Yangilari", sort_price_asc: "Narx: arzondan qimmatga", sort_price_desc: "Narx: qimmatdan arzonga",
     sort_duration_asc: "Muddat: qisqa", sort_duration_desc: "Muddat: uzun",
-    load_more: "Ko'proq ko'rsatish", premium_title: "Telegram Premium olish", premium_subtitle: "O'zingiz yoki yaqiningiz uchun", premium_get_suffix: "olish",
+    load_more: "Ko'proq ko'rsatish", premium_title: "Telegram Premium olish", premium_subtitle: "O'zingiz yoki yaqiningiz uchun", premium_get_suffix: "olish", premium_cta: "{item} olish",
     custom_amount: "Boshqa miqdor", custom_amount_hint: "O'zingiz kiriting", custom_amount_label: "Nechta Stars?",
     recent_recipient_label: "Yaqinda:", collection_all: "Barcha kolleksiyalar", collection_title: "Kolleksiya bo'yicha filtr",
     live_label: "JONLI", minutes_ago: "daqiqa oldin", hours_ago: "soat oldin",
@@ -191,6 +198,13 @@ const I18N = {
     rate_labels: ["", "Очень плохо", "Плохо", "Нормально", "Хорошо", "Отлично! 🔥"],
     rate_ph_good: "Комментарий (необязательно)", rate_ph_bad: "Что не понравилось? Напишите — обязательно разберёмся",
     rate_send: "Отправить", rate_thanks: "🙏 Спасибо! Отзыв принят", rate_err: "Не удалось отправить, попробуйте ещё раз",
+    pc_title: "Чтобы получить Premium, напишите админу", pc_hint: "Нажмите кнопку — сообщение уже будет готово, останется отправить.",
+    pc_write: "✍️ Написать админу", pc_spam: "🚫 Я в спаме", pc_spam_done: "✅ Админ уведомлён — он напишет вам через бота",
+    pc_spam_hint: "Если Telegram не даёт вам писать первым — нажмите эту кнопку.",
+    pc_msg: "Здравствуйте! Оплатил(а) Premium на {item} ✅\nЗаказ #{id}",
+    tut_android: "🤖 Инструкция для Android", tut_ios: "🍏 Инструкция для iPhone",
+    relink_btn: "🔄 Переподключить", relink_title: "Новая ссылка", relink_hint: "Не подключилось на Fragment? Возьмите новую ссылку и вставьте сюда. Скопировав ссылку, не закрывайте страницу Fragment.",
+    relink_send: "Переподключить", relink_ok: "Новая ссылка отправлена — результат придёт в бот",
     top_title: "Рейтинг", top_subtitle: "Самые активные клиенты", top_forming: "Рейтинг формируется", top_hint: "Сделайте первую покупку!",
     profile_operator: "Оператор", profile_channel: "\ud83d\udce2 Канал бота", profile_orders_channel: "\ud83d\uded2 Заказы/Отзывы",
     nav_main: "Главная", nav_rent: "Аренда", nav_history: "История", nav_profile: "Профиль",
@@ -239,7 +253,7 @@ const I18N = {
     modal_preview: "Смотреть в Telegram",
     sort_recent: "Новинки", sort_price_asc: "Цена: по возрастанию", sort_price_desc: "Цена: по убыванию",
     sort_duration_asc: "Срок: короче", sort_duration_desc: "Срок: длиннее",
-    load_more: "Показать ещё", premium_title: "Оформить Telegram Premium", premium_subtitle: "Себе или близкому человеку", premium_get_suffix: "оформить",
+    load_more: "Показать ещё", premium_title: "Оформить Telegram Premium", premium_subtitle: "Себе или близкому человеку", premium_get_suffix: "оформить", premium_cta: "Оформить: {item}",
     custom_amount: "Другое количество", custom_amount_hint: "Введите сами", custom_amount_label: "Сколько звёзд?",
     recent_recipient_label: "Недавнее:", collection_all: "Все коллекции", collection_title: "Фильтр по коллекции",
     live_label: "СЕЙЧАС", minutes_ago: "мин назад", hours_ago: "ч назад",
@@ -314,6 +328,13 @@ const I18N = {
     rate_labels: ["", "Terrible", "Bad", "Okay", "Good", "Excellent! 🔥"],
     rate_ph_good: "Comment (optional)", rate_ph_bad: "What went wrong? Tell us — we'll look into it",
     rate_send: "Send", rate_thanks: "🙏 Thank you! Review received", rate_err: "Couldn't send, please try again",
+    pc_title: "Message the admin to get your Premium", pc_hint: "Tap the button — the message is ready, just send it.",
+    pc_write: "✍️ Message the admin", pc_spam: "🚫 I'm spam-restricted", pc_spam_done: "✅ Admin notified — they'll message you via the bot",
+    pc_spam_hint: "If Telegram doesn't let you message people first, tap this button.",
+    pc_msg: "Hi! I've paid for Premium ({item}) ✅\nOrder #{id}",
+    tut_android: "🤖 Android guide", tut_ios: "🍏 iPhone guide",
+    relink_btn: "🔄 Reconnect", relink_title: "New link", relink_hint: "Didn't connect on Fragment? Get a new link and paste it here. After copying the link, don't close the Fragment page.",
+    relink_send: "Reconnect", relink_ok: "New link sent — the result will arrive in the bot",
     top_title: "Rating", top_subtitle: "Most active customers", top_forming: "Rating is forming", top_hint: "Make your first purchase!",
     profile_operator: "Operator", profile_channel: "\ud83d\udce2 Bot channel", profile_orders_channel: "\ud83d\uded2 Orders channel",
     nav_main: "Home", nav_rent: "Rent", nav_history: "History", nav_profile: "Profile",
@@ -362,7 +383,7 @@ const I18N = {
     modal_preview: "View in Telegram",
     sort_recent: "Newest", sort_price_asc: "Price: low to high", sort_price_desc: "Price: high to low",
     sort_duration_asc: "Duration: shortest", sort_duration_desc: "Duration: longest",
-    load_more: "Show more", premium_title: "Get Telegram Premium", premium_subtitle: "For yourself or someone else", premium_get_suffix: "get",
+    load_more: "Show more", premium_title: "Get Telegram Premium", premium_subtitle: "For yourself or someone else", premium_get_suffix: "get", premium_cta: "Get {item}",
     custom_amount: "Custom amount", custom_amount_hint: "Enter your own", custom_amount_label: "How many Stars?",
     recent_recipient_label: "Recent:", collection_all: "All collections", collection_title: "Filter by collection",
     live_label: "LIVE", minutes_ago: "min ago", hours_ago: "h ago",
@@ -620,7 +641,7 @@ function addActiveItemToCart() {
     line.unitPrice = item.price;
   } else if (item.kind === "premium") {
     line.itemName = "Premium — " + item.raw.label;
-    line.title = "💎 " + item.raw.label;
+    line.title = "💎 " + premiumLabel(item.raw.label);
   } else if (item.kind === "simple_gift") {
     line.giftId = item.raw.id;
     line.itemName = "Подарок " + item.emoji + " (" + item.raw.star_count + "⭐)";
@@ -820,7 +841,10 @@ async function fetchRentPage(cursor) {
 function normalizeItem(cat) {
   return function(raw) {
     if (cat === "stars") return { kind: "stars", title: raw.amount.toLocaleString("ru-RU") + " Stars", price: raw.price_uzs, emoji: "⭐️", raw: raw };
-    if (cat === "premium") return { kind: "premium", title: raw.label, price: raw.price_uzs, emoji: "👑", raw: raw };
+    // title — геттер: прайс хранит «1 месяц», а показываем на выбранном языке,
+    // и после смены языка название должно смениться без перезагрузки каталога.
+    // В заказ по-прежнему уходит исходный raw.label — по нему бот сверяет цену.
+    if (cat === "premium") return { kind: "premium", get title() { return premiumLabel(raw.label); }, price: raw.price_uzs, emoji: "👑", raw: raw };
     if (cat === "simple_gift") return { kind: "simple_gift", title: raw.star_count + "⭐", price: raw.price_uzs, emoji: raw.sticker_emoji || "🎁", image: raw.image_url || null, raw: raw };
     if (cat === "nft_rent") return { kind: "nft_rent", title: raw.name, price: raw.price_per_day_uzs_with_markup, emoji: pickGiftEmoji(raw.name), image: raw.image_url, previewUrl: raw.preview_url, raw: raw };
   };
@@ -1173,7 +1197,7 @@ async function renderPremiumList() {
   function updatePremiumCta() {
     const btn = document.getElementById("premium-cta-btn");
     const it = items[selectedPremiumIndex];
-    btn.textContent = it.title + " " + t("premium_get_suffix");
+    btn.textContent = t("premium_cta").replace("{item}", it.title);
     btn.onclick = function() { openModal(it); };
   }
 
@@ -1860,7 +1884,7 @@ function renderOrderFlow(statusChanged) {
   const actionEl = document.getElementById("flow-action");
   const buttonsEl = document.getElementById("flow-buttons");
 
-  document.getElementById("success-item").textContent = s.item_name || "—";
+  document.getElementById("success-item").textContent = displayItemName(s.item_name, s.category) || "—";
   document.getElementById("success-recipient").textContent =
     s.recipient && s.recipient.charAt(0) === "@" ? s.recipient : t("cart_to_self");
   document.getElementById("success-price").textContent = fmtUZS(s.price_uzs || 0);
@@ -1884,7 +1908,7 @@ function renderOrderFlow(statusChanged) {
       : "");
     buttonsEl.innerHTML =
       (isRent
-        ? '<button onclick="watchDisplayVideo(this)" class="press w-full py-3.5 rounded-2xl btn-primary font-semibold text-white text-sm mb-2.5">📹 ' + t("ao_display_video") + '</button>'
+        ? '<div class="mb-2.5">' + tutorialButtonsHTML(true) + '</div>'
         : "") +
       '<button onclick="flowBuyMore()" class="w-full py-3.5 rounded-2xl ' + (isRent ? "pill" : "btn-primary") + ' press font-semibold text-white text-sm mb-2.5">' + t("order_success_more") + '</button>' +
       '<button onclick="flowGoTarix()" class="w-full py-3.5 rounded-2xl pill press font-semibold text-sm mb-2.5">' + t("order_success_history") + '</button>' +
@@ -1988,11 +2012,16 @@ function renderOrderFlow(statusChanged) {
         // Видео-инструкция лежит в чате бота и к этому моменту уже уехала
         // вверх за другими сообщениями. Кнопка присылает её заново и
         // закрывает витрину — человек сразу попадает на свежее видео.
-        '<button onclick="watchRentTutorial(this)" class="press w-full py-2.5 mt-2 rounded-xl pill text-[11px] font-medium text-neon-blue">🎥 ' + t("ao_watch_tutorial") + '</button>' +
+        '<div class="mt-2">' + tutorialButtonsHTML(false, true) + '</div>' +
       '</div>'
     : "";
 
+  const premiumBlock = s.category === "premium"
+    ? premiumContactHTML(s.order_id || (flowOrder && flowOrder.order_id), s.item_name)
+    : "";
+
   actionEl.innerHTML =
+    premiumBlock +
     linkBlock +
     '<div class="glass-card rounded-2xl p-3 flex items-center gap-2.5 text-left">' +
       '<span class="w-4 h-4 border-2 border-white/20 border-t-neon-blue rounded-full flex-shrink-0" style="animation: spin .8s linear infinite;"></span>' +
@@ -3210,10 +3239,11 @@ async function renderMyRentals() {
     const extendBtn = r.can_extend
       ? '<button data-i="' + i + '" class="rent-extend-btn press pill-gold rounded-xl px-3 py-2 text-[11px] font-bold flex-shrink-0">' + t("rent_extend") + '</button>'
       : "";
-    return '<div class="glass-card rounded-[20px] p-3.5 flex items-center gap-3"' +
+    return '<div class="glass-card rounded-[20px] p-3.5"' +
       (soon ? ' style="border-color: rgba(248,113,113,0.45);"' : '') + '>' +
+      '<div class="flex items-center gap-3">' +
       '<div class="min-w-0 flex-1">' +
-        '<div class="text-[13px] font-semibold text-white truncate">🖼 ' + r.item_name + '</div>' +
+        '<div class="text-[13px] font-semibold text-white truncate">🖼 ' + escHTML(r.item_name) + '</div>' +
         '<div class="text-[11px] ' + leftClass + ' mt-0.5">' +
           (soon ? "⚠️ " + t("rent_ending_soon") + " · " : "") +
           t("rent_ends_in") + ": " + rentLeftLabel(r.seconds_left) +
@@ -3222,7 +3252,20 @@ async function renderMyRentals() {
           ? '<div class="text-[10px] text-gray-500 mt-0.5">' + fmtUZS(r.price_per_day_uzs) + ' · 1 ' + t("rent_days_suffix") + '</div>'
           : '') +
       '</div>' +
-      extendBtn +
+      '<div class="flex flex-col gap-1.5 flex-shrink-0">' + extendBtn +
+        '<button onclick="toggleRelink(' + i + ')" class="press pill rounded-xl px-3 py-2 text-[11px] font-semibold text-neon-blue">' + t("relink_btn") + '</button>' +
+      '</div>' +
+      '</div>' +
+      // Раскрывается по «Qayta ulash»: ссылка на Fragment живёт, пока открыта
+      // выдавшая её страница, и на Android часто умирает — новая ссылка лечит.
+      '<div id="relink-box-' + i + '" class="relink-box hidden mt-3 pt-3 border-t border-white/[0.08]">' +
+        '<div class="text-[12px] font-semibold text-white mb-1">🔗 ' + t("relink_title") + '</div>' +
+        '<div class="text-[11px] text-gray-400 mb-2.5 leading-snug">' + t("relink_hint") + '</div>' +
+        '<input type="text" placeholder="tc://..." class="w-full bg-white/[0.04] border border-white/[0.09] rounded-xl px-3 py-2.5 text-[11px] text-white focus:outline-none focus:border-neon-blue/60 mb-2" />' +
+        '<p class="relink-error hidden text-red-400 text-[11px] mb-2"></p>' +
+        '<button onclick="submitRelink(' + i + ', this)" class="press w-full py-3 rounded-xl btn-primary font-semibold text-white text-[13px] mb-2">' + t("relink_send") + '</button>' +
+        tutorialButtonsHTML(false, true) +
+      '</div>' +
     '</div>';
   }).join("");
 
@@ -3280,7 +3323,7 @@ async function refreshActiveOrder() {
         // Кнопка одна. Раньше их было две с ОДИНАКОВОЙ подписью: первая
         // присылала видео, вторая просто закрывала витрину — человек жал
         // наугад и в половине случаев оставался без инструкции.
-        '<button onclick="watchRentTutorial(this)" class="press w-full py-2.5 rounded-xl pill text-[11px] font-medium text-neon-blue">🎥 ' + t("ao_watch_tutorial") + '</button>' +
+        tutorialButtonsHTML(false, true) +
       '</div>'
     : "";
 
@@ -3320,7 +3363,7 @@ async function refreshActiveOrder() {
   const isCart = cartItems.length > 0;
   const titleLine = isCart
     ? '🛒 ' + t("cart_active_title") + ' · ' + cartItems.length + ' ' + t("cart_items_suffix")
-    : active.item_name;
+    : escHTML(displayItemName(active.item_name, active.category));
   const cartItemsBlock = isCart
     ? '<div class="mt-2 pt-2 border-t border-white/[0.08] space-y-1">' +
         cartItems.map(function(it) {
@@ -3346,7 +3389,11 @@ async function refreshActiveOrder() {
         '</div>' +
         '<div class="text-[12px] font-bold text-neon-yellow flex-shrink-0">' + fmtUZS(active.price_uzs) + '</div>' +
       '</div>' +
-      cartItemsBlock + payBlock + linkBlock + cancelBtn +
+      cartItemsBlock + payBlock +
+      // Premium после оплаты — сразу видно, как связаться с админом.
+      ((active.category === "premium" && (active.status === "paid" || active.status === "fulfilling"))
+        ? '<div class="mt-3">' + premiumContactHTML(active.id, active.item_name) + '</div>' : "") +
+      linkBlock + cancelBtn +
     '</div>';
 }
 
@@ -3443,6 +3490,76 @@ async function submitReceipt(orderId) {
  * искать её там неудобно. Поэтому кнопка просит бота прислать видео заново и
  * закрывает витрину: человек оказывается в чате прямо на свежем сообщении.
  */
+/* Две кнопки инструкции: Android и iPhone. Кнопка телефона, с которого
+   человек сидит, — первой и яркой; вторая — на случай, если определили не так
+   (или он помогает другу с другого телефона). */
+function tutorialButtonsHTML(big, muted) {
+  const android = isAndroidClient();
+  const order = android ? ["android", "ios"] : ["ios", "android"];
+  return order.map(function(pf, i) {
+    // muted — когда рядом уже есть главная кнопка (например «Qayta ulash»):
+    // тогда обе инструкции второстепенные, чтобы не было двух ярких подряд.
+    const primary = i === 0 && !muted;
+    const cls = primary
+      ? "btn-primary text-white font-semibold " + (big ? "py-3.5 text-sm rounded-2xl" : "py-3 text-[12px] rounded-xl")
+      : "pill text-neon-blue font-medium " + (big ? "py-3 text-[12px] rounded-2xl" : "py-2.5 text-[11px] rounded-xl");
+    return '<button onclick="watchRentTutorial(this)" data-platform="' + pf + '" class="press w-full ' + cls + (i ? " mt-2" : "") + '">' +
+      t(pf === "android" ? "tut_android" : "tut_ios") + '</button>';
+  }).join("");
+}
+
+/* «Qayta ulash» у действующей аренды: поле для новой ссылки прямо в карточке. */
+function toggleRelink(i) {
+  const el = document.getElementById("relink-box-" + i);
+  if (!el) return;
+  const open = el.classList.contains("hidden");
+  Array.prototype.forEach.call(document.querySelectorAll(".relink-box"), function(b) { b.classList.add("hidden"); });
+  if (open) {
+    el.classList.remove("hidden");
+    const inp = el.querySelector("input");
+    if (inp) inp.focus();
+  }
+}
+
+async function submitRelink(i, btn) {
+  const r = myRentals[i];
+  const box = document.getElementById("relink-box-" + i);
+  if (!r || !box) return;
+  const input = box.querySelector("input");
+  const errEl = box.querySelector(".relink-error");
+  const link = (input.value || "").trim();
+  errEl.classList.add("hidden");
+  if (!/^(tc:\/\/|https?:\/\/|t\.me\/)\S+$/i.test(link)) {
+    errEl.textContent = t("ao_err_bad_link"); errEl.classList.remove("hidden"); return;
+  }
+  const base = await getShopApiUrl();
+  const initData = await waitForInitData();
+  if (!base || !initData) return;
+  const prev = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full align-middle" style="animation: spin .7s linear infinite;"></span>';
+  try {
+    const res = await fetch(base + "/public/submit_rent_link", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData: initData, link: link, order_id: r.order_id }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      input.value = "";
+      box.classList.add("hidden");
+      showToast(t(data.connected ? "ao_connected" : "relink_ok"));
+      if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred("success");
+    } else {
+      errEl.textContent = t(data.error === "bad_link" ? "ao_err_bad_link" : "ao_err_connect");
+      errEl.classList.remove("hidden");
+    }
+  } catch (e) {
+    errEl.textContent = t("ao_err_network"); errEl.classList.remove("hidden");
+  }
+  btn.disabled = false;
+  btn.innerHTML = prev;
+}
+
 async function watchRentTutorial(btn) {
   const prev = btn ? btn.innerHTML : null;
   if (btn) { btn.disabled = true; btn.innerHTML = "⏳"; }
@@ -3453,7 +3570,7 @@ async function watchRentTutorial(btn) {
 
     const res = await fetch(base + "/public/send_rent_tutorial", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ initData: initData }),
+      body: JSON.stringify({ initData: initData, platform: (btn && btn.dataset.platform) || (tg && tg.platform) || "" }),
     });
     const data = await res.json().catch(function() { return {}; });
     if (!data.ok) {
@@ -3509,6 +3626,103 @@ function androidLinkHintHTML() {
   if (!isAndroidClient()) return "";
   return '<div class="rounded-xl p-2.5 mb-2.5 text-[11px] leading-snug text-gray-200" ' +
     'style="background:rgba(217,180,91,0.10);border:1px solid rgba(217,180,91,0.35)">' + t("ao_android_hint") + '</div>';
+}
+
+/* «1 месяц», «12 месяцев (akkauntga kirib)» из прайса → название на языке
+   витрины: «1 oylik», «12 months (via account login)». Неизвестный формат
+   показываем как есть. */
+/* Название заказа для показа. Бот хранит «Premium — 1 месяц» (по нему
+   сверяется цена), а человеку показываем на его языке. */
+function displayItemName(name, category) {
+  const n = String(name || "");
+  const m = /^Premium\s*[—-]\s*(.+)$/i.exec(n);
+  if (category === "premium" || m) return m ? "Premium — " + premiumLabel(m[1]) : premiumLabel(n);
+  return n;
+}
+
+function premiumLabel(label) {
+  const src = String(label || "");
+  // [а-яё] вместо \w: в JavaScript \w не считает кириллицу буквой, и от
+  // «месяца» оставался бы хвост «а».
+  const m = /^\s*(\d+)\s*(месяц[а-яё]*|мес\.?|oy[a-z'ʻ]*|month[a-z]*)\s*(.*)$/i.exec(src);
+  if (!m) return src;
+  const n = parseInt(m[1], 10);
+  let rest = m[3].trim();
+  const SUFFIX = [
+    { re: /kirmasdan/i, uz: "(akkauntga kirmasdan)", ru: "(без входа в аккаунт)", en: "(without account login)" },
+    { re: /kirib/i,     uz: "(akkauntga kirib)",     ru: "(со входом в аккаунт)", en: "(via account login)" },
+  ];
+  for (let i = 0; i < SUFFIX.length; i++) {
+    if (SUFFIX[i].re.test(rest)) { rest = SUFFIX[i][lang] || rest; break; }
+  }
+  let head;
+  if (lang === "ru") {
+    const d = n % 10, dd = n % 100;
+    const word = (d === 1 && dd !== 11) ? "месяц" : (d >= 2 && d <= 4 && (dd < 12 || dd > 14)) ? "месяца" : "месяцев";
+    head = n + " " + word;
+  } else if (lang === "en") {
+    head = n + (n === 1 ? " month" : " months");
+  } else {
+    head = n + " oylik";
+  }
+  return rest ? head + " " + rest : head;
+}
+
+/* Premium владелец оформляет руками — после оплаты клиент пишет ему.
+   Кнопка открывает чат с админом с уже вписанным текстом заказа; вторая —
+   для аккаунтов в спам-блоке, которые не могут написать первыми. */
+let supportInfoCache = null;
+function premiumContactHTML(orderId, itemName) {
+  return '<div class="rounded-2xl p-3.5 mb-3 text-left" style="background:rgba(142,140,216,0.10);border:1px solid rgba(142,140,216,0.35)">' +
+      '<div class="text-[13px] font-bold text-white mb-1">💎 ' + t("pc_title") + '</div>' +
+      '<div class="text-[11px] text-gray-400 mb-2.5 leading-snug">' + t("pc_hint") + '</div>' +
+      '<button onclick="writeAdminAboutPremium(' + Number(orderId) + ', this)" data-item="' + escHTML(itemName || "") + '" ' +
+        'class="press w-full py-3 rounded-xl btn-primary font-semibold text-white text-[13px]">' + t("pc_write") + '</button>' +
+      '<button onclick="reportSpamBlock(' + Number(orderId) + ', this)" ' +
+        'class="press w-full py-2.5 mt-2 rounded-xl pill text-[12px] font-semibold text-gray-300">' + t("pc_spam") + '</button>' +
+      '<div class="text-[10.5px] text-gray-500 mt-1.5 text-center leading-snug">' + t("pc_spam_hint") + '</div>' +
+    '</div>';
+}
+
+async function writeAdminAboutPremium(orderId, btn) {
+  let info = supportInfoCache;
+  if (!info) {
+    try { info = await (await fetch("/api/support_info")).json(); supportInfoCache = info; } catch (e) { info = {}; }
+  }
+  const op = String((info && info.operator_username) || "").replace(/^@/, "");
+  if (!op) { showToast(t("ao_err_network")); return; }
+  const raw = (btn && btn.dataset.item) || "";
+  const item = premiumLabel(raw.replace(/^Premium\s*[—-]\s*/i, ""));
+  const text = t("pc_msg").replace("{item}", item).replace("{id}", orderId);
+  const url = "https://t.me/" + encodeURIComponent(op) + "?text=" + encodeURIComponent(text);
+  if (tg && tg.openTelegramLink) tg.openTelegramLink(url);
+  else window.open(url, "_blank");
+}
+
+async function reportSpamBlock(orderId, btn) {
+  const base = await getShopApiUrl();
+  const initData = await waitForInitData();
+  if (!base || !initData) return;
+  const prev = btn.innerHTML;
+  btn.disabled = true;
+  try {
+    const res = await fetch(base + "/public/spam_help", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ initData: initData, order_id: orderId }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      btn.innerHTML = t("pc_spam_done");
+      btn.classList.add("text-emerald-400");
+      if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred("success");
+      return;  // кнопка остаётся выключенной — второй раз жать незачем
+    }
+    showToast(t("ao_err_network"));
+  } catch (e) {
+    showToast(t("ao_err_network"));
+  }
+  btn.disabled = false;
+  btn.innerHTML = prev;
 }
 
 async function submitRentLink() {
